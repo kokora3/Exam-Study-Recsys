@@ -1,4 +1,4 @@
-/* Course content for Fast-Track Executive Summary (Exam Cheat Sheet & Core Takeaways) */
+/* Course content for Fast-Track Executive Summary & Exam Cheat Sheet (High-Yield Professional Edition) */
 (() => {
   'use strict';
 
@@ -9,78 +9,106 @@
     number: '0',
     badge: '⚡ สรุป',
     title: 'บทสรุปด่วนเตรียมสอบ 9 บทเรียน (Fast-Track Cheat Sheet)',
-    kicker: 'CORE CONCEPTS & FORMULA CHEAT SHEET',
-    description: 'รวบรวมแก่นสาระสำคัญ สูตรจำเข้าห้องสอบ ตารางเปรียบเทียบข้อดี-ข้อเสีย และกับดักข้อสอบยอดฮิตจากทั้ง 9 บทเรียนหลัก (ไม่รวมพื้นฐานคณิตศาสตร์) พร้อมแนบลิงก์สำหรับกระโดดไปอ่านบทเต็มในแท็บใหม่ได้ทันที',
+    kicker: 'CORE CONCEPTS, FORMULA CHEAT SHEET & EXAM TRAPS',
+    description: 'รวบรวมแก่นสาระสำคัญ สูตรจำเข้าห้องสอบ ตารางตัดสินใจเลือกโมเดล และกับดักข้อสอบยอดฮิตจากทั้ง 9 บทเรียนหลัก (ไม่รวมพื้นฐานคณิตศาสตร์) พร้อมแนบลิงก์สำหรับกระโดดไปอ่านบทเต็มในแท็บใหม่ได้ทันที',
     lessons: [
       /* ==========================================================================
-         Task 0.1: สรุปภาพรวมและสายพาน 3 ด่าน (Ch 01)
+         Task 0.1: บทที่ 1 - ภาพรวมและสายพาน 3 ด่าน (Introduction & Pipeline)
          ========================================================================== */
       {
         id: 'recsys-sum-pipeline',
         number: '0.1',
-        title: 'สรุปบทที่ 1: รากฐาน สายพาน 3 ด่าน และวงจรสะท้อนกลับ',
-        goal: 'แม่นยำความแตกต่างระหว่าง Search vs RecSys, สถาปัตยกรรมสายพาน 3 ขั้น, ปัญหา Cold-Start และ Feedback Loop',
-        lead: 'ระบบแนะนำไม่ใช่ระบบค้นหา! สรุปสถาปัตยกรรมโปรดักชันยุคใหม่ (Candidate Generation → Scoring → Re-ranking) และความท้าทายหลักที่ข้อสอบต้องถาม',
-        body: `<div class="easy-explain">
-            <h3>⚡ หัวใจสำคัญบทที่ 1 ใน 1 นาที</h3>
+        title: 'สรุปบทที่ 1: รากฐานระบบแนะนำ สายพาน 3 ด่าน และวงจรสะท้อนกลับ',
+        goal: 'แม่นยำความแตกต่าง Search vs RecSys, สถาปัตยกรรมสายพาน 3 ขั้นตอน, ประเภท Feedback, และการรับมือ Feedback Loop',
+        lead: 'ระบบแนะนำขับเคลื่อนด้วยบริบทของผู้ใช้! สรุปสถาปัตยกรรมโปรดักชันยุคใหม่ (Candidate Generation → Scoring → Re-ranking) และความท้าทายหลักที่ข้อสอบต้องถาม',
+        body: `<div class="cs-card">
+            <div class="cs-header">
+              <h3>⚡ หัวใจสำคัญบทที่ 1 ใน 2 นาที</h3>
+              <span class="cs-badge-pill">⏱️ อ่านเร็ว 2 นาที · Ch 01</span>
+            </div>
+
             <ul>
-              <li><b>Search vs Recommendation:</b> Search มี <i>Explicit Query</i> (ผู้ใช้พิมพ์คำค้นหาชัดเจน) ส่วน RecSys ขับเคลื่อนด้วย <i>User Context & History</i> (ผู้ใช้ไม่จำเป็นต้องพิมพ์ค้นหา ระบบคาดเดาความต้องการเชิงรุก)</li>
-              <li><b>Rating Prediction vs Ranking:</b> การทายคะแนนดาวแม่น (เช่น ได้ RMSE ต่ำ) <u>ไม่ได้การันตี</u> ว่าลำดับสินค้าแนะนำด้านบน (Top-K) จะถูกใจผู้ใช้ เพราะผู้ใช้สนใจเฉพาะของดีอันดับต้นๆ เท่านั้น</li>
-              <li><b>Explicit vs Implicit Feedback:</b> Explicit (ดาว, รีวิว) มีความบริสุทธิ์สูงแต่ข้อมูลเบาบางมาก (Sparsity &gt; 99%) ส่วน Implicit (คลิก, เวลาดู, การเลื่อนผ่าน) มีปริมาณมหาศาลแต่มีสัญญาณรบกวนและอคติจากตำแหน่ง (Position Bias)</li>
+              <li><b>Search vs Recommendation:</b>
+                <ul>
+                  <li><i>Search (Information Retrieval):</i> ผู้ใช้เป็นฝ่ายรุก (Pull) มี <b>Explicit Query</b> (พิมพ์คำค้นหาชัดเจน) ผลลัพธ์ขึ้นกับคำค้นหาเป็นหลัก</li>
+                  <li><i>Recommendation (RecSys):</i> ระบบเป็นฝ่ายรุก (Push) ผู้ใช้ <b>ไม่มีคำค้นหา</b> ขับเคลื่อนด้วย User Context, ประวัติในอดีต (Watch/Click History) และข้อมูลรสนิยม</li>
+                </ul>
+              </li>
+              <li><b>Rating Prediction vs Ranking (Top-K):</b>
+                การทายคะแนนดาวแม่นยำ (เช่น ได้ค่า RMSE ต่ำมาก) <u>ไม่ได้การันตี</u> ว่าลำดับสินค้าด้านบน (Top-K) จะถูกใจผู้ใช้ เพราะผู้ใช้สนใจเฉพาะของดีอันดับ 1-5 แรกของหน้าจอเท่านั้น ไม่ได้สนใจว่าของอันดับ 1,000 จะทายได้แม่นกี่ดาว
+              </li>
+              <li><b>Explicit vs Implicit Feedback:</b>
+                <ul>
+                  <li><i>Explicit Feedback:</i> การให้คะแนนดาว 1-5, การกดรีวิว &rarr; สัญญาณตรงไปตรงมา ชัดเจน แต่ <b>ปริมาณน้อยมากและเบาบางมาก (Sparsity &gt; 99%)</b></li>
+                  <li><i>Implicit Feedback:</i> การคลิก, เวลาที่ใช้ดู (Dwell Time), การเลื่อนผ่าน (Scroll) &rarr; <b>ปริมาณมหาศาล เก็บได้ฟรี</b> แต่มีสัญญาณรบกวน (Noise) และแฝงด้วย Position Bias (ของอยู่บนมักถูกคลิกมากกว่า)</li>
+                </ul>
+              </li>
             </ul>
 
-            <div class="callout">
-              <h4>🏗️ สถาปัตยกรรมสายพาน 3 ด่าน (Multi-Stage Production Pipeline)</h4>
-              <table style="width:100%;border-collapse:collapse;margin-top:8px;">
+            <div class="cs-table-wrap">
+              <table class="cs-table">
                 <thead>
-                  <tr style="border-bottom:2px solid var(--line2);text-align:left;">
-                    <th style="padding:6px 8px;">ด่านที่</th>
-                    <th style="padding:6px 8px;">ชื่อด่าน</th>
-                    <th style="padding:6px 8px;">จำนวนไอเทม</th>
-                    <th style="padding:6px 8px;">โมเดลและเทคนิคที่ใช้</th>
-                    <th style="padding:6px 8px;">เป้าหมายหลัก</th>
+                  <tr>
+                    <th>ด่านที่</th>
+                    <th>ชื่อด่าน (Stage)</th>
+                    <th>ปริมาณไอเทม</th>
+                    <th>เวลาประมวลผล (Latency)</th>
+                    <th>โมเดลและเทคนิคที่ใช้</th>
+                    <th>เป้าหมายหลัก</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr style="border-bottom:1px solid var(--line);">
-                    <td style="padding:6px 8px;"><b>1</b></td>
-                    <td style="padding:6px 8px;"><b>Candidate Generation (Retrieval)</b></td>
-                    <td style="padding:6px 8px;">ล้านชิ้น &rarr; เหลือ ~100-500 ชิ้น</td>
-                    <td style="padding:6px 8px;">Two-Tower, Vector Search (ANN), Item-kNN, Heuristics</td>
-                    <td style="padding:6px 8px;">เน้น <b>High Recall</b> และ <b>Low Latency (&lt; 10-20ms)</b> ไม่ตกหล่นของดี</td>
-                  </tr>
-                  <tr style="border-bottom:1px solid var(--line);">
-                    <td style="padding:6px 8px;"><b>2</b></td>
-                    <td style="padding:6px 8px;"><b>Scoring &amp; Ranking</b></td>
-                    <td style="padding:6px 8px;">~100-500 ชิ้น &rarr; จัดอันดับเรียงคะแนน</td>
-                    <td style="padding:6px 8px;">DeepFM, DLRM, Cross-Encoder, Gradient Boosted Trees</td>
-                    <td style="padding:6px 8px;">เน้น <b>High Precision</b> คำนวณความน่าจะเป็นของคลิก/ซื้อ (pCTR, pCVR)</td>
+                  <tr>
+                    <td><b>1</b></td>
+                    <td><b>Candidate Generation (Retrieval)</b></td>
+                    <td>ล้านชิ้น &rarr; เหลือ ~100 - 500 ชิ้น</td>
+                    <td><b>&lt; 10 - 20 ms</b></td>
+                    <td>Two-Tower DSSM, Vector Search (ANN / Faiss), Item-kNN, Graph Embeddings</td>
+                    <td>เน้น <b>High Recall</b> กวาดของที่มีแววให้ติดเข้ามามากที่สุด ไม่ตกหล่นของดี</td>
                   </tr>
                   <tr>
-                    <td style="padding:6px 8px;"><b>3</b></td>
-                    <td style="padding:6px 8px;"><b>Re-ranking &amp; Business Rules</b></td>
-                    <td style="padding:6px 8px;">~50 ชิ้น &rarr; เหลือ Top-K หน้าจอ (~10-20)</td>
-                    <td style="padding:6px 8px;">MMR (Diversity), Deduplication, Business Constraints, LLM Reranker</td>
-                    <td style="padding:6px 8px;">คุมความหลากหลาย แก้ความซ้ำซาก และบังคับใช้กฎธุรกิจ</td>
+                    <td><b>2</b></td>
+                    <td><b>Scoring &amp; Ranking</b></td>
+                    <td>~100 - 500 ชิ้น &rarr; เรียงคะแนน</td>
+                    <td><b>&lt; 20 - 40 ms</b></td>
+                    <td>DeepFM, DLRM, Wide &amp; Deep, Gradient Boosted Decision Trees (GBDT)</td>
+                    <td>เน้น <b>High Precision</b> คำนวณความน่าจะเป็นของการคลิก/ซื้อ (pCTR, pCVR) ละเอียดระดับจุดทศนิยม</td>
+                  </tr>
+                  <tr>
+                    <td><b>3</b></td>
+                    <td><b>Re-ranking &amp; Business Rules</b></td>
+                    <td>~50 ชิ้น &rarr; เหลือแสดงผล Top-K (~10-20)</td>
+                    <td><b>&lt; 5 - 10 ms</b></td>
+                    <td>MMR (Diversity), Deduplication, Freshness Boost, Category Balancing, LLM Reranker</td>
+                    <td>กระจายความหลากหลาย (Diversity), กำจัดความซ้ำซาก, และบังคับใช้กฎธุรกิจขององค์กร</td>
                   </tr>
                 </tbody>
               </table>
             </div>
 
-            <div class="callout" style="background:rgba(255,180,87,0.08);border-color:rgba(255,180,87,0.3);">
-              <h4 style="color:var(--warn,#ffb457);">⚠️ กับดักข้อสอบยอดฮิต (Exam Traps)</h4>
-              <p><b>1. Feedback Loop:</b> ระบบแนะนำของดัง &rarr; ผู้ใช้เห็นแต่ของดัง &rarr; ระบบเก็บข้อมูลคลิกของดังเพิ่ม &rarr; ยิ่งแนะนำแต่ของดัง! วิธีแก้คือต้องบันทึก <i>Exposure Log</i> (บันทึกว่าของชิ้นไหนถูกนำไปแสดงบ้าง) และเจียดพื้นที่ทำ <b>Exploration</b> ให้กับสินค้าหางยาว (Long-Tail)</p>
-              <p><b>2. Cold-Start Problem:</b> มี 2 ฝั่งคือ <i>New User</i> (แก้ด้วยแบบสอบถามความชอบตอน Onboarding, แนะนำตามความนิยมยอดฮิต หรือ Demographic) และ <i>New Item</i> (แก้ด้วย Content-Based Filtering หรือ Multimodal Encoders เพราะไม่ต้องพึ่งประวัติรอยเท้าเดิม)</p>
+            <div class="cs-formula-card">
+              <div class="cs-formula-title">📐 สูตรวัดความเบาบางของข้อมูล (Matrix Sparsity)</div>
+              <div class="cs-formula-math">Sparsity = 1 - (|R| / (|U| × |I|))</div>
+              <div class="cs-formula-legend">
+                โดย |R| คือจำนวนปฏิสัมพันธ์ที่มีอยู่จริง, |U| คือจำนวนผู้ใช้ทั้งหมด, และ |I| คือจำนวนสินค้าทั้งหมด (ในระบบจริงค่า Sparsity มักเกิน <b>99.0% - 99.9%</b>)
+              </div>
             </div>
 
-            <div class="callout" style="background:rgba(94,224,194,0.08);border-color:rgba(94,224,194,0.3);margin-top:14px;">
-              <h4 style="color:var(--accent);">🔗 ลิงก์อ่านเจาะลึกบทเต็ม (Deep Links)</h4>
-              <p style="margin-bottom:8px;">คลิกเพื่อดูเนื้อหาแบบละเอียดพร้อมการ์ดอนิเมชันจำลองและแบบฝึกหัดเต็ม:</p>
-              <div style="display:flex;gap:10px;flex-wrap:wrap;">
-                <a class="btn primary" href="index.html#recsys-introduction" target="_blank" rel="noopener noreferrer">↗ เปิดอ่านบทที่ 1 เต็มในแท็บใหม่</a>
-                <a class="btn" href="index.html#recsys-pipeline" target="_blank" rel="noopener noreferrer">↗ เจาะลึก 3-Stage Pipeline</a>
-                <a class="btn" href="index.html#recsys-feedback-signals" target="_blank" rel="noopener noreferrer">↗ เจาะลึก Explicit vs Implicit</a>
-                <button class="btn" type="button" onclick="window.switchRecsysChapter('recsys-introduction')">📖 สลับไปอ่านบทที่ 1 ในหน้านี้</button>
+            <div class="cs-trap-box">
+              <div class="cs-trap-title">🚨 กับดักข้อสอบยอดฮิต (Exam Watch-Outs)</div>
+              <ul>
+                <li><b>Feedback Loop (วงจรสะท้อนกลับ):</b> ระบบแนะนำเฉพาะของดัง &rarr; ผู้ใช้เห็นแต่ของดัง &rarr; ข้อมูลคลิกของดังเพิ่มขึ้น &rarr; โมเดลคิดว่าของดังดีที่สุด &rarr; ยิ่งแนะนำแต่ของดัง! <u>วิธีแก้:</u> ต้องบันทึก <b>Exposure Log</b> (ของที่ถูกแสดงแต่ไม่ถูกคลิก) และเจียดพื้นที่ทำ <b>Exploration (สุ่มของหางยาว Long-Tail)</b></li>
+                <li><b>Cold-Start Problem:</b> มี 2 ฝั่ง: <i>New User</i> (แก้ด้วย Onboarding Survey หรือแนะนำตามความนิยม) และ <i>New Item</i> (แก้ด้วย Content-Based Filtering หรือ Multimodal Encoders เพราะไม่ง้อประวัติเดิม)</li>
+              </ul>
+            </div>
+
+            <div class="cs-link-box">
+              <div class="cs-link-title">🔗 ทางลัดเชื่อมโยงเนื้อหาบทที่ 1</div>
+              <div class="cs-btn-row">
+                <a class="cs-btn-link primary" href="index.html#recsys-introduction" target="_blank" rel="noopener noreferrer">↗ เปิดอ่านบทที่ 1 เต็มในแท็บใหม่</a>
+                <a class="cs-btn-link" href="index.html#recsys-pipeline" target="_blank" rel="noopener noreferrer">↗ เจาะลึก 3-Stage Pipeline</a>
+                <a class="cs-btn-link" href="index.html#recsys-cold-start" target="_blank" rel="noopener noreferrer">↗ เจาะลึก Cold-Start Problem</a>
+                <button class="cs-btn-link" type="button" onclick="window.switchRecsysChapter('recsys-introduction')">📖 สลับไปอ่านบทที่ 1 ในหน้านี้</button>
               </div>
             </div>
           </div>`,
@@ -100,7 +128,7 @@
       },
 
       /* ==========================================================================
-         Task 0.2: สรุปเข็มทิศการวัดผลและตัวชี้วัด (Ch 02)
+         Task 0.2: บทที่ 2 - เข็มทิศการวัดผลและตัวชี้วัด (Evaluation & Metrics)
          ========================================================================== */
       {
         id: 'recsys-sum-metrics',
@@ -108,70 +136,90 @@
         title: 'สรุปบทที่ 2: เข็มทิศการวัดผล (Metrics, NDCG, MRR, Offline vs Online A/B)',
         goal: 'แม่นยำสูตรคำนวณความแม่นยำ ความแตกต่างระหว่างตัวชี้วัดอันดับ และการออกแบบการทดลอง A/B Testing',
         lead: 'วัดผิด = ล้มเหลวทั้งระบบ! สรุปครบทั้งตัวชี้วัด Error, Top-K Ranking, Beyond-Accuracy และหัวใจของการทดสอบ A/B Test',
-        body: `<div class="easy-explain">
-            <h3>⚡ สรุปสูตรและการเลือกตัวชี้วัดในห้องสอบ</h3>
-            
-            <div class="callout">
-              <h4>📊 สรุปสูตรคำนวณสำคัญที่ออกสอบบ่อยที่สุด</h4>
-              <ul>
-                <li><b>MAE (Mean Absolute Error):</b> $\text{MAE} = \frac{1}{|T|} \sum |r_{ui} - \hat{r}_{ui}|$ &rarr; เฉลี่ยผลต่างสัมบูรณ์ ความผิดพลาดทุกลูกมีน้ำหนักเชิงเส้นเท่ากัน</li>
-                <li><b>RMSE (Root Mean Squared Error):</b> $\text{RMSE} = \sqrt{\frac{1}{|T|} \sum (r_{ui} - \hat{r}_{ui})^2}$ &rarr; ยกกำลังสองก่อนเฉลี่ย จึง <u>ลงโทษความผิดพลาดก้อนใหญ่ (Outliers) อย่างรุนแรง</u></li>
-                <li><b>Precision@K vs Recall@K:</b>
-                  <ul>
-                    <li>$\text{Precision@K} = \frac{\text{จำนวนของที่ตรงใจใน Top-K}}{K}$ &rarr; แนะนำไป K ชิ้น มีของตรงใจกี่ชิ้น? (เน้นความคุ้มค่าของพื้นที่หน้าจอ)</li>
-                    <li>$\text{Recall@K} = \frac{\text{จำนวนของที่ตรงใจใน Top-K}}{\text{จำนวนของที่ผู้ใช้ชอบทั้งหมดใน Test Set}}$ &rarr; ในบรรดาของที่ผู้ใช้ชอบทั้งหมด เรากวาดติดมาได้กี่เปอร์เซ็นต์?</li>
-                  </ul>
-                </li>
-                <li><b>MRR (Mean Reciprocal Rank):</b> ดูเฉพาะ <u>ของที่ตรงใจชิ้นแรก</u> ว่าอยู่อันดับที่เท่าไร ($1/\text{rank}_1$) &rarr; เหมาะกับระบบค้นหาหรือที่ต้องการคำตอบเดียว เช่น ตู้ Kiosk, คำถามถาม-ตอบ</li>
-                <li><b>DCG &amp; NDCG@K (Normalized Discounted Cumulative Gain):</b>
-                  $$\text{DCG@K} = \sum_{i=1}^K \frac{2^{rel_i} - 1}{\log_2(i + 1)}, \quad \text{NDCG@K} = \frac{\text{DCG@K}}{\text{IDCG@K}}$$
-                  ให้คะแนนตามระดับความเกี่ยวข้อง ($rel_i$) และลงโทษตามตำแหน่งด้วยตัวหาร $\log_2(i+1)$ โดย $\text{IDCG}$ คือค่า DCG ของการเรียงลำดับในอุดมคติ (Ideal Ranking) ทำให้ค่า NDCG อยู่ในช่วง $[0, 1]$ เสมอ!
-                </li>
-              </ul>
+        body: `<div class="cs-card">
+            <div class="cs-header">
+              <h3>⚡ สรุปสูตรและการเลือกตัวชี้วัดในห้องสอบ</h3>
+              <span class="cs-badge-pill">⏱️ อ่านเร็ว 2 นาที · Ch 02</span>
             </div>
 
-            <div class="callout">
-              <h4>🎯 Beyond-Accuracy Metrics (เมื่อความแม่นยำอย่างเดียวไม่พอ)</h4>
-              <table style="width:100%;border-collapse:collapse;margin-top:8px;">
+            <div class="cs-table-wrap">
+              <table class="cs-table">
                 <thead>
-                  <tr style="border-bottom:2px solid var(--line2);text-align:left;">
-                    <th style="padding:6px 8px;">ตัวชี้วัด</th>
-                    <th style="padding:6px 8px;">คำอธิบายเชิงแนวคิด</th>
-                    <th style="padding:6px 8px;">ผลทางธุรกิจ</th>
+                  <tr>
+                    <th>กลุ่มตัวชี้วัด</th>
+                    <th>ตัวชี้วัด</th>
+                    <th>ความหมายเชิงธุรกิจ / หน้าที่</th>
+                    <th>จุดเด่น / พฤติกรรมของสูตร</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr style="border-bottom:1px solid var(--line);">
-                    <td style="padding:6px 8px;"><b>Catalog Coverage</b></td>
-                    <td style="padding:6px 8px;">สัดส่วนสินค้าในคลังทั้งหมดที่เคยถูกหยิบมาแนะนำ ($|\bigcup R_u| / |I|$)</td>
-                    <td style="padding:6px 8px;">ป้องกันการแนะนำกระจุกตัวอยู่แค่ 1% ของสินค้าดัง</td>
-                  </tr>
-                  <tr style="border-bottom:1px solid var(--line);">
-                    <td style="padding:6px 8px;"><b>Diversity (Intra-List)</b></td>
-                    <td style="padding:6px 8px;">ระยะห่างเฉลี่ยระหว่างสินค้าในลิสต์แนะนำเดียวกัน ($1 - \text{Sim}$)</td>
-                    <td style="padding:6px 8px;">ป้องกันหน้าจอเต็มไปด้วยของประเภทเดียวกัน เช่น แนะนำเคสมือถือ 10 ชิ้นรวด</td>
-                  </tr>
-                  <tr style="border-bottom:1px solid var(--line);">
-                    <td style="padding:6px 8px;"><b>Novelty</b></td>
-                    <td style="padding:6px 8px;">ความแปลกใหม่/ความไม่เกร่อ วัดด้วย $-\log_2 P(i)$ ตามความหายาก</td>
-                    <td style="padding:6px 8px;">ช่วยค้นพบของดีนอกสายตา (Serendipity)</td>
+                  <tr>
+                    <td rowspan="2"><b>Rating Error (คะแนนดาว)</b></td>
+                    <td><b>MAE</b></td>
+                    <td>ความคลาดเคลื่อนเฉลี่ยสัมบูรณ์</td>
+                    <td>ลงโทษเชิงเส้นเท่ากันทุกจุด (Linear penalty)</td>
                   </tr>
                   <tr>
-                    <td style="padding:6px 8px;"><b>A/B Testing (Online)</b></td>
-                    <td style="padding:6px 8px;">สุ่มแบ่งผู้ใช้จริงเป็นกลุ่มควบคุม (A) และกลุ่มทดสอบ (B) วัด Conversion Rate/CTR</td>
-                    <td style="padding:6px 8px;">เป็น Gold Standard ตัดสินใจขึ้นระบบจริง (Offline ชนะ ไม่ได้รับประกันว่า Online จะชนะเสมอไป)</td>
+                    <td><b>RMSE</b></td>
+                    <td>ความคลาดเคลื่อนเฉลี่ยยกกำลังสอง</td>
+                    <td><b>ลงโทษความผิดพลาดก้อนใหญ่ (Outliers) อย่างรุนแรง</b> &rarr; ถ้าทาย 5 ดาวเป็น 1 ดาว ค่า RMSE จะพุ่งสูงมาก</td>
+                  </tr>
+                  <tr>
+                    <td rowspan="2"><b>Classification (Top-K)</b></td>
+                    <td><b>Precision@K</b></td>
+                    <td>แนะนำไป K ชิ้น มีของที่ตรงใจกี่ชิ้น?</td>
+                    <td>วัดความคุ้มค่าของพื้นที่หน้าจอ: <code>|Relevant ∩ Recommended| / K</code></td>
+                  </tr>
+                  <tr>
+                    <td><b>Recall@K</b></td>
+                    <td>ในบรรดาของที่ผู้ใช้ชอบทั้งหมด กวาดติดมาได้กี่เปอร์เซ็นต์?</td>
+                    <td>วัดความครอบคลุม: <code>|Relevant ∩ Recommended| / |Total Relevant|</code></td>
+                  </tr>
+                  <tr>
+                    <td rowspan="3"><b>Ranking (การเรียงลำดับ)</b></td>
+                    <td><b>Hit Rate@K</b></td>
+                    <td>ใน Top-K มีของตรงใจอย่างน้อย 1 ชิ้นหรือไม่?</td>
+                    <td>ตอบ 0 หรือ 1 ต่อคน เหมาะกับบริการสตรีมมิง (ขอแค่มีหนัง 1 เรื่องที่เปิดดูก็พอ)</td>
+                  </tr>
+                  <tr>
+                    <td><b>MRR (Mean Reciprocal Rank)</b></td>
+                    <td>ของตรงใจ <u>ชิ้นแรก</u> อยู่ที่อันดับไหน?</td>
+                    <td><code>1 / rank_1</code> &rarr; <b>สนใจเฉพาะชิ้นแรกเท่านั้น!</b> เหมาะกับระบบค้นหาหรือตู้ Kiosk</td>
+                  </tr>
+                  <tr>
+                    <td><b>NDCG@K</b></td>
+                    <td>วัดคุณภาพการเรียงลำดับทั้งหน้าจอเทียบกับลิสต์ในอุดมคติ</td>
+                    <td>รองรับ Graded Relevance (ชอบมาก/ชอบน้อย) และลงโทษตำแหน่งล่างด้วย <code>log_2(i + 1)</code> ค่าอยู่ในช่วง [0, 1] เสมอ</td>
                   </tr>
                 </tbody>
               </table>
             </div>
 
-            <div class="callout" style="background:rgba(94,224,194,0.08);border-color:rgba(94,224,194,0.3);margin-top:14px;">
-              <h4 style="color:var(--accent);">🔗 ลิงก์อ่านเจาะลึกบทเต็ม (Deep Links)</h4>
-              <div style="display:flex;gap:10px;flex-wrap:wrap;">
-                <a class="btn primary" href="index.html#recsys-evaluation" target="_blank" rel="noopener noreferrer">↗ เปิดอ่านบทที่ 2 เต็มในแท็บใหม่</a>
-                <a class="btn" href="index.html#recsys-ndcg" target="_blank" rel="noopener noreferrer">↗ ตัวอย่างคำนวณสูตร NDCG ละเอียด</a>
-                <a class="btn" href="index.html#recsys-online-ab" target="_blank" rel="noopener noreferrer">↗ หลักการทำ A/B Testing</a>
-                <button class="btn" type="button" onclick="window.switchRecsysChapter('recsys-evaluation')">📖 สลับไปอ่านบทที่ 2 ในหน้านี้</button>
+            <div class="cs-formula-card">
+              <div class="cs-formula-title">📐 สูตรจำเข้าห้องสอบ: DCG@K และ NDCG@K</div>
+              <div class="cs-formula-math">DCG@K = ∑ [ (2^(rel_i) - 1) / log_2(i + 1) ]   (i = 1 ถึง K)</div>
+              <div class="cs-formula-math">NDCG@K = DCG@K / IDCG@K</div>
+              <div class="cs-formula-legend">
+                โดย <b>rel_i</b> คือคะแนนความเกี่ยวข้องที่ตำแหน่ง i (เช่น 0, 1, 2, 3), <b>IDCG@K</b> คือค่า DCG ของการเรียงลำดับที่ดีที่สุดในอุดมคติ (เรียง rel จากมากไปน้อย) เพื่อปรับสเกลผลลัพธ์ให้อยู่ในช่วง 0.0 ถึง 1.0 เสมอ
+              </div>
+            </div>
+
+            <div class="cs-trap-box">
+              <div class="cs-trap-title">🚨 กับดักข้อสอบยอดฮิต (Exam Watch-Outs)</div>
+              <ul>
+                <li><b>Data Leakage จากการสุ่มแบ่งข้อมูล:</b> ใน RecSys <u>ห้ามสุ่มแบ่ง Train/Test แบบ Random เด็ดขาด!</u> เพราะจะทำให้โมเดลเห็นข้อมูลการคลิกในอนาคตหลุดเข้าไปในชุดเทรน <b>ต้องแบ่งตามเส้นเวลา (Temporal Split) เสมอ</b> (อดีตเทรน &rarr; อนาคตทดสอบ)</li>
+                <li><b>MRR สนใจเฉพาะชิ้นแรก:</b> หากผู้ใช้ชอบไอเทมที่อันดับ 2, 3, 5 ค่า Reciprocal Rank คือ <code>1/2 = 0.5</code> เท่านั้น! <u>อย่า</u> นำ 1/3 หรือ 1/5 มาบวกเฉลี่ย</li>
+                <li><b>Offline vs Online Disconnect:</b> โมเดลที่ได้ค่า NDCG ออฟไลน์สูงสุด อาจแพ้ในการทดสอบจริงแบบ <b>Online A/B Testing</b> เนื่องจากข้อมูลออฟไลน์ไม่สะท้อนความแปลกใหม่ (Novelty), ความหน่วงเวลา (Latency), และอคติของตำแหน่งบน UI จริง</li>
+              </ul>
+            </div>
+
+            <div class="cs-link-box">
+              <div class="cs-link-title">🔗 ทางลัดเชื่อมโยงเนื้อหาบทที่ 2</div>
+              <div class="cs-btn-row">
+                <a class="cs-btn-link primary" href="index.html#recsys-evaluation" target="_blank" rel="noopener noreferrer">↗ เปิดอ่านบทที่ 2 เต็มในแท็บใหม่</a>
+                <a class="cs-btn-link" href="index.html#recsys-ndcg" target="_blank" rel="noopener noreferrer">↗ ตัวอย่างคำนวณสูตร NDCG ละเอียด</a>
+                <a class="cs-btn-link" href="index.html#recsys-online-ab" target="_blank" rel="noopener noreferrer">↗ หลักการทำ Online A/B Testing</a>
+                <button class="cs-btn-link" type="button" onclick="window.switchRecsysChapter('recsys-evaluation')">📖 สลับไปอ่านบทที่ 2 ในหน้านี้</button>
               </div>
             </div>
           </div>`,
@@ -191,7 +239,7 @@
       },
 
       /* ==========================================================================
-         Task 0.3: สรุป Content-Based RecSys (Ch 03)
+         Task 0.3: บทที่ 3 - Content-Based Recommendations (Ch 03)
          ========================================================================== */
       {
         id: 'recsys-sum-content',
@@ -199,44 +247,57 @@
         title: 'สรุปบทที่ 3: ระบบแนะนำจากเนื้อหา (TF-IDF, Embeddings, Bi-Encoder, MMR)',
         goal: 'เข้าใจกระบวนการสกัดฟีเจอร์เนื้อหา การเปรียบเทียบ Cosine Similarity การสร้าง User Centroid Profile และการกระจายความหลากหลายด้วย MMR',
         lead: 'แนะนำสิ่งของจาก "คุณสมบัติเนื้อหา" ไม่แคร์รอยเท้าคนอื่น! เหมาะอย่างยิ่งสำหรับแก้ Item Cold-Start และคลังสินค้าที่มีคำบรรยายอุดมสมบูรณ์',
-        body: `<div class="easy-explain">
-            <h3>⚡ สรุปกระบวนการสร้าง Content-Based Recommender</h3>
+        body: `<div class="cs-card">
+            <div class="cs-header">
+              <h3>⚡ สรุปกระบวนการสร้าง Content-Based Recommender</h3>
+              <span class="cs-badge-pill">⏱️ อ่านเร็ว 2 นาที · Ch 03</span>
+            </div>
+
             <ul>
-              <li><b>1. Feature Representation:</b> เปลี่ยนคำอธิบาย/สเปกสินค้าเป็นเวกเตอร์
+              <li><b>1. Feature Representation (แปลงไอเทมเป็นเวกเตอร์):</b>
                 <ul>
-                  <li><i>TF-IDF:</i> $\text{TF}(t, d) \times \log(\frac{N}{\text{DF}(t)})$ &rarr; ให้ค่าน้ำหนักสูงกับคำที่เด่นในเอกสารนี้ แต่ไม่เกร่อในคลังเอกสาร</li>
-                  <li><i>Dense Embeddings (Sentence Transformers):</i> จับความหมายเชิงลึก (Semantics) แก้ปัญหาคำพ้องความหมาย (Synonyms) เช่น "มือถือ" กับ "สมาร์ตโฟน" ได้เวกเตอร์ความหมายใกล้กัน</li>
+                  <li><i>TF-IDF (Term Frequency - Inverse Document Frequency):</i> คำนวณความสำคัญของคำ โดยให้คะแนนสูงกับคำที่ปรากฏบ่อยในเอกสารนั้น แต่ไม่เกร่อในคลังเอกสาร</li>
+                  <li><i>Dense Semantic Embeddings:</i> ใช้ Sentence-BERT แปลงข้อความเป็นเวกเตอร์หนาแน่น (Dense Vector) 384 หรือ 768 มิติ จับความหมายที่ลึกซึ้ง เช่น "มือถือ" กับ "สมาร์ตโฟน" จะได้เวกเตอร์ใกล้เคียงกัน</li>
                 </ul>
               </li>
-              <li><b>2. User Profile Construction:</b> สร้างเวกเตอร์ตัวแทนของผู้ใช้ ($u$)
+              <li><b>2. User Profile Construction (สร้างตัวแทนรสนิยมผู้ใช้):</b>
                 <ul>
-                  <li><i>Centroid Vector:</i> หาเวกเตอร์เฉลี่ยถ่วงน้ำหนักจากสินค้าที่ผู้ใช้คนนั้นเคยชอบในอดีต: $\vec{p}_u = \frac{1}{|I_u|} \sum_{i \in I_u} \vec{v}_i$</li>
-                  <li><i>Decay Profile:</i> ถ่วงน้ำหนักความชอบใหม่ให้สำคัญกว่าความชอบเก่า (Time Decay)</li>
+                  <li><i>Centroid Profile:</i> นำเวกเตอร์ของสินค้าทั้งหมดที่ผู้ใช้คนนั้นเคยคลิกหรือซื้อมา <b>เฉลี่ยรวมกัน</b>: <code>p_u = (1 / |I_u|) × ∑ v_i</code></li>
+                  <li><i>Time-Decay Weighting:</i> คูณค่าน้ำหนักลดทอนตามกาลเวลา เช่น สินค้าที่ดูเมื่อวานมีน้ำหนักมากกว่าสินค้าที่ดูเมื่อ 6 เดือนก่อน</li>
                 </ul>
               </li>
-              <li><b>3. Similarity Matching:</b> คำนวณความเข้ากันได้ด้วย <b>Cosine Similarity</b>:
-                $$\cos(\theta) = \frac{\vec{p}_u \cdot \vec{v}_i}{\|\vec{p}_u\| \|\vec{v}_i\|}$$
-                วัดที่ <u>มุมของเวกเตอร์</u> ไม่หลงกลความยาวเอกสาร (ค่าอยู่ระหว่าง -1 ถึง 1 หรือ 0 ถึง 1 เมื่อเวกเตอร์เป็นบวก)
-              </li>
-              <li><b>4. Bi-Encoder vs Cross-Encoder:</b>
+              <li><b>3. Bi-Encoder vs Cross-Encoder Architecture:</b>
                 <ul>
-                  <li><i>Bi-Encoder (Two-Tower):</i> เข้ารหัส User กับ Item แยกกันล่วงหน้า แล้วจับคู่ด้วย Cosine / Dot Product รวดเร็วมาก เหมาะสำหรับ <b>Retrieval ด่านแรก</b></li>
-                  <li><i>Cross-Encoder:</i> ป้อน (User, Item) เข้า Attention พร้อมกันเพื่อวิเคราะห์ปฏิสัมพันธ์ทุกมิติ แม่นยำสูงสุดแต่คำนวณช้า เหมาะสำหรับ <b>Reranking ด่านหลัง</b></li>
+                  <li><i>Bi-Encoder (Two-Tower):</i> แยกถอดรหัส User และ Item ออกจากกันล่วงหน้า สามารถ Precompute เวกเตอร์สินค้าเก็บไว้ใน Vector DB ได้ ค้นหาเร็วผ่าน ANN Search &rarr; <b>ใช้ในด่าน Retrieval</b></li>
+                  <li><i>Cross-Encoder:</i> ป้อน (User, Item) เข้า Attention พร้อมกันเพื่อดูความสัมพันธ์ทุกคู่คำ แม่นยำสูงสุดแต่คำนวณช้ามาก Precompute ไม่ได้ &rarr; <b>ใช้ในด่าน Reranking</b></li>
                 </ul>
-              </li>
-              <li><b>5. MMR (Maximal Marginal Relevance) เพื่อความหลากหลาย:</b>
-                $$\text{MMR} = \arg\max_{i \in R \setminus S} \left[ \lambda \text{Sim}_1(i, u) - (1 - \lambda) \max_{j \in S} \text{Sim}_2(i, j) \right]$$
-                เลือกชิ้นที่ทั้ง <b>ตรงใจผู้ใช้ ($\text{Sim}_1$)</b> และ <b>ไม่ซ้ำซากกับของที่เลือกไปแล้วในลิสต์ ($\text{Sim}_2$)</b> โดยมี $\lambda$ ควบคุมสมดุล
               </li>
             </ul>
 
-            <div class="callout" style="background:rgba(94,224,194,0.08);border-color:rgba(94,224,194,0.3);margin-top:14px;">
-              <h4 style="color:var(--accent);">🔗 ลิงก์อ่านเจาะลึกบทเต็ม (Deep Links)</h4>
-              <div style="display:flex;gap:10px;flex-wrap:wrap;">
-                <a class="btn primary" href="index.html#recsys-content" target="_blank" rel="noopener noreferrer">↗ เปิดอ่านบทที่ 3 เต็มในแท็บใหม่</a>
-                <a class="btn" href="index.html#recsys-content-tfidf" target="_blank" rel="noopener noreferrer">↗ เจาะลึกสูตรคำนวณ TF-IDF</a>
-                <a class="btn" href="index.html#recsys-content-mmr" target="_blank" rel="noopener noreferrer">↗ เจาะลึกหลักการกระจายความหลากหลายด้วย MMR</a>
-                <button class="btn" type="button" onclick="window.switchRecsysChapter('recsys-content')">📖 สลับไปอ่านบทที่ 3 ในหน้านี้</button>
+            <div class="cs-formula-card">
+              <div class="cs-formula-title">📐 สูตร Cosine Similarity และ MMR Diversification</div>
+              <div class="cs-formula-math">Cosine(u, v) = (u · v) / ( ||u|| × ||v|| ) = ∑(u_k × v_k) / [ √(∑ u_k²) × √(∑ v_k²) ]</div>
+              <div class="cs-formula-math">MMR = argmax [ λ × Sim_1(i, u) - (1 - λ) × max Sim_2(i, j) ]   (j ∈ Selected)</div>
+              <div class="cs-formula-legend">
+                ใน MMR: <b>Sim_1</b> คือความเกี่ยวข้องกับผู้ใช้, <b>Sim_2</b> คือความคล้ายกับของที่เลือกติดหน้าจอไปแล้ว, พารามิเตอร์ <b>λ (แลมบ์ดา)</b> ควบคุมสมดุล: ถ้า <code>λ = 1</code> จะเน้นเฉพาะความตรงใจสูงสุด (Pure Relevance), ถ้า <code>λ = 0</code> จะเน้นเฉพาะความหลากหลายแปลกใหม่สูงสุด (Pure Diversity)
+              </div>
+            </div>
+
+            <div class="cs-trap-box">
+              <div class="cs-trap-title">🚨 ข้อดี vs ข้อจำกัดหลัก (Exam Trap)</div>
+              <ul>
+                <li><b>จุดแข็ง:</b> แก้ปัญหา <b>Item Cold-Start</b> ได้สมบูรณ์แบบ (สินค้าใหม่ลงคลังแนะนำได้ทันที ขอแค่มีคำบรรยาย), อธิบายเหตุผลได้ง่าย (Explainability) และไม่ง้อข้อมูลผู้ใช้คนอื่น</li>
+                <li><b>จุดอ่อน (Over-specialization):</b> แนะนำเฉพาะของแนวเดิมๆ ที่คล้ายประวัติเก่า ผู้ใช้ติดอยู่ในฟองสบู่ (Filter Bubble) ไม่สามารถสร้างความประหลาดใจเชิงบวก (ขาด Serendipity) ข้ามหมวดหมู่ได้เหมือน Collaborative Filtering</li>
+              </ul>
+            </div>
+
+            <div class="cs-link-box">
+              <div class="cs-link-title">🔗 ทางลัดเชื่อมโยงเนื้อหาบทที่ 3</div>
+              <div class="cs-btn-row">
+                <a class="cs-btn-link primary" href="index.html#recsys-content" target="_blank" rel="noopener noreferrer">↗ เปิดอ่านบทที่ 3 เต็มในแท็บใหม่</a>
+                <a class="cs-btn-link" href="index.html#recsys-content-tfidf" target="_blank" rel="noopener noreferrer">↗ เจาะลึกสูตรคำนวณ TF-IDF</a>
+                <a class="cs-btn-link" href="index.html#recsys-content-mmr" target="_blank" rel="noopener noreferrer">↗ เจาะลึกการกระจายความหลากหลายด้วย MMR</a>
+                <button class="cs-btn-link" type="button" onclick="window.switchRecsysChapter('recsys-content')">📖 สลับไปอ่านบทที่ 3 ในหน้านี้</button>
               </div>
             </div>
           </div>`,
@@ -256,7 +317,7 @@
       },
 
       /* ==========================================================================
-         Task 0.4: สรุป Multimodal Recommendations (Ch 04)
+         Task 0.4: บทที่ 4 - Multimodal Recommendations (Ch 04)
          ========================================================================== */
       {
         id: 'recsys-sum-multimodal',
@@ -264,56 +325,67 @@
         title: 'สรุปบทที่ 4: การแนะนำจากข้อมูลหลายสื่อ (Multimodal Fusion, CNN, ViT, Encoders)',
         goal: 'เข้าใจการผสานฟีเจอร์ข้อความ ภาพ เสียง และวิดีโอ การเปรียบเทียบกลยุทธ์ Fusion 3 ระดับ และการจัดการสื่อขาดหาย',
         lead: 'สินค้าหนึ่งชิ้นไม่ได้มีแค่ตัวหนังสือ แต่มีภาพปก คลิปตัวอย่าง และเสียงบรรยาย! สรุปกลยุทธ์การผสานหลายสื่อเข้าสู่เวกเตอร์ร่วม',
-        body: `<div class="easy-explain">
-            <h3>⚡ สรุปกลยุทธ์การผสานสื่อ (Multimodal Fusion Strategies)</h3>
-            <table style="width:100%;border-collapse:collapse;margin:10px 0;">
-              <thead>
-                <tr style="border-bottom:2px solid var(--line2);text-align:left;">
-                  <th style="padding:6px 8px;">ระดับ Fusion</th>
-                  <th style="padding:6px 8px;">วิธีการทำงาน</th>
-                  <th style="padding:6px 8px;">ข้อดี</th>
-                  <th style="padding:6px 8px;">ข้อจำกัด</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr style="border-bottom:1px solid var(--line);">
-                  <td style="padding:6px 8px;"><b>Early Fusion (Feature-level)</b></td>
-                  <td style="padding:6px 8px;">นำเวกเตอร์ของแต่ละสื่อ (Text, Image, Audio) มาต่อกัน (Concatenation) ตั้งแต่ชั้นอินพุต แล้วส่งเข้าโมเดลร่วมก้อนเดียว</td>
-                  <td style="padding:6px 8px;">ให้โมเดลจับปฏิสัมพันธ์ข้ามสื่อได้ตั้งแต่ต้น โครงสร้างเข้าใจง่าย</td>
-                  <td style="padding:6px 8px;">มิติตัวเลขใหญ่มาก (Curse of Dimensionality) และหากสื่อใดสื่อหนึ่งหายไป (Missing Modality) จะรวนทั้งระบบ</td>
-                </tr>
-                <tr style="border-bottom:1px solid var(--line);">
-                  <td style="padding:6px 8px;"><b>Late Fusion (Decision-level)</b></td>
-                  <td style="padding:6px 8px;">สร้างโมเดลทำนายคะแนนแยกตามสื่อ (เช่น Text Model ทำนายคะแนน, Image Model ทำนายคะแนน) แล้วนำคะแนนมารวมกันด้วยค่าเฉลี่ยถ่วงน้ำหนัก</td>
-                  <td style="padding:6px 8px;">ยืดหยุ่นสูง สื่อใดขาดหายก็ตัดเฉพาะโมเดลนั้นออกได้ ออกแบบและเทรนแยกทีมได้อิสระ</td>
-                  <td style="padding:6px 8px;">พลาดความสัมพันธ์เชิงลึกข้ามสื่อ (Cross-modal correlation) เช่น ภาพสวยขัดแย้งกับคำบรรยายหลอกลวง</td>
-                </tr>
-                <tr>
-                  <td style="padding:6px 8px;"><b>Intermediate / Hybrid Fusion</b></td>
-                  <td style="padding:6px 8px;">ใช้ Cross-Attention หรือ Gating Mechanism เชื่อมโยงเวกเตอร์ในชั้นกลาง (เช่น Vision-Language Transformers / CLIP)</td>
-                  <td style="padding:6px 8px;">แม่นยำสูงสุด เรียนรู้การจัดแนวของคำกับรูปภาพได้อย่างลึกซึ้ง</td>
-                  <td style="padding:6px 8px;">สถาปัตยกรรมซับซ้อน คำนวณช้า และใช้ทรัพยากรเทรนสูง</td>
-                </tr>
-              </tbody>
-            </table>
+        body: `<div class="cs-card">
+            <div class="cs-header">
+              <h3>⚡ สรุปกลยุทธ์การผสานสื่อ (Multimodal Fusion Strategies)</h3>
+              <span class="cs-badge-pill">⏱️ อ่านเร็ว 2 นาที · Ch 04</span>
+            </div>
 
-            <div class="callout">
-              <h4>📸 Encoders สำหรับแต่ละสื่อ</h4>
+            <div class="cs-table-wrap">
+              <table class="cs-table">
+                <thead>
+                  <tr>
+                    <th>กลยุทธ์ Fusion</th>
+                    <th>ตำแหน่งที่ผสานข้อมูล</th>
+                    <th>จุดเด่น / ข้อดี</th>
+                    <th>ข้อพิจารณา / จุดอ่อน</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><b>Early Fusion (Feature-level)</b></td>
+                    <td><b>ชั้นอินพุต (Input Stage):</b> นำเวกเตอร์ของแต่ละสื่อมาต่อกัน (Concatenation) เป็นเวกเตอร์ยาวก้อนเดียวก่อนส่งเข้าโมเดล</td>
+                    <td>โครงสร้างโมเดลเข้าใจง่าย ประมวลผลร่วมกันได้ตั้งแต่จุดเริ่มต้น</td>
+                    <td>มิติเวกเตอร์บานปลาย (Curse of Dimensionality) และหากสื่อใดสื่อหนึ่งขาดหายไป (Missing Modality) ระบบจะคำนวณต่อไม่ได้</td>
+                  </tr>
+                  <tr>
+                    <td><b>Late Fusion (Decision-level)</b></td>
+                    <td><b>ชั้นเอาต์พุต (Output Stage):</b> สร้างโมเดลทำนายคะแนนแยกตามสื่ออิสระ แล้วนำผลคะแนนมารวมกันด้วยค่าเฉลี่ยถ่วงน้ำหนัก</td>
+                    <td><b>ยืดหยุ่นสูงสุด:</b> สื่อใดขาดหายก็ตัดเฉพาะโมเดลนั้นออกได้ ออกแบบและเทรนแยกทีมได้อิสระ</td>
+                    <td>พลาดความสัมพันธ์เชิงลึกข้ามสื่อ (Cross-modal correlation) เช่น ภาพสวยแต่ข้อความบรรยายหลอกลวง โมเดลจะจับไม่ได้</td>
+                  </tr>
+                  <tr>
+                    <td><b>Intermediate / Cross-Attention</b></td>
+                    <td><b>ชั้นกลาง (Hidden Layers):</b> ใช้ Cross-Attention หรือ Gated Units ให้สื่อหนึ่งถามหาบริบทจากอีกสื่อหนึ่ง (เช่น CLIP, Flamingo)</td>
+                    <td><b>แม่นยำสูงสุด:</b> เรียนรู้การจัดแนว (Alignment) ระหว่างคำบรรยายกับตำแหน่งบนรูปภาพได้อย่างลึกซึ้ง</td>
+                    <td>โครงสร้างซับซ้อน คำนวณช้า และใช้ทรัพยากรเทรนสูงมาก</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="cs-formula-card">
+              <div class="cs-formula-title">📸 Encoders ยอดฮิตสำหรับแต่ละสื่อในข้อสอบ</div>
               <ul>
                 <li><b>Text:</b> Transformer Encoders (BERT, RoBERTa, Sentence-Transformers)</li>
-                <li><b>Image:</b> CNN (ResNet, EfficientNet) และ Vision Transformer (ViT แบ่งรูปเป็น Patches เสมือน Token)</li>
-                <li><b>Audio:</b> Mel-Spectrogram &rarr; 2D CNN หรือ Audio Spectrogram Transformer (AST)</li>
-                <li><b>Cross-Modal Alignment:</b> คอนเซ็ปต์ของ CLIP (Contrastive Language-Image Pretraining) ที่ดึงคู่ (รูป, คำบรรยาย) ของสิ่งเดียวกันให้ใกล้กัน และผลักคู่อื่นให้ไกลกันในเวกเตอร์สเปซร่วม</li>
+                <li><b>Image:</b> CNN (ResNet, EfficientNet) และ <b>Vision Transformer (ViT)</b> ที่ตัดรูปเป็นตารางสี่เหลี่ยม (Patches) เสมือน Token ข้อความ</li>
+                <li><b>Audio:</b> แปลงคลื่นเสียงเป็น <b>Mel-Spectrogram</b> (ภาพความถี่เสียงตามเวลา) &rarr; ส่งต่อให้ 2D-CNN หรือ Audio Spectrogram Transformer (AST)</li>
+                <li><b>Video:</b> 3D-CNN (ประมวลผล กว้าง x ยาว x เวลา) หรือ TimeSformer</li>
               </ul>
             </div>
 
-            <div class="callout" style="background:rgba(94,224,194,0.08);border-color:rgba(94,224,194,0.3);margin-top:14px;">
-              <h4 style="color:var(--accent);">🔗 ลิงก์อ่านเจาะลึกบทเต็ม (Deep Links)</h4>
-              <div style="display:flex;gap:10px;flex-wrap:wrap;">
-                <a class="btn primary" href="index.html#recsys-multimodal" target="_blank" rel="noopener noreferrer">↗ เปิดอ่านบทที่ 4 เต็มในแท็บใหม่</a>
-                <a class="btn" href="index.html#recsys-mm-late" target="_blank" rel="noopener noreferrer">↗ เจาะลึกเปรียบเทียบ Late vs Early Fusion</a>
-                <a class="btn" href="index.html#recsys-mm-intermediate" target="_blank" rel="noopener noreferrer">↗ เทคนิค Cross-Attention ข้ามสื่อ</a>
-                <button class="btn" type="button" onclick="window.switchRecsysChapter('recsys-multimodal')">📖 สลับไปอ่านบทที่ 4 ในหน้านี้</button>
+            <div class="cs-trap-box">
+              <div class="cs-trap-title">🚨 การรับมือสื่อที่ขาดหาย (Handling Missing Modalities)</div>
+              <p>ในชีวิตจริง สินค้าบางชิ้นอาจมีเฉพาะรูปแต่ไม่มีคำบรรยาย หรือมีเฉพาะข้อความแต่ไม่มีคลิปวิดีโอ <u>กลยุทธ์ที่ทนทานที่สุด</u> คือ <b>Late Fusion</b> หรือการเทรนโมเดลด้วยเทคนิค <b>Modality Dropout</b> (สุ่มปิดสื่อบางประเภทตอนเทรน เพื่อบังคับให้โมเดลทำงานได้แม้ข้อมูลสื่อไม่ครบ)</p>
+            </div>
+
+            <div class="cs-link-box">
+              <div class="cs-link-title">🔗 ทางลัดเชื่อมโยงเนื้อหาบทที่ 4</div>
+              <div class="cs-btn-row">
+                <a class="cs-btn-link primary" href="index.html#recsys-multimodal" target="_blank" rel="noopener noreferrer">↗ เปิดอ่านบทที่ 4 เต็มในแท็บใหม่</a>
+                <a class="cs-btn-link" href="index.html#recsys-mm-late" target="_blank" rel="noopener noreferrer">↗ เจาะลึกเปรียบเทียบ Late vs Early Fusion</a>
+                <a class="cs-btn-link" href="index.html#recsys-mm-intermediate" target="_blank" rel="noopener noreferrer">↗ เทคนิค Cross-Attention ข้ามสื่อ</a>
+                <button class="cs-btn-link" type="button" onclick="window.switchRecsysChapter('recsys-multimodal')">📖 สลับไปอ่านบทที่ 4 ในหน้านี้</button>
               </div>
             </div>
           </div>`,
@@ -333,7 +405,7 @@
       },
 
       /* ==========================================================================
-         Task 0.5: สรุป Collaborative Filtering (Ch 05)
+         Task 0.5: บทที่ 5 - Collaborative Filtering (Ch 05)
          ========================================================================== */
       {
         id: 'recsys-sum-cf',
@@ -341,64 +413,73 @@
         title: 'สรุปบทที่ 5: การกรองแบบร่วมมือ (User-kNN, Item-kNN, Pearson, Baseline Predictor)',
         goal: 'แม่นยำความแตกต่างระหว่าง User-based vs Item-based CF, การปรับแก้ Bias ของแต่ละบุคคล และการคำนวณทำนายคะแนน',
         lead: 'รอยเท้าของฝูงชนคือเข็มทิศชั้นยอด! สรุปการเปรียบเทียบความคล้ายระหว่างบุคคลและสินค้า พร้อมสูตรทำนายคะแนนที่ข้อสอบเน้นคำนวณ',
-        body: `<div class="easy-explain">
-            <h3>⚡ สรุปข้อแตกต่าง User-kNN vs Item-kNN</h3>
-            <table style="width:100%;border-collapse:collapse;margin:10px 0;">
-              <thead>
-                <tr style="border-bottom:2px solid var(--line2);text-align:left;">
-                  <th style="padding:6px 8px;">มิติการเปรียบเทียบ</th>
-                  <th style="padding:6px 8px;">User-based kNN</th>
-                  <th style="padding:6px 8px;">Item-based kNN (Amazon's Classic)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr style="border-bottom:1px solid var(--line);">
-                  <td style="padding:6px 8px;"><b>แกนหลักในการวัด</b></td>
-                  <td style="padding:6px 8px;">เทียบ "คนคล้ายคน" (หารายชื่อผู้ใช้ที่มีรสนิยมคล้ายกัน)</td>
-                  <td style="padding:6px 8px;">เทียบ "สินค้าคล้ายสินค้า" (หาสินค้าที่มีคนกลุ่มเดียวกันชอบ)</td>
-                </tr>
-                <tr style="border-bottom:1px solid var(--line);">
-                  <td style="padding:6px 8px;"><b>ความเสถียร (Stability)</b></td>
-                  <td style="padding:6px 8px;">ความชอบของคนเปลี่ยนแปลงเร็ว รสนิยมเปลี่ยนตามอารมณ์/เวลา</td>
-                  <td style="padding:6px 8px;">คุณลักษณะและความคล้ายของสินค้า <u>เสถียรกว่ามาก</u> สินค้าเปลี่ยนช้ากว่าคน</td>
-                </tr>
-                <tr style="border-bottom:1px solid var(--line);">
-                  <td style="padding:6px 8px;"><b>การคำนวณออฟไลน์</b></td>
-                  <td style="padding:6px 8px;">คำนวณล่วงหน้ายากเมื่อผู้ใช้มีหลักร้อยล้านคน ($O(|U|^2)$)</td>
-                  <td style="padding:6px 8px;">คำนวณความคล้ายระหว่างสินค้าเก็บไว้ล่วงหน้าได้ (Precompute Item-Item Sim Matrix)</td>
-                </tr>
-                <tr>
-                  <td style="padding:6px 8px;"><b>ความสามารถในการอธิบาย</b></td>
-                  <td style="padding:6px 8px;">อธิบายยาก ("แนะนำเพราะคุณเหมือน user #9482")</td>
-                  <td style="padding:6px 8px;">อธิบายเข้าใจง่าย ("แนะนำภาพยนตร์นี้เพราะคุณเคยดูเรื่อง...")</td>
-                </tr>
-              </tbody>
-            </table>
+        body: `<div class="cs-card">
+            <div class="cs-header">
+              <h3>⚡ สรุปข้อแตกต่าง User-kNN vs Item-kNN</h3>
+              <span class="cs-badge-pill">⏱️ อ่านเร็ว 2 นาที · Ch 05</span>
+            </div>
 
-            <div class="callout">
-              <h4>📐 สูตรคำนวณสำคัญที่ต้องจำ</h4>
+            <div class="cs-table-wrap">
+              <table class="cs-table">
+                <thead>
+                  <tr>
+                    <th>มิติการเปรียบเทียบ</th>
+                    <th>User-based kNN</th>
+                    <th>Item-based kNN (Amazon's Architecture)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><b>แกนการคำนวณ</b></td>
+                    <td>เทียบ <b>"คนคล้ายคน"</b> (หาเพื่อนบ้านที่มีรสนิยมการให้คะแนนคล้ายกัน)</td>
+                    <td>เทียบ <b>"สินค้าคล้ายสินค้า"</b> (หาสินค้าที่มีประวัติคนกลุ่มเดียวกันชอบ)</td>
+                  </tr>
+                  <tr>
+                    <td><b>ความเสถียร (Stability)</b></td>
+                    <td>ความชอบของคนเปลี่ยนแปลงรวดเร็ว อารมณ์เปลี่ยนตามกาลเวลา</td>
+                    <td><b>เสถียรกว่ามาก:</b> คุณลักษณะของสินค้าเปลี่ยนช้ามาก หนังแนว Sci-Fi วันนี้ อีก 5 ปีก็ยังเป็นแนวเดิม</td>
+                  </tr>
+                  <tr>
+                    <td><b>ความพร้อมใช้งานออฟไลน์</b></td>
+                    <td>คำนวณล่วงหน้ายากมากเมื่อผู้ใช้มีหลักร้อยล้านคน (ความซับซ้อนระดับ <code>O(|U|²)</code>)</td>
+                    <td><b>Precompute ได้สมบูรณ์:</b> คำนวณตาราง Item-Item Similarity Matrix ขนาด <code>|I| × |I|</code> ออฟไลน์ทิ้งไว้ล่วงหน้าได้</td>
+                  </tr>
+                  <tr>
+                    <td><b>การอธิบายเหตุผล (Explainability)</b></td>
+                    <td>อธิบายยากและไม่น่าเชื่อถือ ("เราแนะนำหนังเรื่องนี้เพราะคุณรสนิยมเหมือน User #8492")</td>
+                    <td><b>อธิบายเข้าใจง่ายและตรงจุด:</b> ("เราแนะนำสินค้าชิ้นนี้เพราะคุณเคยซื้อสินค้า X และ Y")</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="cs-formula-card">
+              <div class="cs-formula-title">📐 สูตรคำนวณสำคัญที่ต้องจำเข้าห้องสอบ</div>
+              <div class="cs-formula-math">Pearson(u, v) = ∑(r_ui - r̄_u)(r_vi - r̄_v) / [ √(∑(r_ui - r̄_u)²) × √(∑(r_vi - r̄_v)²) ]</div>
+              <div class="cs-formula-math">Baseline Predictor: b_ui = μ + b_u + b_i</div>
+              <div class="cs-formula-math">Item-kNN Formula: r̂_ui = b_ui + [ ∑ s_ij × (r_uj - b_uj) ] / ∑ |s_ij|</div>
+              <div class="cs-formula-legend">
+                ใน Pearson: มีการ <b>ลบค่าเฉลี่ยส่วนบุคคล (Mean-Centering)</b> ออกก่อนเสมอ ทำให้แก้ปัญหาคนให้คะแนนง่าย (User ใจดี) vs คนให้คะแนนยาก (User ใจร้าย)<br>
+                ใน Baseline Predictor: <b>μ</b> คือค่าเฉลี่ยทั้งระบบ, <b>b_u</b> คืออคติของผู้ใช้ u, และ <b>b_i</b> คืออคติความนิยมของสินค้า i
+              </div>
+            </div>
+
+            <div class="cs-trap-box">
+              <div class="cs-trap-title">🚨 3 จุดบอดคลาสสิกของ Collaborative Filtering</div>
               <ul>
-                <li><b>Pearson Correlation Coefficient (PCC):</b>
-                  $$w_{u,v} = \frac{\sum_{i \in I_{uv}} (r_{ui} - \bar{r}_u)(r_{vi} - \bar{r}_v)}{\sqrt{\sum (r_{ui} - \bar{r}_u)^2} \sqrt{\sum (r_{vi} - \bar{r}_v)^2}}$$
-                  <i>หัวใจสำคัญ:</i> มีการ <b>ลบค่าเฉลี่ยส่วนบุคคล ($\bar{r}_u$)</b> ออกก่อน ทำให้แก้ปัญหา "คนให้คะแนนยาก (ให้ 3 แปลว่าชอบมาก)" กับ "คนใจดี (ให้ 4 เป็นขั้นต่ำ)" ได้อย่างยอดเยี่ยม!
-                </li>
-                <li><b>Baseline Predictor (แยกอคติพื้นฐาน):</b>
-                  $$b_{ui} = \mu + b_u + b_i$$
-                  โดย $\mu$ คือค่าเฉลี่ยทั้งระบบ, $b_u$ คือความใจดี/ใจร้ายของผู้ใช้ $u$, $b_i$ คือความดัง/คุณภาพของสินค้า $i$
-                </li>
-                <li><b>Item-kNN Prediction Formula:</b>
-                  $$\hat{r}_{ui} = b_{ui} + \frac{\sum_{j \in N_k(i; u)} s_{ij} (r_{uj} - b_{uj})}{\sum_{j \in N_k(i; u)} |s_{ij}|}$$
-                </li>
+                <li><b>Cold-Start:</b> ทั้ง New User (ไม่มีประวัติการให้คะแนน) และ New Item (ไม่มีใครเคยซื้อ) CF จะคำนวณไม่ได้ทั้งคู่!</li>
+                <li><b>Sparsity:</b> ผู้ใช้สองคนอาจมีรสนิยมตรงกัน แต่บังเอิญให้คะแนนสินค้าไม่ตรงกันเลยแม้แต่ชิ้นเดียว (Co-rated items = 0) ทำให้คำนวณความคล้ายไม่ได้</li>
+                <li><b>Gray Sheep:</b> ผู้ใช้ที่มีรสนิยมแปลกประหลาด ไม่เข้าพวกกับใครเลย ระบบจะหาเพื่อนบ้านที่ตรงกันไม่ได้</li>
               </ul>
             </div>
 
-            <div class="callout" style="background:rgba(94,224,194,0.08);border-color:rgba(94,224,194,0.3);margin-top:14px;">
-              <h4 style="color:var(--accent);">🔗 ลิงก์อ่านเจาะลึกบทเต็ม (Deep Links)</h4>
-              <div style="display:flex;gap:10px;flex-wrap:wrap;">
-                <a class="btn primary" href="index.html#recsys-neighbors" target="_blank" rel="noopener noreferrer">↗ เปิดอ่านบทที่ 5 เต็มในแท็บใหม่</a>
-                <a class="btn" href="index.html#recsys-cf-pearson" target="_blank" rel="noopener noreferrer">↗ ตัวอย่างคำนวณ Pearson Correlation</a>
-                <a class="btn" href="index.html#recsys-cf-item-knn" target="_blank" rel="noopener noreferrer">↗ กลไก Item-kNN สไตล์ Amazon</a>
-                <button class="btn" type="button" onclick="window.switchRecsysChapter('recsys-neighbors')">📖 สลับไปอ่านบทที่ 5 ในหน้านี้</button>
+            <div class="cs-link-box">
+              <div class="cs-link-title">🔗 ทางลัดเชื่อมโยงเนื้อหาบทที่ 5</div>
+              <div class="cs-btn-row">
+                <a class="cs-btn-link primary" href="index.html#recsys-neighbors" target="_blank" rel="noopener noreferrer">↗ เปิดอ่านบทที่ 5 เต็มในแท็บใหม่</a>
+                <a class="cs-btn-link" href="index.html#recsys-cf-pearson" target="_blank" rel="noopener noreferrer">↗ ตัวอย่างคำนวณ Pearson Correlation</a>
+                <a class="cs-btn-link" href="index.html#recsys-cf-item-knn" target="_blank" rel="noopener noreferrer">↗ กลไก Item-kNN สไตล์ Amazon</a>
+                <button class="cs-btn-link" type="button" onclick="window.switchRecsysChapter('recsys-neighbors')">📖 สลับไปอ่านบทที่ 5 ในหน้านี้</button>
               </div>
             </div>
           </div>`,
@@ -418,7 +499,7 @@
       },
 
       /* ==========================================================================
-         Task 0.6: สรุป Matrix Factorization & Deep Models (Ch 06)
+         Task 0.6: บทที่ 6 - Matrix Factorization & Deep Models (Ch 06)
          ========================================================================== */
       {
         id: 'recsys-sum-mf-deep',
@@ -426,42 +507,58 @@
         title: 'สรุปบทที่ 6: การแยกตัวประกอบเมทริกซ์และโมเดลการเรียนรู้เชิงลึก (SVD, BPR, NCF, Two-Tower)',
         goal: 'แม่นยำกลไก Latent Factor Models, การแก้ปัญหา Implicit Feedback ด้วย BPR, สถาปัตยกรรม Two-Tower และ NCF',
         lead: 'ย่อเมทริกซ์มหึมาลงสู่มิติแฝง (Latent Space)! สรุปวิวัฒนาการจาก Funk SVD ผู้ชนะรางวัล Netflix Prize สู่โมเดล Two-Tower ระดับมิลลิวินาทีของ YouTube',
-        body: `<div class="easy-explain">
-            <h3>⚡ สรุปวิวัฒนาการโมเดลจาก SVD สู่ Two-Tower</h3>
+        body: `<div class="cs-card">
+            <div class="cs-header">
+              <h3>⚡ สรุปวิวัฒนาการโมเดลจาก SVD สู่ Two-Tower</h3>
+              <span class="cs-badge-pill">⏱️ อ่านเร็ว 2 นาที · Ch 06</span>
+            </div>
+
             <ul>
               <li><b>Matrix Factorization (Funk SVD):</b>
-                $$\hat{r}_{ui} = \mu + b_u + b_i + \vec{p}_u \cdot \vec{q}_i$$
-                แยกเมทริกซ์เรตติ้ง $R_{|U| \times |I|}$ ออกเป็นผลคูณของ 2 เมทริกซ์ขนาดเล็ก:
-                User Matrix $P_{|U| \times k}$ และ Item Matrix $Q_{|I| \times k}$ โดยที่ $k \ll \min(|U|, |I|)$ (มิติแฝง เช่น $k=64, 128$)
+                แยกเมทริกซ์เรตติ้ง <code>R (|U| × |I|)</code> ออกเป็นผลคูณของ 2 เมทริกซ์มิติแฝงขนาดเล็ก:
+                User Matrix <code>P (|U| × k)</code> และ Item Matrix <code>Q (|I| × k)</code> โดยที่ <code>k &lt;&lt; min(|U|, |I|)</code> (เช่น k = 64 หรือ 128 มิติ)
                 <ul>
-                  <li><i>Loss Function:</i> $\min_{P, Q} \sum_{(u,i) \in R} (r_{ui} - \hat{r}_{ui})^2 + \lambda (\|\vec{p}_u\|^2 + \|\vec{q}_i\|^2 + b_u^2 + b_i^2)$ (มี Regularization ป้องกัน Overfitting)</li>
-                  <li><i>Optimization:</i> ใช้ Stochastic Gradient Descent (SGD) หรือ Alternating Least Squares (ALS)</li>
+                  <li>คำนวณเฉพาะจุดที่มีข้อมูลคะแนนเรตติ้งจริง (Observed Ratings) เท่านั้น ป้องกันปัญหาเมทริกซ์ว่าง</li>
+                  <li>มีพารามิเตอร์ <b>Regularization (λ)</b> เพื่อป้องกัน Overfitting</li>
                 </ul>
               </li>
               <li><b>BPR (Bayesian Personalized Ranking):</b>
-                ออกแบบมาเพื่อ <b>Implicit Feedback (คลิก/ไม่คลิก)</b> โดยเฉพาะ! เปลี่ยนจากการทำนายค่าตัวเลขเดี่ยวๆ เป็นการเปรียบเทียบเป็นคู่ (Pairwise Loss):
-                $$\text{Loss}_{\text{BPR}} = -\sum_{(u, i, j) \in D} \ln \sigma(\hat{x}_{ui} - \hat{x}_{uj}) + \lambda \|\Theta\|^2$$
-                สินค้า $i$ ที่ผู้ใช้เคยคลิก (Positive) จะต้องได้คะแนนสูงกว่าสินค้า $j$ ที่ไม่เคยคลิก (Negative)!
+                ออกแบบมาเพื่อ <b>Implicit Feedback (คลิก/ดู)</b> โดยเฉพาะ! เปลี่ยนจากการทำนายคะแนนตัวเลขเดี่ยวๆ เป็นการเปรียบเทียบเป็นคู่ (Pairwise Ranking Loss):
+                บังคับให้สินค้า <code>i</code> ที่ผู้ใช้เคยคลิก (Positive) ต้องมีคะแนนสูงกว่าสินค้า <code>j</code> ที่ไม่เคยคลิก (Negative Item ที่สุ่มขึ้นมา)
               </li>
               <li><b>Neural Collaborative Filtering (NCF):</b>
-                ผสมผสาน 2 เส้นทาง: <b>GMF (Generalized Matrix Factorization)</b> ที่คูณเวกเตอร์แบบ Element-wise รวมกับ <b>MLP (Multi-Layer Perceptron)</b> ที่จับปฏิสัมพันธ์ไม่เชิงเส้น (Non-linear interactions)
+                ผสาน 2 เส้นทางคู่ขนาน: ฝั่ง <b>GMF (Generalized Matrix Factorization)</b> จับปฏิสัมพันธ์เชิงเส้นแบบ Element-wise รวมกับฝั่ง <b>MLP (Multi-Layer Perceptron)</b> จับปฏิสัมพันธ์ไม่เชิงเส้น (Non-linear)
               </li>
               <li><b>Two-Tower DSSM Architecture (หัวใจสำคัญของ YouTube &amp; TikTok):</b>
                 <ul>
-                  <li><i>User Tower:</i> รับฟีเจอร์ผู้ใช้ (ประวัติการดู, อุปกรณ์, บริบท) &rarr; ขับออกมาเป็นเวกเตอร์ $\vec{u} \in \mathbb{R}^d$</li>
-                  <li><i>Item Tower:</i> รับฟีเจอร์สินค้า (ชื่อ, รูป, หมวดหมู่) &rarr; ขับออกมาเป็นเวกเตอร์ $\vec{v} \in \mathbb{R}^d$</li>
-                  <li><i>Matching:</i> คำนวณคะแนนด้วย $\text{Score} = \vec{u} \cdot \vec{v}$ และค้นหาด้วย Approximate Nearest Neighbors (ANN / Faiss) ในเวลาไม่เกิน 5-15 ms!</li>
+                  <li><i>User Tower:</i> รับฟีเจอร์ผู้ใช้ &rarr; ขับออกมาเป็นเวกเตอร์ <code>u ∈ R^d</code></li>
+                  <li><i>Item Tower:</i> รับฟีเจอร์สินค้า &rarr; ขับออกมาเป็นเวกเตอร์ <code>v ∈ R^d</code></li>
+                  <li><i>Serving:</i> เวกเตอร์สินค้าทั้งหมดสามารถคำนวณออฟไลน์และทำดัชนี (HNSW / Faiss) ล่วงหน้า เมื่อมี Request เข้ามา เพียงรัน User Tower แล้วทำ Dot Product ค้นหาด้วย ANN ในเวลา &lt; 15 ms!</li>
                 </ul>
               </li>
             </ul>
 
-            <div class="callout" style="background:rgba(94,224,194,0.08);border-color:rgba(94,224,194,0.3);margin-top:14px;">
-              <h4 style="color:var(--accent);">🔗 ลิงก์อ่านเจาะลึกบทเต็ม (Deep Links)</h4>
-              <div style="display:flex;gap:10px;flex-wrap:wrap;">
-                <a class="btn primary" href="index.html#recsys-models" target="_blank" rel="noopener noreferrer">↗ เปิดอ่านบทที่ 6 เต็มในแท็บใหม่</a>
-                <a class="btn" href="index.html#recsys-mf-latent" target="_blank" rel="noopener noreferrer">↗ เจาะลึกคณิตศาสตร์ Matrix Factorization</a>
-                <a class="btn" href="index.html#recsys-twotower-dssm" target="_blank" rel="noopener noreferrer">↗ สถาปัตยกรรม Two-Tower DSSM ละเอียด</a>
-                <button class="btn" type="button" onclick="window.switchRecsysChapter('recsys-models')">📖 สลับไปอ่านบทที่ 6 ในหน้านี้</button>
+            <div class="cs-formula-card">
+              <div class="cs-formula-title">📐 สูตรคำนวณ Funk SVD และ Loss Function</div>
+              <div class="cs-formula-math">r̂_ui = μ + b_u + b_i + (p_u · q_i) = μ + b_u + b_i + ∑(p_uk × q_ik)</div>
+              <div class="cs-formula-math">Loss = ∑ (r_ui - r̂_ui)² + λ × ( ||p_u||² + ||q_i||² + b_u² + b_i² )</div>
+              <div class="cs-formula-legend">
+                อัปเดตพารามิเตอร์ด้วย Stochastic Gradient Descent (SGD): คำนวณ error <code>e_ui = r_ui - r̂_ui</code> แล้วปรับเวกเตอร์ p_u และ q_i ตามทิศทางเกรเดียนต์
+              </div>
+            </div>
+
+            <div class="cs-trap-box">
+              <div class="cs-trap-title">🚨 ข้อจำกัดทางสถาปัตยกรรมของ Two-Tower (Exam Watch-Out)</div>
+              <p>Two-Tower Model เร็วมากเพราะแยก User Tower กับ Item Tower ออกจากกันเด็ดขาด แต่มี <b>ข้อจำกัดสำคัญ</b> คือ <u>ไม่สามารถจับปฏิสัมพันธ์ข้ามฟีเจอร์ในระดับลึก (Cross-features Interactions)</u> ได้เหมือนโมเดล DeepFM หรือ DLRM เพราะฟีเจอร์ทั้งสองฝั่งเพิ่งมาเจอกันที่ขั้นตอน Dot Product สุดท้ายเท่านั้น!</p>
+            </div>
+
+            <div class="cs-link-box">
+              <div class="cs-link-title">🔗 ทางลัดเชื่อมโยงเนื้อหาบทที่ 6</div>
+              <div class="cs-btn-row">
+                <a class="cs-btn-link primary" href="index.html#recsys-models" target="_blank" rel="noopener noreferrer">↗ เปิดอ่านบทที่ 6 เต็มในแท็บใหม่</a>
+                <a class="cs-btn-link" href="index.html#recsys-mf-latent" target="_blank" rel="noopener noreferrer">↗ เจาะลึกคณิตศาสตร์ Matrix Factorization</a>
+                <a class="cs-btn-link" href="index.html#recsys-twotower-dssm" target="_blank" rel="noopener noreferrer">↗ สถาปัตยกรรม Two-Tower DSSM ละเอียด</a>
+                <button class="cs-btn-link" type="button" onclick="window.switchRecsysChapter('recsys-models')">📖 สลับไปอ่านบทที่ 6 ในหน้านี้</button>
               </div>
             </div>
           </div>`,
@@ -481,7 +578,7 @@
       },
 
       /* ==========================================================================
-         Task 0.7: สรุป LLM ในระบบแนะนำ (Ch 07)
+         Task 0.7: บทที่ 7 - LLM-Powered Recommender Systems (Ch 07)
          ========================================================================== */
       {
         id: 'recsys-sum-llm',
@@ -489,41 +586,73 @@
         title: 'สรุปบทที่ 7: พลังของ Large Language Models ในระบบแนะนำ (LLM-Powered RecSys)',
         goal: 'เข้าใจบทบาท 3 มิติของ LLM ในระบบแนะนำ, รูปแบบการ Prompt (Pointwise, Pairwise, Listwise) และข้อจำกัดทางวิศวกรรมจริง',
         lead: 'เมื่อปัญญาประดิษฐ์เชิงภาษาพบกับระบบแนะนำ! สรุปการประยุกต์ใช้ LLM ในโลกการทำงานจริง พร้อมวิธีรับมือ Latency และ Cost',
-        body: `<div class="easy-explain">
-            <h3>⚡ 3 บทบาทหลักของ LLM ใน Recommender Systems</h3>
+        body: `<div class="cs-card">
+            <div class="cs-header">
+              <h3>⚡ 3 บทบาทหลักของ LLM ใน Recommender Systems</h3>
+              <span class="cs-badge-pill">⏱️ อ่านเร็ว 2 นาที · Ch 07</span>
+            </div>
+
             <ol>
-              <li><b>1. LLM as Feature Extractor / Semantic Encoder:</b>
-                ใช้ LLM สกัดความหมายลึกซึ้งจากข้อความสินค้า (เช่น วิเคราะห์อารมณ์ สไตล์ บุคลิก) หรือสร้าง <i>Dense Text Embeddings</i> ส่งต่อให้โมเดล RecSys ดั้งเดิม (เช่น Two-Tower) ใช้ต่อ &rarr; <u>นิยมมากในโปรดักชันเพราะไม่กระทบ Latency ตอนเสิร์ฟ</u>
+              <li><b>1. LLM as Feature Extractor / Semantic Encoder (ด่านออฟไลน์):</b>
+                ใช้ LLM สกัดความหมายลึกซึ้งจากเนื้อหาสินค้า เช่น สรุปธีม อารมณ์ บุคลิก หรือสร้าง <b>Dense Text Embeddings</b> ส่งต่อให้โมเดล Two-Tower &rarr; <u>ปลอดภัยต่อ Latency มากที่สุด</u> เพราะทำออฟไลน์ล่วงหน้าได้
               </li>
               <li><b>2. LLM as Reranker (ด่านสุดท้าย):</b>
-                ป้อนสินค้า Top-10 หรือ Top-20 พร้อมประวัติผู้ใช้ให้ LLM ช่วยคิดและจัดอันดับใหม่ (Re-ranking) ผ่าน Prompting
-                <ul>
-                  <li><i>Pointwise:</i> ประเมินสินค้าทีละชิ้น (ถามว่าผู้ใช้จะชอบชิ้นนี้ไหม? ตอบ ใช่/ไม่ใช่ หรือ 1-5)</li>
-                  <li><i>Pairwise:</i> ส่งสินค้าทีละคู่ แล้วถามว่าชิ้นใดเหมาะกับผู้ใช้มากกว่ากัน (แม่นยำขึ้นแต่จำนวนรอบสูง $O(K^2)$)</li>
-                  <li><i>Listwise:</i> ส่งรายการสินค้าทั้ง 10 ชิ้นพร้อมกัน ให้โมเดลเรียงลำดับผลลัพธ์ทันที (รวดเร็วที่สุดแต่เสี่ยงต่ออาการหลอน Hallucination และ Position Bias ภายใน Prompt)</li>
-                </ul>
+                รับรายการสินค้าผู้สมัคร Top-10 หรือ Top-20 ที่ผ่านการคัดกรองมาแล้ว พร้อมประวัติย่อของผู้ใช้ ให้ LLM คิดวิเคราะห์และจัดเรียงใหม่ผ่าน Prompting
               </li>
               <li><b>3. Conversational Recommender &amp; Explanation Agent:</b>
-                เป็นแชตบอตพูดคุยตอบโต้ ซักถามความต้องการเพิ่มเติม (Clarifying Questions) และให้คำอธิบายที่อ้างอิงหลักฐานจริง (Grounded Explanations) ผ่าน RAG
+                แชตบอตแนะนำสินค้าแบบโต้ตอบ ซักถามความต้องการเพิ่มเติม (Clarifying Questions) และให้คำอธิบายที่มีหลักฐานอ้างอิงชัดเจน (Grounded Explanations) ผ่าน RAG
               </li>
             </ol>
 
-            <div class="callout" style="background:rgba(255,180,87,0.08);border-color:rgba(255,180,87,0.3);">
-              <h4 style="color:var(--warn,#ffb457);">⚠️ ข้อจำกัดทางวิศวกรรมจริงของ LLM (The Production Trilemma)</h4>
+            <div class="cs-table-wrap">
+              <table class="cs-table">
+                <thead>
+                  <tr>
+                    <th>รูปแบบ Prompting</th>
+                    <th>วิธีการทำงาน</th>
+                    <th>ข้อดี</th>
+                    <th>ข้อจำกัด / ความเสี่ยง</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><b>Pointwise</b></td>
+                    <td>ส่งสินค้าให้ LLM ประเมิน <b>ทีละ 1 ชิ้น</b> (ถามว่าผู้ใช้คนนี้จะชอบชิ้นนี้ไหม? ตอบ 1-5 ดาว หรือ ใช่/ไม่ใช่)</td>
+                    <td>เข้าใจง่าย Prompt สั้น</td>
+                    <td>ไม่ได้เปรียบเทียบระหว่างตัวเลือก (No relative comparison) และต้องเรียก API K ครั้ง</td>
+                  </tr>
+                  <tr>
+                    <td><b>Pairwise</b></td>
+                    <td>ส่งสินค้าให้ LLM เปรียบเทียบ <b>ทีละคู่</b> (ชิ้น A กับ ชิ้น B ชิ้นไหนตรงใจผู้ใช้มากกว่ากัน?)</td>
+                    <td>แม่นยำสูง เปรียบเทียบทางเลือกตรงๆ</td>
+                    <td>จำนวนรอบบานปลายระดับ <code>O(K²)</code> &rarr; คำนวณช้ามากเกินไปในระบบจริง</td>
+                  </tr>
+                  <tr>
+                    <td><b>Listwise</b></td>
+                    <td>ส่งรายการสินค้าทั้ง 10 ชิ้นพร้อมกันใน Prompt เดียว ให้ LLM เรียงลำดับผลลัพธ์ทันที</td>
+                    <td><b>เร็วที่สุดและประหยัดต้นทุนที่สุด</b> (เรียก API เพียงรอบเดียว)</td>
+                    <td>เสี่ยงต่อ <b>Position Bias ใน Prompt</b> (LLM มักสนใจหัวและท้ายลิสต์มากกว่าตรงกลาง) และเสี่ยงต่อ Hallucination</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="cs-trap-box">
+              <div class="cs-trap-title">🚨 The Production Trilemma (ข้อจำกัดวิศวกรรมจริง 3 ประการ)</div>
               <ul>
-                <li><b>Latency (ความหน่วง):</b> LLM ใช้เวลาถอดรหัส Token เฉลี่ย 200 - 1500 ms ซึ่งเกินงบ Latency มาตรฐานของหน้าแรกแอปพลิเคชัน (&lt; 50-100 ms) มหาศาล จึงห้ามนำไปใช้ในด่าน Candidate Generation เด็ดขาด!</li>
-                <li><b>Cost (ค่าใช้จ่าย):</b> หากมีผู้ใช้เปิดหน้าแอปวันละ 100 ล้านครั้ง การเรียก API LLM ทุกครั้งจะทำให้ค่าใช้จ่ายสูงจนธุรกิจขาดทุน</li>
-                <li><b>Hallucination (อาการหลอน):</b> LLM อาจแต่งชื่อสินค้าที่ไม่มีอยู่จริงในคลังสินค้าขึ้นมาเอง จึงต้องมี Guardrail บังคับให้แนะนำเฉพาะ Item ID ที่มีอยู่ในสต็อกจริงเท่านั้น</li>
+                <li><b>Latency (ความหน่วง):</b> LLM ใช้เวลาสร้าง Token ประมาณ 200 - 1500 ms ในขณะที่งบ Latency หน้าแรกของแอปคือ <b>&lt; 50 ms</b> &rarr; <u>ห้ามนำ LLM ไปใช้ในด่าน Candidate Generation เด็ดขาด!</u></li>
+                <li><b>Cost (ค่าใช้จ่าย API):</b> การยิง API LLM ทุกครั้งที่มีคนเปิดแอปจะทำให้ต้นทุนเซิร์ฟเวอร์ระเบิด</li>
+                <li><b>Hallucination (อาการหลอน):</b> LLM อาจแต่งชื่อสินค้าที่ไม่มีอยู่จริงขึ้นมา &rarr; ต้องมี <b>Guardrail / ID Filtering</b> กรองเอาต์พุตให้ตรงกับคลังสินค้าเสมอ</li>
               </ul>
             </div>
 
-            <div class="callout" style="background:rgba(94,224,194,0.08);border-color:rgba(94,224,194,0.3);margin-top:14px;">
-              <h4 style="color:var(--accent);">🔗 ลิงก์อ่านเจาะลึกบทเต็ม (Deep Links)</h4>
-              <div style="display:flex;gap:10px;flex-wrap:wrap;">
-                <a class="btn primary" href="index.html#recsys-llm" target="_blank" rel="noopener noreferrer">↗ เปิดอ่านบทที่ 7 เต็มในแท็บใหม่</a>
-                <a class="btn" href="index.html#recsys-llm-prompting" target="_blank" rel="noopener noreferrer">↗ เจาะลึก Pointwise vs Pairwise vs Listwise</a>
-                <a class="btn" href="index.html#recsys-llm-engineering" target="_blank" rel="noopener noreferrer">↗ กรณีศึกษาแก้ปัญหา Latency & Cost</a>
-                <button class="btn" type="button" onclick="window.switchRecsysChapter('recsys-llm')">📖 สลับไปอ่านบทที่ 7 ในหน้านี้</button>
+            <div class="cs-link-box">
+              <div class="cs-link-title">🔗 ทางลัดเชื่อมโยงเนื้อหาบทที่ 7</div>
+              <div class="cs-btn-row">
+                <a class="cs-btn-link primary" href="index.html#recsys-llm" target="_blank" rel="noopener noreferrer">↗ เปิดอ่านบทที่ 7 เต็มในแท็บใหม่</a>
+                <a class="cs-btn-link" href="index.html#recsys-llm-prompting" target="_blank" rel="noopener noreferrer">↗ เจาะลึก Pointwise vs Pairwise vs Listwise</a>
+                <a class="cs-btn-link" href="index.html#recsys-llm-engineering" target="_blank" rel="noopener noreferrer">↗ กรณีศึกษาแก้ปัญหา Latency & Cost</a>
+                <button class="cs-btn-link" type="button" onclick="window.switchRecsysChapter('recsys-llm')">📖 สลับไปอ่านบทที่ 7 ในหน้านี้</button>
               </div>
             </div>
           </div>`,
@@ -543,7 +672,7 @@
       },
 
       /* ==========================================================================
-         Task 0.8: สรุป Responsible RecSys (Ch 08)
+         Task 0.8: บทที่ 8 - Responsible & Trustworthy RecSys (Ch 08)
          ========================================================================== */
       {
         id: 'recsys-sum-responsible',
@@ -551,42 +680,66 @@
         title: 'สรุปบทที่ 8: ระบบผู้แนะนำที่มีความรับผิดชอบและจริยธรรม (Responsible & Trustworthy RecSys)',
         goal: 'แม่นยำปัญหา Popularity Bias, ความเป็นธรรมสองฝั่ง (C-Fairness vs P-Fairness), ความเป็นส่วนตัว (DP & Federated Learning) และการป้องกัน Shilling Attacks',
         lead: 'ระบบที่ดีต้องไม่หลอกผู้ใช้และไม่ทำลายสังคม! สรุปมิติความรับผิดชอบ การตรวจวัดอคติ และเทคนิคการปกป้องความเป็นส่วนตัว',
-        body: `<div class="easy-explain">
-            <h3>⚡ สรุป 4 เสาหลักของ Responsible AI ในระบบแนะนำ</h3>
-            
-            <div class="callout">
-              <h4>1. Popularity Bias &amp; Filter Bubble</h4>
-              <ul>
-                <li><b>Popularity Bias:</b> อคติที่ระบบเอนเอียงไปแนะนำเฉพาะสินค้ายอดนิยมกลุ่มเล็กๆ (Short Head) จนสินค้าส่วนใหญ่ (Long Tail) ถูกปิดกั้นโอกาส</li>
-                <li><b>Gini Coefficient:</b> วัดความไม่เท่าเทียมของการแสดงผล (0 = ทุกสินค้าถูกแนะนำเท่ากันหมด, 1 = สินค้าชิ้นเดียวผูกขาดทั้งระบบ)</li>
-                <li><b>Filter Bubble / Echo Chamber:</b> ผู้ใช้เห็นเฉพาะเนื้อหาที่ตรงกับความเชื่อเดิมของตนเอง นำไปสู่การแบ่งขั้วทางความคิด (Polarization)</li>
-              </ul>
+        body: `<div class="cs-card">
+            <div class="cs-header">
+              <h3>⚡ สรุป 4 เสาหลักของ Responsible AI ในระบบแนะนำ</h3>
+              <span class="cs-badge-pill">⏱️ อ่านเร็ว 2 นาที · Ch 08</span>
             </div>
 
-            <div class="callout">
-              <h4>2. Two-Sided Fairness (ความเป็นธรรมสองฝั่งในตลาด)</h4>
-              <ul>
-                <li><b>C-Fairness (Consumer Fairness):</b> ความเป็นธรรมฝั่งผู้บริโภค &rarr; ผู้ใช้ทุกกลุ่ม (ไม่ว่าจะเชื้อชาติ เพศ วัย หรือกลุ่มชนกลุ่มน้อย) ต้องได้รับการแนะนำที่มีคุณภาพและความแม่นยำเท่าเทียมกัน ไม่ถูกเลือกปฏิบัติ</li>
-                <li><b>P-Fairness (Producer Fairness):</b> ความเป็นธรรมฝั่งผู้ผลิต/ร้านค้า &rarr; ร้านค้ารายย่อย ผู้ผลิตหน้าใหม่ ต้องได้รับโอกาสในการแสดงผล (Exposure) อย่างเป็นธรรม ไม่ถูกแบรนด์ยักษ์ใหญ่ผูกขาด</li>
-              </ul>
+            <div class="cs-table-wrap">
+              <table class="cs-table">
+                <thead>
+                  <tr>
+                    <th>เสาหลัก</th>
+                    <th>ปัญหา / สิ่งที่ต้องเผชิญ</th>
+                    <th>เครื่องมือวัดผล / ตัวชี้วัด</th>
+                    <th>กลยุทธ์การแก้ไข (Mitigation)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><b>1. Popularity Bias &amp; Bubbles</b></td>
+                    <td>ระบบแนะนำกระจุกตัวอยู่เฉพาะสินค้าดัง สินค้าหางยาว (Long Tail) ถูกละเลย ผู้ใช้ติดใน Filter Bubble</td>
+                    <td><b>Gini Index</b> (0 = กระจายเท่าเทียม, 1 = ผูกขาดชิ้นเดียว) และ Catalog Coverage</td>
+                    <td>Exploration Budget, Inverse Propensity Scoring (IPS), MMR Diversification</td>
+                  </tr>
+                  <tr>
+                    <td><b>2. Two-Sided Fairness</b></td>
+                    <td>
+                      <b>C-Fairness:</b> ผู้บริโภคต่างกลุ่มได้รับความแม่นยำไม่เท่ากัน<br>
+                      <b>P-Fairness:</b> ร้านค้ารายย่อยไม่ได้รับโอกาสในการแสดงผล (Exposure)
+                    </td>
+                    <td>Demographic Parity, Equal Opportunity, Exposure Parity</td>
+                    <td>Fair Re-ranking ในด่านสุดท้าย, Constrained Optimization จัดสรรโควตาการแสดงผลให้ผู้ผลิตรายย่อย</td>
+                  </tr>
+                  <tr>
+                    <td><b>3. Privacy Protection</b></td>
+                    <td>ข้อมูลประวัติการซื้อหลุดรั่ว หรือถูกระบุตัวตนย้อนกลับ (Re-identification)</td>
+                    <td>Privacy Budget (ε - เอปซีลอน ใน Differential Privacy)</td>
+                    <td><b>Differential Privacy (DP)</b> เติมสัญญาณรบกวน Noise และ <b>Federated Learning</b> เทรนบนเครื่องผู้ใช้ ส่งเฉพาะ Gradients</td>
+                  </tr>
+                  <tr>
+                    <td><b>4. Shilling Attacks</b></td>
+                    <td>บัญชีปลอมปั๊มรีวิวเพื่อดันสินค้าตนเอง (Push Attack) หรือทำลายคู่แข่ง (Nuke Attack)</td>
+                    <td>Rating Distribution Anomaly, Suspicious Account Clustering</td>
+                    <td>ตรวจจับความผิดปกติของเวลาการให้คะแนน (Burst detection), ตรวจสอบรอยเท้า IP/Device Fingerprinting</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
 
-            <div class="callout">
-              <h4>3. Privacy &amp; Trust (ความเป็นส่วนตัวและความปลอดภัย)</h4>
-              <ul>
-                <li><b>Differential Privacy (DP):</b> เติมสัญญาณรบกวนทางคณิตศาสตร์ (Calibrated Noise เช่น Laplace/Gaussian Mechanism) ลงในข้อมูลหรือเกรเดียนต์ เพื่อรับประกันว่าไม่มีใครสามารถระบุตัวตนย้อนกลับได้ว่าข้อมูลนี้เป็นของใคร</li>
-                <li><b>Federated Learning:</b> อุปกรณ์ของผู้ใช้เทรนโมเดลภายในเครื่องตนเอง แล้วส่งเฉพาะ <i>Model Weights/Gradients</i> กลับไปรวบรวมที่ Server &rarr; ข้อมูลดิบของผู้ใช้ไม่เคยหลุดออกจากเครื่อง!</li>
-                <li><b>Shilling Attack / Manipulation:</b> ขบวนการสร้างบัญชีปลอมเข้ามารีวิวหรือปั๊มคะแนนดาวเพื่อดันสินค้าตนเอง (Push Attack) หรือทำลายคู่แข่ง (Nuke Attack)</li>
-              </ul>
+            <div class="cs-trap-box">
+              <div class="cs-trap-title">🚨 The Accuracy-Fairness Trade-off (กับดักข้อสอบ)</div>
+              <p>การบังคับใช้มาตรการทางจริยธรรม (เช่น บังคับให้หน้าจอแสดงผลสินค้าของร้านค้ารายย่อยเพื่อ P-Fairness หรือเติม Noise เพื่อ Differential Privacy) มักทำให้ <b>ตัวชี้วัดความแม่นยำระยะสั้น (เช่น NDCG, CTR) ลดลงเล็กน้อย</b> เสมอ แต่นี่คือสิ่งที่ธุรกิจยอมแลกเพื่อความยั่งยืนของระบบนิเวศน์ทางธุรกิจในระยะยาว</p>
             </div>
 
-            <div class="callout" style="background:rgba(94,224,194,0.08);border-color:rgba(94,224,194,0.3);margin-top:14px;">
-              <h4 style="color:var(--accent);">🔗 ลิงก์อ่านเจาะลึกบทเต็ม (Deep Links)</h4>
-              <div style="display:flex;gap:10px;flex-wrap:wrap;">
-                <a class="btn primary" href="index.html#recsys-responsible" target="_blank" rel="noopener noreferrer">↗ เปิดอ่านบทที่ 8 เต็มในแท็บใหม่</a>
-                <a class="btn" href="index.html#recsys-resp-fairness" target="_blank" rel="noopener noreferrer">↗ เจาะลึก C-Fairness vs P-Fairness</a>
-                <a class="btn" href="index.html#recsys-resp-trust" target="_blank" rel="noopener noreferrer">↗ ความปลอดภัย Differential Privacy & Federated Learning</a>
-                <button class="btn" type="button" onclick="window.switchRecsysChapter('recsys-responsible')">📖 สลับไปอ่านบทที่ 8 ในหน้านี้</button>
+            <div class="cs-link-box">
+              <div class="cs-link-title">🔗 ทางลัดเชื่อมโยงเนื้อหาบทที่ 8</div>
+              <div class="cs-btn-row">
+                <a class="cs-btn-link primary" href="index.html#recsys-responsible" target="_blank" rel="noopener noreferrer">↗ เปิดอ่านบทที่ 8 เต็มในแท็บใหม่</a>
+                <a class="cs-btn-link" href="index.html#recsys-resp-fairness" target="_blank" rel="noopener noreferrer">↗ เจาะลึก C-Fairness vs P-Fairness</a>
+                <a class="cs-btn-link" href="index.html#recsys-resp-trust" target="_blank" rel="noopener noreferrer">↗ เจาะลึก Differential Privacy & Federated Learning</a>
+                <button class="cs-btn-link" type="button" onclick="window.switchRecsysChapter('recsys-responsible')">📖 สลับไปอ่านบทที่ 8 ในหน้านี้</button>
               </div>
             </div>
           </div>`,
@@ -606,7 +759,7 @@
       },
 
       /* ==========================================================================
-         Task 0.9: สรุปผังเชื่อมโยงการตัดสินใจและกับดักข้อสอบ (Ch 09)
+         Task 0.9: บทที่ 9 - แผนผังการตัดสินใจเลือกโมเดลและ 10 กับดักข้อสอบ (Capstone)
          ========================================================================== */
       {
         id: 'recsys-sum-capstone',
@@ -614,68 +767,89 @@
         title: 'สรุปบทที่ 9: แผนผังการตัดสินใจเลือกโมเดล และ 10 กับดักข้อสอบยอดฮิต (Capstone Synthesis)',
         goal: 'มองเห็นภาพรวมการเลือกสถาปัตยกรรมโมเดลตามโจทย์ธุรกิจ และเช็กลิสต์จุดผิดพลาดยอดฮิตก่อนก้าวเข้าสู่ห้องสอบ',
         lead: 'สังเคราะห์ทุกบทเข้าด้วยกัน! สรุป Master Decision Matrix สำหรับเลือกวิธีแก้ปัญหา พร้อม 10 กับดักข้อสอบที่ห้ามตอบผิด',
-        body: `<div class="easy-explain">
-            <h3>⚡ Master Decision Matrix: เจอโจทย์แบบนี้ เลือกโมเดลใด?</h3>
-            <table style="width:100%;border-collapse:collapse;margin:10px 0;">
-              <thead>
-                <tr style="border-bottom:2px solid var(--line2);text-align:left;">
-                  <th style="padding:6px 8px;">สถานการณ์ / เงื่อนไขของโจทย์</th>
-                  <th style="padding:6px 8px;">โมเดลและสถาปัตยกรรมที่ควรเลือก</th>
-                  <th style="padding:6px 8px;">เหตุผลหลักทางวิศวกรรม</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr style="border-bottom:1px solid var(--line);">
-                  <td style="padding:6px 8px;">ระบบเพิ่งเปิดตัวใหม่ ไม่มีข้อมูลประวัติการคลิกหรือซื้อเลย (Extreme Cold-Start)</td>
-                  <td style="padding:6px 8px;"><b>Popularity Baseline + Onboarding Questionnaire</b></td>
-                  <td style="padding:6px 8px;">เมื่อไม่มีรอยเท้าใดๆ การแนะนำของยอดนิยมหรือถามความชอบเบื้องต้นคือทางเลือกที่ปลอดภัยที่สุด</td>
-                </tr>
-                <tr style="border-bottom:1px solid var(--line);">
-                  <td style="padding:6px 8px;">สินค้ามีข้อความสเปกและคุณสมบัติชัดเจน แต่เป็นสินค้าใหม่เพิ่งลงคลังตลอดเวลา (News, Articles)</td>
-                  <td style="padding:6px 8px;"><b>Content-Based Filtering (Bi-Encoder / TF-IDF / BM25)</b></td>
-                  <td style="padding:6px 8px;">พึ่งพาเฉพาะฟีเจอร์ของสินค้า ไม่ต้องการประวัติการคลิกเดิม</td>
-                </tr>
-                <tr style="border-bottom:1px solid var(--line);">
-                  <td style="padding:6px 8px;">มีสินค้าหลายสื่อ (มีทั้งภาพปก คลิปตัวอย่าง และคำบรรยาย)</td>
-                  <td style="padding:6px 8px;"><b>Multimodal Fusion (Intermediate / Late Fusion)</b></td>
-                  <td style="padding:6px 8px;">ดึงคุณลักษณะเด่นของแต่ละสื่อมารวมพลังกันในเวกเตอร์สเปซ</td>
-                </tr>
-                <tr style="border-bottom:1px solid var(--line);">
-                  <td style="padding:6px 8px;">มีข้อมูลประวัติการซื้อจำนวนมาก ต้องการระบบที่อธิบายเหตุผลได้ง่าย และเสถียร</td>
-                  <td style="padding:6px 8px;"><b>Item-based Collaborative Filtering (Amazon's Item-kNN)</b></td>
-                  <td style="padding:6px 8px;">Precompute ความคล้ายระหว่างสินค้าได้ล่วงหน้า และอธิบายง่าย ("เพราะคุณซื้อ X เราจึงแนะนำ Y")</td>
-                </tr>
-                <tr style="border-bottom:1px solid var(--line);">
-                  <td style="padding:6px 8px;">คลังสินค้าขนาดใหญ่มาก (10 ล้านชิ้น) ต้องการค้นหา Top-100 ในเวลา &lt; 15 ms</td>
-                  <td style="padding:6px 8px;"><b>Two-Tower Neural Network + Vector ANN Search (Faiss / HNSW)</b></td>
-                  <td style="padding:6px 8px;">คำนวณเวกเตอร์สินค้าออฟไลน์ล่วงหน้า ตอนออนไลน์คำนวณเฉพาะ User Tower แล้วค้นหาทันที</td>
-                </tr>
-                <tr>
-                  <td style="padding:6px 8px;">ต้องการปรับปรุงความหลากหลาย (Diversity) ไม่ให้หน้าจอซ้ำซากจำเจ</td>
-                  <td style="padding:6px 8px;"><b>Maximal Marginal Relevance (MMR) ในด่าน Re-ranking</b></td>
-                  <td style="padding:6px 8px;">จัดสมดุลระหว่างความชอบส่วนบุคคลกับความหลากหลายของลิสต์แนะนำ</td>
-                </tr>
-              </tbody>
-            </table>
+        body: `<div class="cs-card">
+            <div class="cs-header">
+              <h3>⚡ Master Decision Matrix: เจอโจทย์แบบนี้ เลือกโมเดลใด?</h3>
+              <span class="cs-badge-pill">⏱️ อ่านเร็ว 2 นาที · Ch 09</span>
+            </div>
 
-            <div class="callout" style="background:rgba(255,180,87,0.08);border-color:rgba(255,180,87,0.3);">
-              <h4 style="color:var(--warn,#ffb457);">🚨 สรุป 5 กับดักข้อสอบยอดฮิตที่ห้ามตกหลุมพรางเด็ดขาด</h4>
+            <div class="cs-table-wrap">
+              <table class="cs-table">
+                <thead>
+                  <tr>
+                    <th>สถานการณ์ / ข้อกำหนดของโจทย์</th>
+                    <th>โมเดล / สถาปัตยกรรมที่ควรเลือก</th>
+                    <th>เหตุผลหลักทางวิศวกรรม</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>ระบบเปิดใหม่ ไม่มีประวัติคลิกหรือซื้อเลย (Extreme Cold-Start)</td>
+                    <td><b>Popularity Baseline + Onboarding Survey</b></td>
+                    <td>เมื่อไม่มีรอยเท้าใดๆ การแนะนำของดังและการสอบถามเบื้องต้นคือแนวทางเดียวที่เสถียร</td>
+                  </tr>
+                  <tr>
+                    <td>สินค้ามีเนื้อหาคำบรรยายเยอะ แต่เป็นสินค้าใหม่เพิ่งลงคลังตลอดเวลา (News, Articles)</td>
+                    <td><b>Content-Based Filtering (Bi-Encoder / TF-IDF)</b></td>
+                    <td>พึ่งพาเฉพาะฟีเจอร์เนื้อหาของสินค้า ไม่ง้อประวัติการคลิกเดิม แก้ Item Cold-Start สมบูรณ์</td>
+                  </tr>
+                  <tr>
+                    <td>สินค้ามีหลายสื่อประกอบกัน (รูปปก คลิปสั้น ตัวอย่างเสียง)</td>
+                    <td><b>Multimodal Fusion (Intermediate / Late Fusion)</b></td>
+                    <td>ดึงคุณลักษณะข้ามสื่อมารวมพลังกันในเวกเตอร์สเปซ</td>
+                  </tr>
+                  <tr>
+                    <td>มีประวัติการซื้อเยอะ ต้องการระบบที่เสถียรและอธิบายเหตุผลได้ชัดเจน</td>
+                    <td><b>Item-based Collaborative Filtering (Amazon Item-kNN)</b></td>
+                    <td>Precompute ตารางความคล้ายระหว่างสินค้าได้ล่วงหน้า และอธิบายง่าย ("เพราะซื้อ X จึงแนะนำ Y")</td>
+                  </tr>
+                  <tr>
+                    <td>ข้อมูลเป็น Implicit Feedback (คลิก/ดู) ไม่มีคะแนนดาว</td>
+                    <td><b>Matrix Factorization + BPR (Bayesian Personalized Ranking)</b></td>
+                    <td>ออกแบบเพื่อ Pairwise Ranking บังคับให้ของที่คลิกชนะของที่ไม่คลิก</td>
+                  </tr>
+                  <tr>
+                    <td>คลังสินค้ามหึมา (10 ล้านชิ้น) ต้องการผลลัพธ์ด่านแรกในเวลา &lt; 15 ms</td>
+                    <td><b>Two-Tower DSSM + Vector ANN Search (Faiss / ScaNN)</b></td>
+                    <td>Precompute เวกเตอร์สินค้าล่วงหน้า รันเฉพาะ User Tower แล้วค้นหาทันที</td>
+                  </tr>
+                  <tr>
+                    <td>ต้องการลดความซ้ำซากจำเจบนหน้าจอ เพิ่มความหลากหลาย</td>
+                    <td><b>Maximal Marginal Relevance (MMR) ในด่าน Re-ranking</b></td>
+                    <td>ควบคุมสมดุลระหว่างความชอบส่วนบุคคลกับความหลากหลายด้วยพารามิเตอร์ λ</td>
+                  </tr>
+                  <tr>
+                    <td>ต้องการจัดอันดับละเอียดในด่านสุดท้ายด้วยความเข้าใจเชิงภาษาขั้นสูง</td>
+                    <td><b>LLM Reranker (Listwise Prompting กับ Top-10 ผู้สมัคร)</b></td>
+                    <td>ใช้ความฉลาดของ LLM วิเคราะห์บริบทที่ซับซ้อนในงบ Latency ที่ควบคุมได้</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="cs-trap-box">
+              <div class="cs-trap-title">🚨 สรุป 10 กับดักข้อสอบยอดฮิต (The Top 10 Exam Traps)</div>
               <ol>
-                <li><b>Data Leakage ในการแบ่งชุดข้อมูล:</b> ห้ามสุ่มแบ่ง Train/Test แบบ Random เด็ดขาดใน RecSys! <u>ต้องแบ่งตามเส้นเวลา (Temporal Split) เสมอ</u> (ใช้ข้อมูลอดีตเทรน แล้วทดสอบกับข้อมูลอนาคต) มิฉะนั้นโมเดลจะแอบเห็นอนาคตแล้วได้คะแนนสูงเกินจริง</li>
-                <li><b>Rating Prediction vs Top-K Ranking:</b> โมเดลที่ทายคะแนนดาวแม่นที่สุด (RMSE ต่ำสุด) <u>ไม่ได้แปลว่า</u> จะแนะนำสินค้า Top-5 ได้ดีที่สุด เพราะ RMSE ให้ความสำคัญกับความแม่นยำของดาวทุกดวงเท่ากัน แต่ผู้ใช้แคร์เฉพาะของที่ดีที่สุดที่อยู่บนหัวตาราง</li>
-                <li><b>MRR สนใจเฉพาะชิ้นแรก:</b> อย่าหลงกลนำอันดับของสินค้าชิ้นที่ 2 หรือ 3 มาเฉลี่ยใน MRR! สูตร $1/\text{rank}_1$ สนใจเฉพาะตำแหน่งของของที่ตรงใจชิ้นแรกเท่านั้น</li>
-                <li><b>Cosine vs Pearson:</b> Cosine ไม่ได้ลบค่าเฉลี่ยของคนออก ส่วน Pearson Correlation มีการ Mean-centering ลบค่าเฉลี่ยส่วนบุคคล ทำให้ Pearson รับมือกับคนที่ให้คะแนนยาก/ง่ายได้ดีกว่า</li>
-                <li><b>Two-Tower ข้อจำกัด:</b> Two-Tower รวดเร็วมากเพราะคำนวณ User กับ Item แยกกันเด็ดขาด แต่ข้อเสียคือ <u>ไม่สามารถจับปฏิสัมพันธ์เชิงลึก (Cross-features) ระหว่างฟีเจอร์ของผู้ใช้กับสินค้าในระดับชั้นล่างได้</u> เหมือน Cross-Encoder หรือ DLRM</li>
+                <li><b>Data Leakage จาก Random Split:</b> ใน RecSys ห้ามสุ่มแบ่ง Train/Test แบบสุ่มเด็ดขาด! <u>ต้องแบ่งตามเส้นเวลา (Temporal Split) เสมอ</u></li>
+                <li><b>ทายดาวแม่นไม่ได้แปลว่าเรียงดี:</b> โมเดลที่ได้ค่า RMSE ต่ำสุด ไม่ได้รับประกันว่าจะได้ค่า NDCG@10 หรือ Conversion สูงสุด</li>
+                <li><b>MRR สนใจเฉพาะชิ้นแรก:</b> สูตรคือ <code>1 / rank_1</code> อย่าหลงกลเอาอันดับของชิ้นที่ 2 หรือ 3 มาบวกเฉลี่ย</li>
+                <li><b>Cosine vs Pearson:</b> Cosine ไม่ได้ลบค่าเฉลี่ยส่วนบุคคล ส่วน Pearson Correlation มีการ Mean-Centering แก้ปัญหาคนให้คะแนนง่าย/ยาก</li>
+                <li><b>User-kNN vs Item-kNN:</b> Item-kNN เสถียรกว่ามากและ Precompute ออฟไลน์ล่วงหน้าได้ ส่วน User-kNN ต้องคำนวณสดเมื่อคนมีจำนวนมหาศาล</li>
+                <li><b>Two-Tower ข้อจำกัด:</b> ไม่สามารถจับปฏิสัมพันธ์ข้ามฟีเจอร์ในระดับลึก (Cross-features) ได้เพราะเวกเตอร์เพิ่งมาเจอกันที่ขั้นตอน Dot Product</li>
+                <li><b>ห้ามใช้ LLM ในด่านแรก:</b> Latency ระดับ 200-1500 ms เกินงบ 50 ms ของหน้าแรกแอปพลิเคชันอย่างมหาศาล</li>
+                <li><b>Offline ชนะ ไม่ได้รับประกันว่า Online จะชนะ:</b> ผลออฟไลน์ไม่สะท้อน Exposure Bias, Position Bias, และความหน่วงเวลาจริง</li>
+                <li><b>P-Fairness vs C-Fairness:</b> P-Fairness คือความเป็นธรรมฝั่งผู้ผลิต/ร้านค้ารายย่อย, C-Fairness คือฝั่งผู้บริโภค</li>
+                <li><b>Differential Privacy:</b> ต้องเติมสัญญาณรบกวนทางคณิตศาสตร์ (Calibrated Noise) การลบชื่อหรือ ID ผู้ใช้ออกธรรมดาไม่สามารถป้องกัน Re-identification ได้</li>
               </ol>
             </div>
 
-            <div class="callout" style="background:rgba(94,224,194,0.08);border-color:rgba(94,224,194,0.3);margin-top:14px;">
-              <h4 style="color:var(--accent);">🔗 ลิงก์อ่านเจาะลึกบทเต็ม (Deep Links)</h4>
-              <div style="display:flex;gap:10px;flex-wrap:wrap;">
-                <a class="btn primary" href="index.html#recsys-capstone" target="_blank" rel="noopener noreferrer">↗ เปิดอ่านบทที่ 9 เต็มในแท็บใหม่</a>
-                <a class="btn" href="index.html#recsys-capstone-matrix" target="_blank" rel="noopener noreferrer">↗ ตาราง Decision Matrix ฉบับสมบูรณ์</a>
-                <a class="btn" href="index.html#recsys-capstone-pitfalls" target="_blank" rel="noopener noreferrer">↗ เจาะลึก 10 ข้อผิดพลาดยอดฮิตก่อนสอบ</a>
-                <button class="btn" type="button" onclick="window.switchRecsysChapter('recsys-capstone')">📖 สลับไปอ่านบทที่ 9 ในหน้านี้</button>
+            <div class="cs-link-box">
+              <div class="cs-link-title">🔗 ทางลัดเชื่อมโยงเนื้อหาบทที่ 9</div>
+              <div class="cs-btn-row">
+                <a class="cs-btn-link primary" href="index.html#recsys-capstone" target="_blank" rel="noopener noreferrer">↗ เปิดอ่านบทที่ 9 เต็มในแท็บใหม่</a>
+                <a class="cs-btn-link" href="index.html#recsys-capstone-matrix" target="_blank" rel="noopener noreferrer">↗ ตาราง Decision Matrix ฉบับเต็ม</a>
+                <a class="cs-btn-link" href="index.html#recsys-capstone-pitfalls" target="_blank" rel="noopener noreferrer">↗ เช็กลิสต์ 10 ข้อผิดพลาดยอดฮิตก่อนสอบ</a>
+                <button class="cs-btn-link" type="button" onclick="window.switchRecsysChapter('recsys-capstone')">📖 สลับไปอ่านบทที่ 9 ในหน้านี้</button>
               </div>
             </div>
           </div>`,

@@ -1031,6 +1031,231 @@ body.sidebar-open:after{content:"";display:none;position:fixed;inset:110px 0 0;b
   color: #334155 !important;
 }
 
+
+/* ==========================================================================
+   FAST-TRACK CHEAT SHEET DEDICATED STYLES
+   Professional typography, formula cards, decision tables & deep link buttons
+   ========================================================================== */
+.cs-card {
+  margin: 18px 0 24px;
+  border: 1px solid var(--line2);
+  background: var(--panel);
+  border-radius: 16px;
+  padding: 22px 24px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+}
+.cs-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+  flex-wrap: wrap;
+}
+.cs-header h3 {
+  margin: 0;
+  font-size: 20px;
+  color: var(--text);
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.cs-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(var(--accent-rgb), 0.15);
+  border: 1px solid rgba(var(--accent-rgb), 0.4);
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 0.02em;
+}
+.cs-formula-card {
+  margin: 16px 0;
+  padding: 16px 20px;
+  border-radius: 12px;
+  background: var(--panel2);
+  border-left: 4px solid var(--accent);
+  border-top: 1px solid var(--line2);
+  border-right: 1px solid var(--line2);
+  border-bottom: 1px solid var(--line2);
+}
+.cs-formula-title {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--accent);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.cs-formula-math {
+  font-family: "JetBrains Mono", Consolas, "SFMono-Regular", monospace;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  background: rgba(0, 0, 0, 0.18);
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin: 8px 0;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+}
+.cs-formula-legend {
+  font-size: 13.5px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-top: 8px;
+}
+.cs-table-wrap {
+  overflow-x: auto;
+  margin: 16px 0;
+  border-radius: 12px;
+  border: 1px solid var(--line2);
+  background: var(--panel);
+}
+.cs-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14.5px;
+  text-align: left;
+}
+.cs-table th {
+  background: var(--panel2);
+  padding: 12px 14px;
+  font-weight: 800;
+  color: var(--text);
+  border-bottom: 2px solid var(--line2);
+  white-space: nowrap;
+}
+.cs-table td {
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--line);
+  color: var(--text);
+  vertical-align: top;
+  line-height: 1.6;
+}
+.cs-table tr:last-child td {
+  border-bottom: none;
+}
+.cs-table tr:hover td {
+  background: rgba(var(--accent-rgb), 0.04);
+}
+.cs-trap-box {
+  margin: 16px 0;
+  padding: 16px 18px;
+  border-radius: 12px;
+  background: rgba(255, 180, 87, 0.08);
+  border: 1px solid rgba(255, 180, 87, 0.32);
+}
+.cs-trap-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: #ffb457;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.cs-trap-box p, .cs-trap-box li {
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--text);
+  margin: 5px 0;
+}
+.cs-link-box {
+  margin: 18px 0 6px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  background: rgba(var(--accent-rgb), 0.06);
+  border: 1px solid rgba(var(--accent-rgb), 0.28);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.cs-link-title {
+  font-size: 14px;
+  font-weight: 750;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.cs-btn-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.cs-btn-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.16s ease;
+  border: 1px solid var(--line2);
+  background: var(--panel2);
+  color: var(--text);
+}
+.cs-btn-link:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+.cs-btn-link.primary {
+  background: rgba(var(--accent-rgb), 0.15);
+  border-color: rgba(var(--accent-rgb), 0.45);
+  color: var(--accent);
+}
+.cs-btn-link.primary:hover {
+  background: var(--accent);
+  color: #050608;
+}
+
+/* Sepia & Light overrides for Fast-Track elements */
+[data-theme="sepia"] .cs-formula-math {
+  background: #f4eedf !important;
+  color: #26211c !important;
+  border-color: #d8cebc !important;
+}
+[data-theme="sepia"] .cs-trap-box {
+  background: rgba(180, 83, 9, 0.08) !important;
+  border-color: rgba(180, 83, 9, 0.3) !important;
+}
+[data-theme="sepia"] .cs-trap-title {
+  color: #b45309 !important;
+}
+[data-theme="sepia"] .cs-btn-link.primary:hover {
+  color: #ffffff !important;
+}
+
+[data-theme="light"] .cs-formula-math {
+  background: #f1f5f9 !important;
+  color: #0f172a !important;
+  border-color: #e2e8f0 !important;
+}
+[data-theme="light"] .cs-trap-box {
+  background: rgba(217, 119, 6, 0.08) !important;
+  border-color: rgba(217, 119, 6, 0.3) !important;
+}
+[data-theme="light"] .cs-trap-title {
+  color: #b45309 !important;
+}
+[data-theme="light"] .cs-btn-link.primary:hover {
+  color: #ffffff !important;
+}
+
 </style>
 </head>
 <body>
