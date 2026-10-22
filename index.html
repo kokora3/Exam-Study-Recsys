@@ -357,6 +357,7 @@ body.sidebar-open:after{content:"";display:none;position:fixed;inset:110px 0 0;b
 }
 </style>
 
+<style id="recsys-theme-adaptations">
 /* ==========================================================================
    THEME ADAPTATION: SEPIA & LIGHT MODES
    Navbar, Figures, Zoom Hint, Figcaption & Technical Term Modal
@@ -880,6 +881,157 @@ body.sidebar-open:after{content:"";display:none;position:fixed;inset:110px 0 0;b
   color: #64748b !important;
 }
 
+
+/* Sources & Attached PDF Section Theme Adaptations */
+[data-theme="sepia"] #subject-recsys .rs-sources {
+  background: #efe7d7 !important;
+  border-color: #d8cebc !important;
+  color: #473d32 !important;
+}
+[data-theme="sepia"] #subject-recsys .rs-sources summary {
+  color: #0d766e !important;
+  font-weight: 700 !important;
+}
+[data-theme="sepia"] #subject-recsys .rs-sources p,
+[data-theme="sepia"] #subject-recsys .rs-sources li {
+  color: #473d32 !important;
+}
+[data-theme="sepia"] #subject-recsys .rs-sources a {
+  color: #0d766e !important;
+  font-weight: 600 !important;
+}
+[data-theme="sepia"] .section-doc-btn {
+  background: #e4dac7 !important;
+  border-color: #c4b8a2 !important;
+  color: #0d766e !important;
+  font-weight: 750 !important;
+}
+[data-theme="sepia"] .section-doc-btn:hover {
+  background: #0d766e !important;
+  color: #ffffff !important;
+  border-color: #0a5c56 !important;
+}
+[data-theme="sepia"] .section-doc-btn small {
+  color: #736758 !important;
+}
+[data-theme="sepia"] .pdf-modal {
+  background: rgba(38, 33, 28, 0.72) !important;
+}
+[data-theme="sepia"] .pdf-dialog {
+  background: #faf6ee !important;
+  border-color: #c4b8a2 !important;
+  box-shadow: 0 30px 100px rgba(60, 45, 30, 0.25) !important;
+}
+[data-theme="sepia"] .pdf-head {
+  background: #efe7d7 !important;
+  border-bottom: 1px solid #d8cebc !important;
+}
+[data-theme="sepia"] .pdf-eyebrow {
+  color: #0d766e !important;
+}
+[data-theme="sepia"] .pdf-title {
+  color: #26211c !important;
+}
+[data-theme="sepia"] .pdf-external,
+[data-theme="sepia"] .pdf-close {
+  background: #e4dac7 !important;
+  border-color: #c4b8a2 !important;
+  color: #473d32 !important;
+}
+[data-theme="sepia"] .pdf-external:hover,
+[data-theme="sepia"] .pdf-close:hover {
+  background: #0d766e !important;
+  color: #ffffff !important;
+}
+[data-theme="sepia"] .pdf-frame-wrap {
+  background: #f4eedf !important;
+}
+[data-theme="sepia"] .recsys-img-dialog {
+  background: #faf6ee !important;
+  border: 1px solid #c4b8a2 !important;
+}
+[data-theme="sepia"] .recsys-img-stage-wrap {
+  background: #f8f4ea !important;
+}
+[data-theme="sepia"] .recsys-img-caption {
+  color: #473d32 !important;
+}
+
+[data-theme="light"] #subject-recsys .rs-sources {
+  background: #f8fafc !important;
+  border-color: #e2e8f0 !important;
+  color: #334155 !important;
+}
+[data-theme="light"] #subject-recsys .rs-sources summary {
+  color: #0284c7 !important;
+  font-weight: 700 !important;
+}
+[data-theme="light"] #subject-recsys .rs-sources p,
+[data-theme="light"] #subject-recsys .rs-sources li {
+  color: #334155 !important;
+}
+[data-theme="light"] #subject-recsys .rs-sources a {
+  color: #0284c7 !important;
+  font-weight: 600 !important;
+}
+[data-theme="light"] .section-doc-btn {
+  background: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+  color: #0284c7 !important;
+  font-weight: 750 !important;
+}
+[data-theme="light"] .section-doc-btn:hover {
+  background: #0284c7 !important;
+  color: #ffffff !important;
+  border-color: #0369a1 !important;
+}
+[data-theme="light"] .section-doc-btn small {
+  color: #64748b !important;
+}
+[data-theme="light"] .pdf-modal {
+  background: rgba(15, 23, 42, 0.6) !important;
+}
+[data-theme="light"] .pdf-dialog {
+  background: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 30px 100px rgba(15, 23, 42, 0.16) !important;
+}
+[data-theme="light"] .pdf-head {
+  background: #f8fafc !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+}
+[data-theme="light"] .pdf-eyebrow {
+  color: #0284c7 !important;
+}
+[data-theme="light"] .pdf-title {
+  color: #0f172a !important;
+}
+[data-theme="light"] .pdf-external,
+[data-theme="light"] .pdf-close {
+  background: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+  color: #334155 !important;
+}
+[data-theme="light"] .pdf-external:hover,
+[data-theme="light"] .pdf-close:hover {
+  background: #0284c7 !important;
+  color: #ffffff !important;
+}
+[data-theme="light"] .pdf-frame-wrap {
+  background: #f1f5f9 !important;
+}
+[data-theme="light"] .recsys-img-dialog {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+}
+[data-theme="light"] .recsys-img-stage-wrap {
+  background: #f8fafc !important;
+}
+[data-theme="light"] .recsys-img-caption {
+  color: #334155 !important;
+}
+
+</style>
 </head>
 <body>
 <header class="topbar">
