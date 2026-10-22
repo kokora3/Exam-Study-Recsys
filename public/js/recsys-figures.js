@@ -497,8 +497,141 @@
         note: 'ภาพรวมระบบแนะนำระดับ Production ครบวงจร: ถ่ายทอดความรู้ทั้ง 10 บทเรียน ตั้งแต่ Feature Store, Two-Tower Retrieval, Deep Ranking, Reranking สู่ A/B Testing',
         badge: 'SVG End-to-End Synthesis'
       }
-    ]
-  };
+    ],
+  
+    // --- Additional figures integrated from Summary & curriculum ---
+    'recsys-vectors': [
+      {
+        file: 'vector-cosine-similarity.svg',
+        w: 920, h: 500,
+        darkStage: true,
+        title: 'Vector Space Representation: การแปลงรสนิยมเป็นเวกเตอร์และมิติพิกัด',
+        alt: 'แผนภาพเวกเตอร์แสดงพิกัดและการวัดทิศทางใน Vector Space',
+        note: 'การแทนข้อมูลผู้ใช้และสินค้าในรูปเวกเตอร์หลายมิติ (Embeddings) ทำให้เราสามารถคำนวณระยะทางและความคล้ายคลึงของรสนิยมได้ด้วยคณิตศาสตร์เชิงเส้น',
+        badge: 'Vector Geometry'
+      }
+    ],
+    'recsys-purpose': [
+      {
+        file: 'recsys-funnel-pipeline.svg',
+        w: 940, h: 520,
+        darkStage: true,
+        title: 'Search vs Recommendation: การทำงานแบบดึงข้อมูล (Pull) ปะทะ ผลักข้อมูล (Push)',
+        alt: 'แผนผังเปรียบเทียบสถาปัตยกรรมสายพานและการประมวลผลคำขอ',
+        note: 'ระบบค้นหาเริ่มจากผู้ใช้ส่ง Explicit Query เข้ามา ส่วนระบบแนะนำขับเคลื่อนด้วยบริบทและประวัติในอดีต (User History) เพื่อผลักดันไอเทมที่ตรงใจที่สุด',
+        badge: 'System Architecture'
+      }
+    ],
+    'recsys-cold-start': [
+      {
+        file: 'cb-user-profile-flow.svg',
+        w: 920, h: 480,
+        darkStage: true,
+        title: 'Cold-Start Solutions: การแก้ปัญหาผู้ใช้ใหม่และไอเทมใหม่ด้วย Content Profiles',
+        alt: 'แผนภาพการสร้าง User Profile จากคุณลักษณะของสินค้าโดยไม่ต้องพึ่งประวัติปฏิสัมพันธ์เดิม',
+        note: 'สำหรับ New Item และ New User ที่ไม่มีข้อมูลประวัติเดิม การสกัด Feature เวกเตอร์เนื้อหา (Content-Based) และ Onboarding Survey เป็นด่านแรกในการแก้ปัญหา Cold-Start',
+        badge: 'Cold-Start Strategy'
+      }
+    ],
+    'recsys-diversity-novelty': [
+      {
+        file: 'recsys-long-tail-distribution.svg',
+        w: 920, h: 460,
+        darkStage: true,
+        title: 'Measuring Diversity & Novelty: การขยายขอบเขตการแนะนำสู่สินค้าหางยาว',
+        alt: 'กราฟหางยาวแสดงการดันสินค้าในส่วน Torso และ Long-Tail เพื่อเพิ่มความแปลกใหม่',
+        note: 'การวัดผลระบบที่ดีต้องไม่จำกัดแค่ความแม่นยำ (Accuracy) แต่ต้องวัดความหลากหลาย (Diversity) และความแปลกใหม่ (Novelty) เพื่อป้องกันความจำเจของผู้ใช้',
+        badge: 'Evaluation Metrics'
+      }
+    ],
+    'recsys-content-cosine': [
+      {
+        file: 'vector-cosine-similarity.svg',
+        w: 920, h: 500,
+        darkStage: true,
+        title: 'Cosine Similarity in Content Matching: การเปรียบเทียบเวกเตอร์เนื้อหาไอเทม',
+        alt: 'แผนภาพเวกเตอร์แสดงการคำนวณมุมโคไซน์ระหว่างเอกสารหรือไอเทมในพื้นที่เวกเตอร์',
+        note: 'สูตร Cosine Similarity ใช้ตัดอิทธิพลความยาวของเนื้อหา (Document Length) เพื่อเทียบเฉพาะความสอดคล้องของหัวข้อระหว่าง User Profile และ Item Profile',
+        badge: 'Content Matching'
+      }
+    ],
+    'recsys-content-retrieval': [
+      {
+        file: 'two-tower-retrieval-architecture.svg',
+        w: 960, h: 540,
+        darkStage: true,
+        title: 'Dense Retrieval via Two-Tower: สายพานคัดกรองเนื้อหาความเร็วสูงระดับมิลลิวินาที',
+        alt: 'แผนผังสถาปัตยกรรม Two-Tower DSSM แยกหอคอย User และ Item สำหรับค้นหาไอเทมด้วยเวกเตอร์',
+        note: 'การใช้ Two-Tower Neural Encoders สกัดเวกเตอร์ฝั่ง User และ Item ล่วงหน้า ทำให้สามารถค้นคืน Candidate นับล้านชิ้นด้วย ANN Vector Search ภายในไม่กี่มิลลิวินาที',
+        badge: 'Neural Retrieval'
+      }
+    ],
+    'recsys-mm-map': [
+      {
+        file: 'multimodal-encoders-architecture.svg',
+        w: 940, h: 520,
+        darkStage: true,
+        title: 'Multimodal Representation Map: การสกัดและหลอมรวมข้อมูลหลายสื่อในระบบแนะนำ',
+        alt: 'แผนผังแสดงการแปลงภาพ ข้อความ และเสียง เป็น Embedding Vector เพื่อนำมารวมกัน',
+        note: 'ระบบแนะนำยุคใหม่ใช้โมเดล Deep Learning หลายสาขา (Vision Transformer, Text Transformer) ในการทำความเข้าใจบริบทของสินค้าแบบรอบด้าน',
+        badge: 'Multimodal Architecture'
+      }
+    ],
+    'recsys-model-map': [
+      {
+        file: 'matrix-factorization-uv.svg',
+        w: 920, h: 480,
+        darkStage: true,
+        title: 'Model-Based Collaborative Filtering: การลดรูปเมทริกซ์สู่ Latent Factor Space',
+        alt: 'แผนภาพแยกตัวประกอบ Rating Matrix ออกเป็น User Matrix U และ Item Matrix V',
+        note: 'โมเดลจำพวก Matrix Factorization (Funk SVD, ALS) ทำหน้าที่บีบอัดเมทริกซ์คะแนนขนาดใหญ่ที่มีความเบาบาง ให้กลายเป็นเวกเตอร์ตัวแทนมิติแฝงที่เรียนรู้พฤติกรรมอัตโนมัติ',
+        badge: 'Matrix Decomposition'
+      }
+    ],
+    'recsys-hy-review': [
+      {
+        file: 'hy-08-model-summary.webp',
+        w: 1200, h: 1696,
+        title: 'Burke Hybrid Taxonomy Summary: ตารางสรุป 7 รูปแบบการผสมผสานระบบแนะนำ',
+        alt: 'ตารางสรุปเปรียบเทียบข้อดีและข้อจำกัดของระบบผสม 7 รูปแบบตามทฤษฎีของ Robin Burke',
+        note: 'คู่มือเลือกใช้ Hybrid RecSys: Weighted, Switching, Mixed, Feature-Combining, Cascade, Feature-Augmenting, และ Meta-Level',
+        badge: 'Taxonomy Synthesis'
+      }
+    ],
+    'recsys-resp-popularity': [
+      {
+        file: 'feedback-loop-bubble.svg',
+        w: 920, h: 480,
+        darkStage: true,
+        title: 'Popularity Bias Dynamics: วงจรสะท้อนกลับที่ส่งผลให้สินค้ากลุ่มน้อยถูกลืม',
+        alt: 'ไดอะแกรมวงจรความนิยมและผลกระทบต่อ Exposure Inequality',
+        note: 'เมื่อระบบแนะนำแต่ของดัง ข้อมูลคลิกของดังก็ยิ่งเพิ่มขึ้นจนกลืนสินค้าคุณภาพดีในกลุ่มหางยาว การเข้าใจวงจรนี้คือกุญแจสำคัญสู่ระบบแนะนำที่เป็นธรรม',
+        badge: 'Popularity Bias'
+      }
+    ],
+    'recsys-resp-metrics': [
+      {
+        file: 'lorenz-gini-curve.svg',
+        w: 920, h: 460,
+        darkStage: true,
+        title: 'Equity Metrics: เส้นโค้ง Lorenz และค่า Gini สำหรับวัดความเหลื่อมล้ำในการแสดงสินค้า',
+        alt: 'กราฟ Lorenz Curve แสดงสัดส่วนการมองเห็นของสินค้าและพื้นที่คำนวณสัมประสิทธิ์ Gini',
+        note: 'Gini Coefficient และ Lorenz Curve เป็นเครื่องมือมาตรฐานในการตรวจสอบว่าพื้นที่หน้าจอ (Screen Exposure) ถูกกระจายอย่างเป็นธรรม หรือผูกขาดโดยผู้ขายรายใหญ่เพียงไม่กี่ราย',
+        badge: 'Fairness Metrics'
+      }
+    ],
+    'recsys-capstone-pitfalls': [
+      {
+        file: 'ndcg-position-discount.svg',
+        w: 920, h: 460,
+        darkStage: true,
+        title: 'Evaluation Pitfalls: จุดพลาดในการประเมินผลและการให้น้ำหนักอันดับ Top-K',
+        alt: 'กราฟลดทอนอันดับของ nDCG แสดงให้เห็นว่าความผิดพลาดในอันดับ 1-3 มีผลกระทบต่อประสบการณ์ผู้ใช้รุนแรงกว่าอันดับท้ายๆ',
+        note: 'ข้อสอบและงานจริงมักดักเรื่อง Position Bias และการเลือก Metric ผิดประเภท เช่น การใช้ RMSE วัดระบบจัดอันดับ Top-K ซึ่งเป็นการวัดผิดมิติ',
+        badge: 'Exam Pitfalls'
+      }
+    ],
+};
 
   window.RECSYS_FIGURES = RECSYS_FIGURES;
 
