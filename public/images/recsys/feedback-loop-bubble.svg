@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 480" width="100%" height="100%">
+  
+    <defs>
+      <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#15263a"/>
+        <stop offset="100%" stop-color="#0f1d2c"/>
+      </linearGradient>
+      <linearGradient id="mintGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#5ee0c2"/>
+        <stop offset="100%" stop-color="#38bdf8"/>
+      </linearGradient>
+      <linearGradient id="accentGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#38bdf8"/>
+        <stop offset="100%" stop-color="#818cf8"/>
+      </linearGradient>
+      <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+        <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.35"/>
+      </filter>
+      <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#5ee0c2" />
+      </marker>
+      <marker id="arrowSky" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8" />
+      </marker>
+      <marker id="arrowIndigo" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#818cf8" />
+      </marker>
+    </defs>
+    <style>
+      text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+      .title { font-weight: 700; fill: #ffffff; }
+      .subtitle { fill: #94a3b8; font-size: 13px; }
+      .badge-text { font-size: 11px; font-weight: 600; text-anchor: middle; fill: #0b1927; }
+      .card-title { font-size: 15px; font-weight: 600; fill: #5ee0c2; }
+      .card-desc { font-size: 12.5px; fill: #cbd5e1; }
+      .formula { font-family: "Courier New", monospace; font-size: 13px; fill: #fbbf24; }
+      .axis { stroke: #475569; stroke-width: 1.5; }
+      .grid { stroke: #1e293b; stroke-width: 1; stroke-dasharray: 4,4; }
+    </style>
+
+  <rect width="100%" height="100%" rx="14" fill="#0b1927" stroke="#253a52" stroke-width="1.5"/>
+
+  <text x="40" y="42" class="title" font-size="20">Feedback Loop &amp; Filter Bubble: กับดักที่ระบบแนะนำขุดขึ้นมาหลอกตัวเอง</text>
+  <text x="40" y="66" class="subtitle">เมื่อพฤติกรรมผู้ใช้เกิดจากการชี้นำของอัลกอริทึม หากไม่แทรกการสำรวจ (Exploration) มุมมองของผู้ใช้จะแคบลงเรื่อยๆ</text>
+
+  <!-- Cycle Nodes -->
+  <!-- Node 1: Recommendation -->
+  <g transform="translate(360, 90)">
+    <rect x="0" y="0" width="200" height="70" rx="10" fill="#15263a" stroke="#38bdf8" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="100" y="28" fill="#38bdf8" font-weight="700" font-size="14" text-anchor="middle">1. ระบบแนะนำสินค้า</text>
+    <text x="100" y="50" fill="#94a3b8" font-size="12" text-anchor="middle">แสดงเฉพาะชิ้นที่คะแนนสูง</text>
+  </g>
+
+  <!-- Arrow 1 -> 2 -->
+  <path d="M 560 125 Q 670 125 670 200" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arrowSky)"/>
+
+  <!-- Node 2: User Action -->
+  <g transform="translate(570, 205)">
+    <rect x="0" y="0" width="200" height="70" rx="10" fill="#15263a" stroke="#5ee0c2" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="100" y="28" fill="#5ee0c2" font-weight="700" font-size="14" text-anchor="middle">2. ผู้ใช้คลิก / ซื้อ</text>
+    <text x="100" y="50" fill="#94a3b8" font-size="12" text-anchor="middle">ผู้ใช้คลิกเพราะมันถูกนำมาโชว์</text>
+  </g>
+
+  <!-- Arrow 2 -> 3 -->
+  <path d="M 670 275 Q 670 350 560 350" fill="none" stroke="#5ee0c2" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <!-- Node 3: Logging & Training -->
+  <g transform="translate(360, 315)">
+    <rect x="0" y="0" width="200" height="70" rx="10" fill="#15263a" stroke="#818cf8" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="100" y="28" fill="#818cf8" font-weight="700" font-size="14" text-anchor="middle">3. บันทึกข้อมูลเทรนใหม่</text>
+    <text x="100" y="50" fill="#94a3b8" font-size="12" text-anchor="middle">โมเดลเข้าใจว่าผู้ใช้ชอบเฉพาะสิ่งนี้</text>
+  </g>
+
+  <!-- Arrow 3 -> 4 -->
+  <path d="M 360 350 Q 250 350 250 275" fill="none" stroke="#818cf8" stroke-width="2.5" marker-end="url(#arrowIndigo)"/>
+
+  <!-- Node 4: Echo Chamber -->
+  <g transform="translate(150, 205)">
+    <rect x="0" y="0" width="200" height="70" rx="10" fill="#15263a" stroke="#f43f5e" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="100" y="28" fill="#f43f5e" font-weight="700" font-size="14" text-anchor="middle">4. Filter Bubble เกิดขึ้น</text>
+    <text x="100" y="50" fill="#94a3b8" font-size="12" text-anchor="middle">สินค้าอื่น 90% ถูกตัดทิ้งถาวร</text>
+  </g>
+
+  <!-- Arrow 4 -> 1 -->
+  <path d="M 250 205 Q 250 125 360 125" fill="none" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <!-- Center Callout: The Fix -->
+  <g transform="translate(320, 195)">
+    <rect x="0" y="0" width="280" height="80" rx="8" fill="#0f1d2c" stroke="#fbbf24" stroke-width="1.5"/>
+    <text x="140" y="26" fill="#fbbf24" font-weight="700" font-size="13" text-anchor="middle">💡 วิธีแก้ทางวิศวกรรม (Mitigation)</text>
+    <text x="140" y="48" fill="#cbd5e1" font-size="11.5" text-anchor="middle">• Exploration: สุ่มแทรกสินค้าใหม่ (ε-Greedy)</text>
+    <text x="140" y="66" fill="#cbd5e1" font-size="11.5" text-anchor="middle">• Inverse Propensity Scoring (IPS) ถ่วงน้ำหนัก</text>
+  </g>
+</svg>

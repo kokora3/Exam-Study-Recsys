@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 460" width="100%" height="100%">
+  
+    <defs>
+      <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#15263a"/>
+        <stop offset="100%" stop-color="#0f1d2c"/>
+      </linearGradient>
+      <linearGradient id="mintGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#5ee0c2"/>
+        <stop offset="100%" stop-color="#38bdf8"/>
+      </linearGradient>
+      <linearGradient id="accentGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#38bdf8"/>
+        <stop offset="100%" stop-color="#818cf8"/>
+      </linearGradient>
+      <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+        <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.35"/>
+      </filter>
+      <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#5ee0c2" />
+      </marker>
+      <marker id="arrowSky" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8" />
+      </marker>
+      <marker id="arrowIndigo" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#818cf8" />
+      </marker>
+    </defs>
+    <style>
+      text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+      .title { font-weight: 700; fill: #ffffff; }
+      .subtitle { fill: #94a3b8; font-size: 13px; }
+      .badge-text { font-size: 11px; font-weight: 600; text-anchor: middle; fill: #0b1927; }
+      .card-title { font-size: 15px; font-weight: 600; fill: #5ee0c2; }
+      .card-desc { font-size: 12.5px; fill: #cbd5e1; }
+      .formula { font-family: "Courier New", monospace; font-size: 13px; fill: #fbbf24; }
+      .axis { stroke: #475569; stroke-width: 1.5; }
+      .grid { stroke: #1e293b; stroke-width: 1; stroke-dasharray: 4,4; }
+    </style>
+
+  <rect width="100%" height="100%" rx="14" fill="#0b1927" stroke="#253a52" stroke-width="1.5"/>
+
+  <text x="40" y="42" class="title" font-size="20">Responsible RecSys: จุดแทรกแซงความเป็นธรรม 3 ช่วงในสายพานข้อมูล</text>
+  <text x="40" y="66" class="subtitle">การแก้ไขอคติ (Bias Mitigation) สามารถทำได้ตั้งแต่ก่อนเทรน (Pre), ระหว่างเทรน (In) และหลังเทรนเสร็จ (Post-processing)</text>
+
+  <g transform="translate(40, 100)">
+    <!-- Stage 1: Pre-processing -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="260" height="300" rx="10" fill="#15263a" stroke="#38bdf8" stroke-width="1.5" filter="url(#shadow)"/>
+      <rect x="15" y="15" width="125" height="22" rx="11" fill="#38bdf8"/>
+      <text x="77" y="30" class="badge-text">PRE-PROCESSING</text>
+      <text x="15" y="60" fill="#ffffff" font-weight="700" font-size="15">แทรกแซงที่ข้อมูลดิบ</text>
+      <text x="15" y="80" fill="#94a3b8" font-size="11">(ก่อนป้อนเข้าโมเดล)</text>
+
+      <rect x="15" y="100" width="230" height="130" rx="6" fill="#0f1d2c" stroke="#253a52"/>
+      <text x="25" y="125" fill="#5ee0c2" font-weight="600" font-size="12">• IPS Reweighting:</text>
+      <text x="25" y="145" fill="#cbd5e1" font-size="11">ถ่วงน้ำหนักกลับด้านด้วยความน่าจะเป็น</text>
+      <text x="25" y="170" fill="#5ee0c2" font-weight="600" font-size="12">• Balanced Sampling:</text>
+      <text x="25" y="190" fill="#cbd5e1" font-size="11">สุ่มเก็บข้อมูลกลุ่มน้อยเพิ่มขึ้น</text>
+      <text x="25" y="215" fill="#38bdf8" font-size="11">w = 1 / P(เห็นสินค้า | นโยบายเดิม)</text>
+
+      <text x="15" y="255" fill="#cbd5e1" font-size="11.5">ข้อดี: ใช้กับโมเดลใดก็ได้</text>
+      <text x="15" y="275" fill="#cbd5e1" font-size="11.5">ไม่ขึ้นกับสถาปัตยกรรม</text>
+    </g>
+
+    <!-- Arrow 1 -> 2 -->
+    <line x1="265" y1="150" x2="285" y2="150" stroke="#5ee0c2" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <!-- Stage 2: In-processing -->
+    <g transform="translate(290, 0)">
+      <rect x="0" y="0" width="260" height="300" rx="10" fill="#15263a" stroke="#fbbf24" stroke-width="1.5" filter="url(#shadow)"/>
+      <rect x="15" y="15" width="115" height="22" rx="11" fill="#fbbf24"/>
+      <text x="72" y="30" class="badge-text">IN-PROCESSING</text>
+      <text x="15" y="60" fill="#ffffff" font-weight="700" font-size="15">แทรกแซงฟังก์ชัน Loss</text>
+      <text x="15" y="80" fill="#94a3b8" font-size="11">(ระหว่างการเรียนรู้)</text>
+
+      <rect x="15" y="100" width="230" height="130" rx="6" fill="#0f1d2c" stroke="#253a52"/>
+      <text x="25" y="125" fill="#fbbf24" font-weight="600" font-size="12">• Constrained Loss:</text>
+      <text x="25" y="150" class="formula" font-size="12">L = L_rec + λ · L_fair</text>
+      <text x="25" y="180" fill="#cbd5e1" font-size="11">• ลงโทษโมเดลทันทีเมื่อเริ่มลำเอียง</text>
+      <text x="25" y="200" fill="#cbd5e1" font-size="11">• Adversarial Debiasing:</text>
+      <text x="25" y="218" fill="#94a3b8" font-size="10.5">ลบ Sensitive Attributes ออก</text>
+
+      <text x="15" y="255" fill="#cbd5e1" font-size="11.5">ข้อดี: ปรับความยุติธรรม</text>
+      <text x="15" y="275" fill="#cbd5e1" font-size="11.5">ฝังลงในเวกเตอร์โดยตรง</text>
+    </g>
+
+    <!-- Arrow 2 -> 3 -->
+    <line x1="555" y1="150" x2="575" y2="150" stroke="#5ee0c2" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <!-- Stage 3: Post-processing -->
+    <g transform="translate(580, 0)">
+      <rect x="0" y="0" width="260" height="300" rx="10" fill="#15263a" stroke="#5ee0c2" stroke-width="1.5" filter="url(#shadow)"/>
+      <rect x="15" y="15" width="135" height="22" rx="11" fill="#5ee0c2"/>
+      <text x="82" y="30" class="badge-text">POST-PROCESSING</text>
+      <text x="15" y="60" fill="#ffffff" font-weight="700" font-size="15">แทรกแซงตอนจัดอันดับ</text>
+      <text x="15" y="80" fill="#94a3b8" font-size="11">(ก่อนแสดงบนหน้าจอ)</text>
+
+      <rect x="15" y="100" width="230" height="130" rx="6" fill="#0f1d2c" stroke="#253a52"/>
+      <text x="25" y="125" fill="#5ee0c2" font-weight="600" font-size="12">• MMR (Maximal Marginal):</text>
+      <text x="25" y="145" fill="#cbd5e1" font-size="11">บาลานซ์ Relevancy vs Diversity</text>
+      <text x="25" y="170" fill="#5ee0c2" font-weight="600" font-size="12">• Fair Reranking (FA*IR):</text>
+      <text x="25" y="190" fill="#cbd5e1" font-size="11">การันตีโควตากลุ่มด้อยใน Top-K</text>
+      <text x="25" y="215" fill="#38bdf8" font-size="11">Score - λ · max(Similarity)</text>
+
+      <text x="15" y="255" fill="#cbd5e1" font-size="11.5">ข้อดี: ยืดหยุ่นสูงสุด</text>
+      <text x="15" y="275" fill="#cbd5e1" font-size="11.5">ไม่ต้องเทรนโมเดลใหม่</text>
+    </g>
+  </g>
+</svg>

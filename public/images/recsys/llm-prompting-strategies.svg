@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 480" width="100%" height="100%">
+  
+    <defs>
+      <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#15263a"/>
+        <stop offset="100%" stop-color="#0f1d2c"/>
+      </linearGradient>
+      <linearGradient id="mintGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#5ee0c2"/>
+        <stop offset="100%" stop-color="#38bdf8"/>
+      </linearGradient>
+      <linearGradient id="accentGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#38bdf8"/>
+        <stop offset="100%" stop-color="#818cf8"/>
+      </linearGradient>
+      <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+        <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.35"/>
+      </filter>
+      <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#5ee0c2" />
+      </marker>
+      <marker id="arrowSky" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8" />
+      </marker>
+      <marker id="arrowIndigo" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#818cf8" />
+      </marker>
+    </defs>
+    <style>
+      text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+      .title { font-weight: 700; fill: #ffffff; }
+      .subtitle { fill: #94a3b8; font-size: 13px; }
+      .badge-text { font-size: 11px; font-weight: 600; text-anchor: middle; fill: #0b1927; }
+      .card-title { font-size: 15px; font-weight: 600; fill: #5ee0c2; }
+      .card-desc { font-size: 12.5px; fill: #cbd5e1; }
+      .formula { font-family: "Courier New", monospace; font-size: 13px; fill: #fbbf24; }
+      .axis { stroke: #475569; stroke-width: 1.5; }
+      .grid { stroke: #1e293b; stroke-width: 1; stroke-dasharray: 4,4; }
+    </style>
+
+  <rect width="100%" height="100%" rx="14" fill="#0b1927" stroke="#253a52" stroke-width="1.5"/>
+
+  <text x="40" y="42" class="title" font-size="20">LLM RecSys: เปรียบเทียบ 3 รูปแบบ Prompt (Pointwise, Pairwise, Listwise)</text>
+  <text x="40" y="66" class="subtitle">การจัดวางผู้สมัครลงใน Prompt ส่งผลโดยตรงต่อต้นทุน Token, ความเร็ว และคุณภาพของการจัดอันดับ (Ranking Quality)</text>
+
+  <!-- 3 Boxes -->
+  <!-- Box 1: Pointwise -->
+  <g transform="translate(30, 95)">
+    <rect x="0" y="0" width="275" height="350" rx="10" fill="#15263a" stroke="#38bdf8" stroke-width="1.5" filter="url(#shadow)"/>
+    <rect x="15" y="15" width="95" height="22" rx="11" fill="#38bdf8"/>
+    <text x="62" y="30" class="badge-text">POINTWISE</text>
+    <text x="15" y="60" fill="#ffffff" font-weight="700" font-size="15">ประเมินทีละ 1 ชิ้น</text>
+
+    <rect x="15" y="80" width="245" height="120" rx="6" fill="#0f1d2c" stroke="#253a52"/>
+    <text x="25" y="105" fill="#fbbf24" font-size="11">Prompt โครงสร้าง:</text>
+    <text x="25" y="130" fill="#cbd5e1" font-size="11.5">"ผู้ใช้ชอบ Sci-Fi.</text>
+    <text x="25" y="150" fill="#cbd5e1" font-size="11.5">ประเมินสินค้า: [Inception]</text>
+    <text x="25" y="170" fill="#cbd5e1" font-size="11.5">ตอบคะแนน: 1 ถึง 5 ดาว"</text>
+
+    <text x="15" y="230" fill="#5ee0c2" font-weight="600" font-size="12">ข้อดี:</text>
+    <text x="15" y="250" fill="#94a3b8" font-size="11.5">• รันขนานกันได้ (Parallel)</text>
+    <text x="15" y="270" fill="#94a3b8" font-size="11.5">• ยิง Batch รวดเร็ว</text>
+
+    <text x="15" y="300" fill="#f43f5e" font-weight="600" font-size="12">ข้อเสีย:</text>
+    <text x="15" y="320" fill="#94a3b8" font-size="11.5">• ไม่เห็นการเปรียบเทียบระหว่างชิ้น</text>
+  </g>
+
+  <!-- Box 2: Pairwise -->
+  <g transform="translate(330, 95)">
+    <rect x="0" y="0" width="275" height="350" rx="10" fill="#15263a" stroke="#818cf8" stroke-width="1.5" filter="url(#shadow)"/>
+    <rect x="15" y="15" width="85" height="22" rx="11" fill="#818cf8"/>
+    <text x="57" y="30" class="badge-text">PAIRWISE</text>
+    <text x="15" y="60" fill="#ffffff" font-weight="700" font-size="15">ประชันเป็นคู่ (A vs B)</text>
+
+    <rect x="15" y="80" width="245" height="120" rx="6" fill="#0f1d2c" stroke="#253a52"/>
+    <text x="25" y="105" fill="#fbbf24" font-size="11">Prompt โครงสร้าง:</text>
+    <text x="25" y="130" fill="#cbd5e1" font-size="11.5">"เทียบสินค้าสองชิ้นนี้:</text>
+    <text x="25" y="150" fill="#cbd5e1" font-size="11.5">A: [Interstellar] vs</text>
+    <text x="25" y="170" fill="#cbd5e1" font-size="11.5">B: [Gravity] ผู้ใช้ชอบชิ้นไหน?"</text>
+
+    <text x="15" y="230" fill="#5ee0c2" font-weight="600" font-size="12">ข้อดี:</text>
+    <text x="15" y="250" fill="#94a3b8" font-size="11.5">• ลอจิกการตัดสินใจละเอียดมาก</text>
+    <text x="15" y="270" fill="#94a3b8" font-size="11.5">• ใช้ทำ Tournament Sort ได้</text>
+
+    <text x="15" y="300" fill="#f43f5e" font-weight="600" font-size="12">ข้อเสีย:</text>
+    <text x="15" y="320" fill="#94a3b8" font-size="11.5">• ต้นทุนพุ่ง O(N^2) ถ้าผู้สมัครเยอะ</text>
+  </g>
+
+  <!-- Box 3: Listwise -->
+  <g transform="translate(630, 95)">
+    <rect x="0" y="0" width="280" height="350" rx="10" fill="#15263a" stroke="#5ee0c2" stroke-width="1.5" filter="url(#shadow)"/>
+    <rect x="15" y="15" width="85" height="22" rx="11" fill="#5ee0c2"/>
+    <text x="57" y="30" class="badge-text">LISTWISE</text>
+    <text x="15" y="60" fill="#ffffff" font-weight="700" font-size="15">จัดอันดับยกแผง (Top-K)</text>
+
+    <rect x="15" y="80" width="250" height="120" rx="6" fill="#0f1d2c" stroke="#253a52"/>
+    <text x="25" y="105" fill="#fbbf24" font-size="11">Prompt โครงสร้าง:</text>
+    <text x="25" y="130" fill="#cbd5e1" font-size="11.5">"ผู้สมัคร 10 ชิ้น: [A, B, C, ...]</text>
+    <text x="25" y="150" fill="#cbd5e1" font-size="11.5">เรียงลำดับความน่าสนใจใหม่</text>
+    <text x="25" y="170" fill="#cbd5e1" font-size="11.5">ตอบในรูป JSON: [B, A, D, ...]"</text>
+
+    <text x="15" y="230" fill="#5ee0c2" font-weight="600" font-size="12">ข้อดี:</text>
+    <text x="15" y="250" fill="#94a3b8" font-size="11.5">• เห็นบริบทครบทุกชิ้นบนจอ</text>
+    <text x="15" y="270" fill="#94a3b8" font-size="11.5">• เรียก LLM เพียงครั้งเดียวจบ</text>
+
+    <text x="15" y="300" fill="#fbbf24" font-weight="600" font-size="12">ข้อควรระวัง:</text>
+    <text x="15" y="320" fill="#94a3b8" font-size="11.5">• มี Position Bias (ชอบของชิ้นแรก)</text>
+  </g>
+</svg>

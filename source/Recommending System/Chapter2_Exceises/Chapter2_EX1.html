@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>บทที่ 2 · ระเบียบวิธีประเมินผลระบบผู้แนะนำ — สื่อการสอนแบบโต้ตอบ ฝึกคำนวณและแบบฝึกหัด</title>
+<style>
+:root{
+  --ink:#39414D; --muted:#5C6672; --faint:#95A0AB; --line:#E3E9EE;
+  --bg:#FBFCFD; --surf:#F4F7F9; --white:#FFFFFF;
+  --dark:#3E4C59; --dark2:#33404B;
+  --blue:#A8C6DC; --blue-d:#3F6E92; --blue-l:#E7F0F6;
+  --sage:#B6D3C1; --sage-d:#497C5F; --sage-l:#E9F3EC;
+  --sand:#EBD2BC; --sand-d:#A3703F; --sand-l:#FAF1E8;
+  --lilac:#C5BDDA; --lilac-d:#6A5C90; --lilac-l:#F0EDF6;
+  --rose:#E9BCB7; --rose-d:#AC5A52; --rose-l:#FBEDEB;
+  --r:14px; --sh:0 2px 10px rgba(120,135,150,.10);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:74px}
+body{margin:0; background:var(--bg); color:var(--ink);
+  font-family:"Leelawadee UI","Sarabun","Noto Sans Thai","Segoe UI",system-ui,-apple-system,sans-serif;
+  font-size:16.5px; line-height:1.72; -webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{line-height:1.35; margin:0}
+a{color:var(--blue-d)}
+.wrap{max-width:1140px; margin:0 auto; padding:0 24px}
+
+nav{position:sticky; top:0; z-index:50; background:rgba(251,252,253,.92); backdrop-filter:blur(10px); border-bottom:1px solid var(--line)}
+nav .wrap{display:flex; align-items:center; gap:6px; height:58px; overflow-x:auto; scrollbar-width:none}
+nav .wrap::-webkit-scrollbar{display:none}
+nav .brand{font-weight:700; color:var(--ink); white-space:nowrap; margin-right:10px; font-size:14.5px}
+nav a{text-decoration:none; color:var(--muted); font-size:13.5px; white-space:nowrap; padding:6px 9px; border-radius:999px; transition:.18s}
+nav a:hover,nav a.on{background:var(--blue-l); color:var(--blue-d)}
+nav a.on{font-weight:700}
+nav .score{margin-left:auto; font-size:13px; color:var(--sage-d); background:var(--sage-l); border:1px solid var(--sage); border-radius:999px; padding:4px 12px; white-space:nowrap; font-weight:700}
+
+header{background:linear-gradient(160deg,var(--dark) 0%,var(--dark2) 100%); color:#fff; padding:70px 0 78px; position:relative; overflow:hidden}
+header .c1,header .c2,header .c3{position:absolute; border-radius:50%; opacity:.30}
+header .c1{width:420px;height:420px; right:-90px; top:-130px; background:var(--blue-d)}
+header .c2{width:260px;height:260px; right:150px; bottom:-120px; background:var(--sage-d)}
+header .c3{width:160px;height:160px; right:-40px; bottom:60px; background:var(--sand-d)}
+header .wrap{position:relative; z-index:2}
+header .eyebrow{color:var(--sand); letter-spacing:2px; font-size:13.5px; margin-bottom:6px}
+header .num{color:var(--sand); font-weight:700; font-size:19px}
+header h1{font-size:44px; font-weight:700; margin:6px 0 4px; letter-spacing:-.5px}
+header .en{color:var(--blue); font-size:19px; margin-bottom:22px}
+header .quote{border:1px solid rgba(255,255,255,.22); border-radius:var(--r); padding:16px 22px; max-width:780px; font-style:italic; color:#E8EEF3; font-size:16px}
+header .meta{margin-top:24px; color:#C6D3DD; font-size:14px}
+header .howto{margin-top:22px; display:grid; gap:12px; grid-template-columns:repeat(3,1fr); max-width:900px}
+header .howto div{background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.16); border-radius:12px; padding:12px 14px; font-size:14px}
+header .howto b{color:var(--sand); display:block; margin-bottom:2px}
+@media(max-width:800px){header .howto{grid-template-columns:1fr} header h1{font-size:34px}}
+
+section{padding:56px 0 8px; scroll-margin-top:74px}
+.kick{display:inline-block; background:var(--blue-l); color:var(--blue-d); font-weight:700; font-size:13.5px; padding:4px 14px; border-radius:999px; border:1px solid var(--blue)}
+.kick.s{background:var(--sage-l); color:var(--sage-d); border-color:var(--sage)}
+.kick.a{background:var(--sand-l); color:var(--sand-d); border-color:var(--sand)}
+.kick.l{background:var(--lilac-l); color:var(--lilac-d); border-color:var(--lilac)}
+.kick.r{background:var(--rose-l); color:var(--rose-d); border-color:var(--rose)}
+h2.sec{font-size:30px; font-weight:700; margin:12px 0 8px}
+p.lead{color:var(--muted); font-size:17px; max-width:860px; margin:0 0 22px}
+
+.card{background:var(--white); border:1px solid var(--line); border-radius:var(--r); padding:20px 22px; box-shadow:var(--sh)}
+.card h3{font-size:17.5px; margin-bottom:8px}
+.card.blue{background:var(--blue-l); border-color:var(--blue)} .card.blue h3{color:var(--blue-d)}
+.card.sage{background:var(--sage-l); border-color:var(--sage)} .card.sage h3{color:var(--sage-d)}
+.card.sand{background:var(--sand-l); border-color:var(--sand)} .card.sand h3{color:var(--sand-d)}
+.card.lilac{background:var(--lilac-l); border-color:var(--lilac)} .card.lilac h3{color:var(--lilac-d)}
+.card.rose{background:var(--rose-l); border-color:var(--rose)} .card.rose h3{color:var(--rose-d)}
+.grid{display:grid; gap:18px}
+.g2{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)} .g23{grid-template-columns:1.35fr 1fr}
+@media(max-width:900px){.g2,.g3,.g4,.g23{grid-template-columns:1fr}}
+
+.panel{background:var(--white); border:1px solid var(--line); border-radius:var(--r); padding:24px; box-shadow:var(--sh); margin:20px 0}
+.panel > h3{font-size:19px; margin-bottom:4px}
+.panel .hint{color:var(--muted); font-size:14.5px; margin:0 0 16px}
+.panelhead{display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:10px; margin-bottom:12px}
+
+.stats{display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+.stat{border-radius:12px; padding:14px 12px; text-align:center; border:1px solid; position:relative}
+.stat .v{font-size:28px; font-weight:700; line-height:1.15; font-variant-numeric:tabular-nums}
+.stat .l{font-size:12.5px; color:var(--ink); line-height:1.4; margin-top:3px}
+.st-b{background:var(--blue-l); border-color:var(--blue)} .st-b .v{color:var(--blue-d)}
+.st-g{background:var(--sage-l); border-color:var(--sage)} .st-g .v{color:var(--sage-d)}
+.st-a{background:var(--sand-l); border-color:var(--sand)} .st-a .v{color:var(--sand-d)}
+.st-l{background:var(--lilac-l); border-color:var(--lilac)} .st-l .v{color:var(--lilac-d)}
+.st-r{background:var(--rose-l); border-color:var(--rose)} .st-r .v{color:var(--rose-d)}
+
+table{border-collapse:collapse; width:100%; font-size:14.5px}
+th,td{padding:8px 10px; border:1px solid var(--line); text-align:center}
+th{background:var(--blue-l); color:var(--blue-d); font-weight:700}
+tbody tr:nth-child(even){background:var(--surf)}
+td.l,th.l{text-align:left}
+.num{font-variant-numeric:tabular-nums}
+.table-scroll{overflow-x:auto; margin-top:10px}
+
+label.ctl{display:block; font-size:14px; color:var(--muted); margin-bottom:5px}
+input[type=range]{width:100%; accent-color:var(--blue-d)}
+select,input[type=number],input[type=text]{font:inherit; font-size:14.5px; padding:6px 10px; border:1px solid var(--line); border-radius:9px; background:var(--white); color:var(--ink)}
+input[type=number]{width:96px; text-align:center}
+.btn{font:inherit; font-size:14.5px; padding:7px 16px; border-radius:999px; cursor:pointer; border:1px solid var(--blue); background:var(--blue-l); color:var(--blue-d); font-weight:700; transition:.15s}
+.btn:hover{background:var(--blue); color:#fff}
+.btn.ghost{background:var(--white); border-color:var(--line); color:var(--muted); font-weight:400}
+.btn.ghost:hover{background:var(--surf); color:var(--ink)}
+.btn.sage{background:var(--sage-l); border-color:var(--sage); color:var(--sage-d)} .btn.sage:hover{background:var(--sage-d); color:#fff}
+.btn.sand{background:var(--sand-l); border-color:var(--sand); color:var(--sand-d)} .btn.sand:hover{background:var(--sand-d); color:#fff}
+.btn.sm{font-size:13px; padding:4px 12px}
+.seg{display:inline-flex; border:1px solid var(--line); border-radius:999px; overflow:hidden; background:var(--white)}
+.seg button{font:inherit; font-size:14px; padding:6px 16px; border:0; background:transparent; color:var(--muted); cursor:pointer}
+.seg button.on{background:var(--sage-l); color:var(--sage-d); font-weight:700}
+.row{display:flex; flex-wrap:wrap; gap:12px; align-items:center}
+
+/* โหมดฝึก: ซ่อนคำตอบ */
+.toggle{display:inline-flex; align-items:center; gap:8px; cursor:pointer; user-select:none; font-size:14px; color:var(--muted); background:var(--white); border:1px solid var(--line); border-radius:999px; padding:5px 12px}
+.toggle input{accent-color:var(--sage-d); width:16px; height:16px; margin:0}
+.toggle.on{background:var(--sand-l); border-color:var(--sand); color:var(--sand-d); font-weight:700}
+.lab.practice .hid{filter:blur(7px); user-select:none; pointer-events:none}
+.lab.practice .hidblock{display:none}
+.lab.practice .showpr{display:block}
+.showpr{display:none}
+.anscheck{background:var(--sand-l); border:1px solid var(--sand); border-radius:12px; padding:14px 16px; margin-top:14px}
+.anscheck h4{color:var(--sand-d); font-size:15px; margin-bottom:8px}
+.ansgrid{display:grid; gap:10px; grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+.ansgrid label{font-size:13px; color:var(--muted); display:block}
+.ansgrid input{width:100%}
+.ansgrid .fb{font-size:12.5px; min-height:18px; font-weight:700}
+.ok{color:var(--sage-d)} .bad{color:var(--rose-d)}
+input.ok{border-color:var(--sage-d); background:var(--sage-l)} input.bad{border-color:var(--rose-d); background:var(--rose-l)}
+
+.ranklist{display:flex; flex-direction:column; gap:7px}
+.rankrow{display:grid; grid-template-columns:44px 1fr auto auto; gap:10px; align-items:center; background:var(--white); border:1px solid var(--line); border-radius:11px; padding:7px 10px; cursor:grab; transition:.15s}
+.rankrow:hover{border-color:var(--blue); box-shadow:var(--sh)}
+.rankrow.drag{opacity:.35} .rankrow.over{border-color:var(--blue-d); border-style:dashed}
+.rankrow .pos{width:32px;height:32px;border-radius:50%; display:grid; place-items:center; background:var(--surf); color:var(--muted); font-weight:700; font-size:14px}
+.rankrow.hit .pos{background:var(--sage-l); color:var(--sage-d)}
+.rankrow .nm{font-weight:700; font-size:15px}
+.rankrow .nm small{font-weight:400; color:var(--faint); margin-left:8px; font-size:12.5px}
+.grade{display:flex; gap:4px}
+.grade button{width:29px;height:29px;border-radius:8px; border:1px solid var(--line); background:var(--white); color:var(--faint); font:inherit; font-size:13.5px; font-weight:700; cursor:pointer}
+.grade button:hover{border-color:var(--sage)}
+.grade button.on{background:var(--sage-d); border-color:var(--sage-d); color:#fff}
+.grade button.on0{background:var(--surf); border-color:var(--faint); color:var(--muted)}
+.mv{display:flex; flex-direction:column; gap:2px}
+.mv button{width:24px;height:15px; border:0; background:transparent; color:var(--faint); cursor:pointer; font-size:11px; line-height:1; padding:0}
+.mv button:hover{color:var(--blue-d)}
+
+.formula{background:var(--surf); border-left:3px solid var(--blue); border-radius:0 9px 9px 0; padding:11px 16px; font-size:15px; margin:12px 0; overflow-x:auto}
+.formula b{color:var(--blue-d)}
+.note{font-size:14px; color:var(--muted)}
+.warn{background:var(--rose-l); border:1px solid var(--rose); border-radius:11px; padding:13px 17px; font-size:14.5px}
+.warn b{color:var(--rose-d)}
+details.acc{border:1px solid var(--line); border-radius:11px; background:var(--white); margin-bottom:10px; overflow:hidden}
+details.acc summary{padding:13px 18px; cursor:pointer; font-weight:700; font-size:15.5px; list-style:none; display:flex; justify-content:space-between; align-items:center}
+details.acc summary::-webkit-details-marker{display:none}
+details.acc summary::after{content:"+"; color:var(--muted); font-size:20px; font-weight:400}
+details.acc[open] summary::after{content:"–"}
+details.acc summary:hover{background:var(--surf)}
+details.acc .body{padding:0 18px 16px; font-size:15px}
+
+.calc-trace{margin-top:20px;border:1px solid var(--blue);border-radius:var(--r);background:var(--blue-l);padding:20px}
+.calc-trace h3{color:var(--blue-d);font-size:19px;margin-bottom:4px}
+.calc-trace .intro{font-size:14px;color:var(--muted);margin:0 0 14px}
+.source-label{display:inline-block;background:var(--blue-d);color:#fff;border-radius:999px;padding:3px 11px;font-size:12px;font-weight:700;letter-spacing:.3px;margin-bottom:10px}
+.trace-grid{display:grid;gap:8px}
+.trace-line{display:grid;grid-template-columns:190px 1fr;gap:10px;align-items:stretch}
+.trace-line .step{border:1px solid var(--blue);background:#fff;border-radius:9px;padding:9px 12px;font-size:14px;font-weight:700;color:var(--blue-d)}
+.trace-line .expr{border:1px solid var(--line);background:#fff;border-radius:9px;padding:9px 13px;font-size:15px;overflow-x:auto;font-variant-numeric:tabular-nums}
+.trace-result{margin-top:10px;background:var(--dark);color:#fff;border-radius:10px;padding:11px 14px;text-align:center;font-weight:700}
+@media(max-width:700px){.trace-line{grid-template-columns:1fr}}
+
+/* MovieMini */
+.userlist{display:grid; gap:8px}
+.urow{display:grid; grid-template-columns:110px 1fr; gap:10px; align-items:center; background:var(--white); border:1px solid var(--line); border-radius:10px; padding:6px 10px}
+.urow .un{font-weight:700; font-size:14px}
+.urow .un small{display:block; font-weight:400; color:var(--faint); font-size:12px}
+.urow .slots{display:flex; gap:5px; flex-wrap:wrap}
+.urow select{padding:4px 6px; font-size:13px; border-radius:7px}
+.urow select.hit{background:var(--sage-l); border-color:var(--sage); color:var(--sage-d); font-weight:700}
+.chip{display:inline-block; font-size:12px; padding:2px 9px; border-radius:999px; background:var(--surf); border:1px solid var(--line); color:var(--muted); margin:2px}
+.chip.g1{background:var(--blue-l);border-color:var(--blue);color:var(--blue-d)}
+.chip.g2{background:var(--rose-l);border-color:var(--rose);color:var(--rose-d)}
+.chip.g3{background:var(--sand-l);border-color:var(--sand);color:var(--sand-d)}
+.chip.g4{background:var(--lilac-l);border-color:var(--lilac);color:var(--lilac-d)}
+.chip.g5{background:var(--sage-l);border-color:var(--sage);color:var(--sage-d)}
+
+/* แบบฝึกหัด */
+.quiz{background:var(--white); border:1px solid var(--line); border-radius:var(--r); box-shadow:var(--sh); padding:20px 22px; margin-bottom:16px; border-left:5px solid var(--lilac)}
+.quiz.done-ok{border-left-color:var(--sage-d)} .quiz.done-bad{border-left-color:var(--rose-d)}
+.quiz .qh{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px}
+.quiz .qh h3{font-size:16.5px}
+.quiz .tag{font-size:12px; font-weight:700; padding:2px 10px; border-radius:999px; background:var(--lilac-l); color:var(--lilac-d); border:1px solid var(--lilac)}
+.quiz .q{font-size:15.5px; margin-bottom:12px}
+.quiz .q table{max-width:640px; font-size:14px}
+.quiz .sol{display:none; margin-top:12px; background:var(--sage-l); border:1px solid var(--sage); border-radius:10px; padding:12px 15px; font-size:14.5px}
+.quiz.show .sol{display:block}
+.quiz .sol b{color:var(--sage-d)}
+.quiz .verdict{font-weight:700; margin-top:8px; font-size:14.5px}
+.scorebar{background:var(--white); border:1px solid var(--line); border-radius:var(--r); padding:16px 20px; display:flex; flex-wrap:wrap; gap:14px; align-items:center; margin-bottom:18px}
+.scorebar .big{font-size:30px; font-weight:700; color:var(--sage-d)}
+.bar{flex:1; min-width:180px; height:12px; background:var(--surf); border-radius:999px; overflow:hidden}
+.bar i{display:block; height:100%; background:var(--sage-d); width:0; transition:.3s}
+
+footer{background:var(--dark); color:#9FB0BE; padding:40px 0; margin-top:70px; font-size:14px}
+footer b{color:#fff}
+svg text{font-family:inherit}
+.legend{display:flex; gap:18px; font-size:13.5px; color:var(--muted); flex-wrap:wrap}
+.legend i{display:inline-block; width:13px;height:13px;border-radius:4px; margin-right:6px; vertical-align:-2px}
+.mini{font-size:13px;color:var(--faint)}
+
+
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <span class="brand">บทที่ 2 · ฝึกคำนวณ</span>
+  <a href="#s1">2.1 MAE/RMSE</a>
+  <a href="#s2">2.2–2.3 อันดับ</a>
+  <a href="#s3u">MRR · MAP สามผู้ใช้</a>
+  <a href="#s4">2.4 AUC</a>
+  <a href="#s5">2.5 Beyond-Accuracy</a>
+  <a href="#ex">แบบฝึกหัด</a>
+  <span class="score" id="navscore">แบบฝึกหัด 0 / 0</span>
+</div></nav>
+
+<header>
+  <div class="c1"></div><div class="c2"></div><div class="c3"></div>
+  <div class="wrap">
+    <div class="eyebrow">ตำราระบบผู้แนะนำ · RECOMMENDER SYSTEMS</div>
+    <div class="num">บทที่ 2</div>
+    <h1>ระเบียบวิธีประเมินผลระบบผู้แนะนำ</h1>
+    <div class="en">Evaluation Metrics — สื่อการสอนแบบโต้ตอบว่าด้วย “การคำนวณตัวชี้วัด” สี่ตระกูล ปรับพารามิเตอร์ ฝึกคำนวณ และแบบฝึกหัดตรวจคำตอบอัตโนมัติ</div>
+    <div class="quote">“การเลือกตัวชี้วัดคือการเลือกข้อสรุป — การเลือกตระกูลผิดร้ายแรงกว่าการคำนวณผิด — เพราะการคำนวณผิดยังตรวจพบได้ แต่การเลือกตระกูลผิดทำให้ตัวเลขที่ถูกทุกหลักตอบคำถามที่เราไม่ได้ถาม”</div>
+    <div class="howto">
+      <div><b>1 · ปรับพารามิเตอร์</b>แก้ตัวเลข ลากอันดับ เลื่อนแถบ ทุกตัวชี้วัดคำนวณใหม่ทันทีพร้อมร่องรอยการคำนวณทีละขั้น</div>
+      <div><b>2 · เปิดโหมดฝึก</b>ติ๊ก “โหมดฝึก” ที่มุมของแต่ละสนามทดลอง คำตอบจะถูกซ่อน ให้คำนวณด้วยมือแล้วกรอกตรวจ</div>
+      <div><b>3 · ทำแบบฝึกหัด</b>ท้ายหน้ามีโจทย์ประจำบทและโจทย์สุ่มใหม่ได้ไม่จำกัด ตรวจคำตอบและดูเฉลยละเอียดได้ทันที</div>
+    </div>
+    <div class="meta">ขอบเขตของสื่อชุดนี้: หัวข้อ 2.1 ถึง 2.5 — สี่ตระกูลตัวชี้วัดและการคำนวณทีละขั้น · ทุกตัวเลขคำนวณสดในเบราว์เซอร์ ทำงานแบบออฟไลน์ · ค่าเริ่มต้นคือตัวอย่างการคำนวณ 2.1–2.12 บนชุดข้อมูลเดียวกันทั้งบท</div>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════ 2.1 -->
+<section id="s1"><div class="wrap">
+  <span class="kick">2.1</span>
+  <h2 class="sec">แผนที่ตัวชี้วัด และการพยากรณ์คะแนน — MAE และ RMSE</h2>
+  <p class="lead">แก้คะแนนจริงและคะแนนที่ทายได้ทุกช่อง เพิ่มหรือลดจำนวนรายการได้ ค่าเริ่มต้นคือตัวอย่างการคำนวณ 2.1 (ผู้ใช้ Emma กับ Model A) ลองกดปุ่ม “ตัวอย่าง 2.2” เพื่อดูกรณีที่ MAE เท่ากันแต่ RMSE ต่างกันสองเท่า</p>
+
+  <div class="panel" style="padding:18px 20px 20px; margin-bottom:18px">
+    <h3 style="font-size:19px; margin-bottom:2px">แผนที่ตระกูลตัวชี้วัดของระบบผู้แนะนำ (ตารางที่ 2.1)</h3>
+    <p class="hint" style="margin-bottom:14px">เลือก “ตัวชี้วัดหลัก” ได้เพียงหนึ่งตัวเพื่อใช้ตัดสินผู้ชนะ ที่เหลือทำหน้าที่เป็น “ตัวชี้วัดกำกับ” ที่ห้ามแย่ลงเกินเกณฑ์</p>
+    <div class="grid g4">
+      <div class="card blue"><h3>โจทย์พยากรณ์คะแนน</h3>
+        <div class="note" style="margin-bottom:6px">Rating Prediction</div>
+        MAE — ค่าเฉลี่ยความคลาดเคลื่อนสัมบูรณ์<br>RMSE — ลงโทษความผิดพลาดก้อนใหญ่หนักกว่า
+        <div class="note" style="margin-top:8px">เหมาะกับผลป้อนกลับแบบชัดแจ้ง แต่ RMSE ดีไม่ได้แปลว่าจัดอันดับดี</div></div>
+      <div class="card sage"><h3>โจทย์จัดอันดับ: ไม่ไวต่อตำแหน่ง</h3>
+        <div class="note" style="margin-bottom:6px">Set-based</div>
+        Precision@K — ของที่เสิร์ฟ ใช่ที่ชื่นชอบไหม<br>Recall@K — ของที่ชอบ หยิบมาได้กี่ส่วน<br>F1@K — ค่าเฉลี่ยฮาร์มอนิก<br>HR@K — มีของถูกอย่างน้อยหนึ่งชิ้นไหม
+        <div class="note" style="margin-top:8px">นับเพียงจำนวน ไม่สนใจว่าอยู่อันดับใด</div></div>
+      <div class="card sand"><h3>โจทย์จัดอันดับ: ไวต่อตำแหน่ง</h3>
+        <div class="note" style="margin-bottom:6px">Rank-aware</div>
+        MRR — ส่วนกลับอันดับของถูกชิ้นแรก<br>MAP — เฉลี่ย Precision ทุกจุดที่ถูก<br>nDCG@K — ส่วนลดลอการิทึม + ทำบรรทัดฐาน<br>AUC — ความน่าจะเป็นที่เรียงคู่ถูก
+        <div class="note" style="margin-top:8px">ตัวชี้วัดหลักของงานสมัยใหม่</div></div>
+      <div class="card lilac"><h3>นอกเหนือความถูกต้อง</h3>
+        <div class="note" style="margin-bottom:6px">Beyond-Accuracy</div>
+        Coverage — ครอบคลุมคลังกี่ %<br>Gini / Long-tail — กระจุกตัวแค่ไหน<br>ILD — ของที่แนะนำต่างกันเองไหม<br>Novelty — ใหม่สำหรับผู้ใช้แค่ไหน<br>Calibration — สัดส่วนหมวดตรงรสนิยมไหม<br>Fairness — ทุกกลุ่มได้คุณภาพเท่ากันไหม
+        <div class="note" style="margin-top:8px">ใช้เป็นตัวชี้วัดกำกับควบคู่เสมอ</div></div>
+    </div>
+  </div>
+
+
+  <div class="panel lab" id="lab-rmse">
+    <div class="panelhead">
+      <div class="row">
+        <button class="btn ghost sm" data-preset="emma">ตัวอย่าง 2.1 · Emma</button>
+        <button class="btn ghost sm" data-preset="even">ตัวอย่าง 2.2 · กระจายสม่ำเสมอ</button>
+        <button class="btn ghost sm" data-preset="spike">ตัวอย่าง 2.2 · พลาดหนักจุดเดียว</button>
+        <button class="btn ghost sm" data-preset="rand">สุ่มข้อมูลใหม่</button>
+      </div>
+      <label class="toggle"><input type="checkbox" class="prtoggle"> โหมดฝึก (ซ่อนคำตอบ)</label>
+    </div>
+    <div class="grid g23">
+      <div>
+        <div class="table-scroll"><table id="rmsetbl">
+          <thead><tr><th>รายการ</th><th>คะแนนจริง r</th><th>คะแนนที่ทาย r̂</th><th>e = r̂ − r</th><th>|e|</th><th>e²</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table></div>
+        <div class="row" style="margin-top:12px">
+          <button class="btn ghost sm" id="rmseadd">+ เพิ่มรายการ</button>
+          <span class="note">n = <b id="rmsen">5</b> รายการ · ทศนิยม 4 ตำแหน่ง</span>
+        </div>
+      </div>
+      <div>
+        <div class="stats" style="grid-template-columns:1fr 1fr">
+          <div class="stat st-b"><div class="v hid" id="v-mae">–</div><div class="l">MAE<br>ค่าเฉลี่ยความคลาดเคลื่อนสัมบูรณ์</div></div>
+          <div class="stat st-a"><div class="v hid" id="v-rmse">–</div><div class="l">RMSE<br>รากที่สองของกำลังสองเฉลี่ย</div></div>
+        </div>
+        <div class="formula"><b>MAE</b> = (1/|T|) Σ |r − r̂| &nbsp;(2.1)<br><b>RMSE</b> = √( (1/|T|) Σ (r − r̂)² ) &nbsp;(2.2)</div>
+        <div class="card rose hid">
+          <h3>RMSE − MAE = <span id="v-gap">–</span></h3>
+          <div id="gaptext" class="note"></div>
+        </div>
+        <div class="anscheck showpr">
+          <h4>กรอกคำตอบที่คำนวณด้วยมือ</h4>
+          <div class="ansgrid">
+            <div><label>MAE</label><input type="number" step="0.0001" data-ans="mae"><div class="fb"></div></div>
+            <div><label>RMSE</label><input type="number" step="0.0001" data-ans="rmse"><div class="fb"></div></div>
+          </div>
+          <div class="row" style="margin-top:10px"><button class="btn sand sm chk">ตรวจคำตอบ</button><button class="btn ghost sm reveal">เฉลย</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="calc-trace hid" id="rmse-trace"></div>
+  </div>
+
+  <div class="grid g2">
+    <div class="card sand"><h3>ทำไม RMSE ≥ MAE เสมอ</h3>
+      จากอสมการของเยนเซน เพราะ f(x) = x² เป็นฟังก์ชันคอนเวกซ์ จึงได้ MAE² ≤ MSE ⟹ MAE ≤ RMSE (2.3) เครื่องหมายเท่ากับเกิดเมื่อ |e| ทุกตัวเท่ากันหมด
+      ลองกด “ตัวอย่าง 2.2 · กระจายสม่ำเสมอ” จะเห็น RMSE = MAE พอดี</div>
+    <div class="card rose"><h3>RMSE ต่ำ ≠ จัดอันดับดี</h3>
+      การทำนายแม่นในช่วงกลางของสเกล ซึ่งเป็นช่วงที่มีข้อมูลมากที่สุด ลด RMSE ได้มาก แต่ไม่ช่วยให้สิบอันดับแรกดีขึ้นเลย นี่คือเหตุผลที่วงการเปลี่ยนมาใช้ตัวชี้วัดเชิงอันดับในหัวข้อถัดไป</div>
+  </div>
+</div></section>
+
+<!-- ══════════════════════════════════════ 2.2–2.3 -->
+<section id="s2"><div class="wrap">
+  <span class="kick l">2.2 – 2.3</span>
+  <h2 class="sec">ตัวชี้วัดเชิงอันดับ — ไม่ไวต่อตำแหน่ง และ ไวต่อตำแหน่ง</h2>
+  <p class="lead">ข้อมูลตั้งต้นคือตารางที่ 2.2 Model A และ B มีของถูกสามชิ้นเท่ากัน {i2, i5, i9} ต่างกันเพียงตำแหน่ง
+  <b>ลากสลับอันดับ</b> หรือกดลูกศร และ <b>กดตัวเลข 0–3</b> เพื่อกำหนดระดับความเกี่ยวข้อง (rel) ของแต่ละรายการ แล้วดูว่าตัวชี้วัดตัวใด “เห็น” และ “ไม่เห็น” การเปลี่ยนแปลง</p>
+
+  <div class="panel lab" id="lab-rank">
+    <div class="panelhead">
+      <div class="row">
+        <button class="btn ghost sm" data-preset="A">Model A</button>
+        <button class="btn ghost sm" data-preset="B">Model B</button>
+        <button class="btn ghost sm" data-preset="C">Model C (แบบฝึกหัด)</button>
+        <button class="btn ghost sm" data-preset="graded">ความเกี่ยวข้องหลายระดับ</button>
+        <button class="btn ghost sm" data-preset="perfect">อุดมคติ</button>
+        <button class="btn ghost sm" data-preset="shuffle">สุ่มลำดับ</button>
+      </div>
+      <label class="toggle"><input type="checkbox" class="prtoggle"> โหมดฝึก (ซ่อนคำตอบ)</label>
+    </div>
+    <div class="grid g23">
+      <div>
+        <h3>รายการที่ระบบเสิร์ฟ (สิบอันดับ)</h3>
+        <p class="hint">แถวสีเขียวคือรายการที่ผู้ใช้ชอบจริง · ปุ่ม 0–3 คือระดับความเกี่ยวข้อง (0 = ไม่เกี่ยวข้อง)</p>
+        <div class="ranklist" id="ranklist"></div>
+        <div class="row" style="margin-top:16px">
+          <div><label class="ctl">ค่าตัด K</label>
+            <select id="rk-k"><option>1</option><option>3</option><option>5</option><option selected>10</option></select></div>
+          <div><label class="ctl">ฟังก์ชันผลได้ gain(rel)</label>
+            <select id="rk-gain"><option value="lin" selected>เชิงเส้น gain = rel</option><option value="exp">เลขชี้กำลัง gain = 2^rel − 1</option></select></div>
+          <div><label class="ctl">ตัวหาร AP</label>
+            <select id="rk-apden"><option value="min" selected>min(K, |R|) — ตามสูตร 2.9</option><option value="R">|R| ทั้งหมด</option></select></div>
+        </div>
+      </div>
+      <div>
+        <h3>ตัวชี้วัดที่ได้</h3>
+        <p class="hint">สี่ตัวแรกไม่ไวต่อตำแหน่ง · สี่ตัวหลังไวต่อตำแหน่ง</p>
+        <div class="stats" style="grid-template-columns:1fr 1fr">
+          <div class="stat st-b"><div class="v hid" id="m-p">–</div><div class="l">Precision@<span class="kk">10</span></div></div>
+          <div class="stat st-b"><div class="v hid" id="m-r">–</div><div class="l">Recall@<span class="kk">10</span></div></div>
+          <div class="stat st-b"><div class="v hid" id="m-f">–</div><div class="l">F1@<span class="kk">10</span></div></div>
+          <div class="stat st-b"><div class="v hid" id="m-hr">–</div><div class="l">HR@<span class="kk">10</span></div></div>
+          <div class="stat st-l"><div class="v hid" id="m-mrr">–</div><div class="l">RR (ส่วนกลับอันดับ)</div></div>
+          <div class="stat st-l"><div class="v hid" id="m-map">–</div><div class="l">AP@<span class="kk">10</span></div></div>
+        </div>
+        <div class="stat st-g" style="margin-top:14px; padding:16px">
+          <div class="v hid" style="font-size:40px" id="m-ndcg">–</div>
+          <div class="l" style="font-size:14px">nDCG@<span class="kk">10</span> = DCG <span class="num hid" id="m-dcg">–</span> ÷ IDCG <span class="num hid" id="m-idcg">–</span></div>
+        </div>
+        <div class="stat st-a" style="margin-top:14px; padding:12px">
+          <div class="v hid" style="font-size:24px" id="m-auc">–</div>
+          <div class="l">AUC ของลำดับทั้งสิบ (นับคู่บวก–ลบ)</div>
+        </div>
+        <div class="anscheck showpr">
+          <h4>กรอกคำตอบที่คำนวณด้วยมือ (K ปัจจุบัน)</h4>
+          <div class="ansgrid">
+            <div><label>Precision@K</label><input type="number" step="0.0001" data-ans="P"><div class="fb"></div></div>
+            <div><label>Recall@K</label><input type="number" step="0.0001" data-ans="R"><div class="fb"></div></div>
+            <div><label>F1@K</label><input type="number" step="0.0001" data-ans="F"><div class="fb"></div></div>
+            <div><label>RR</label><input type="number" step="0.0001" data-ans="mrr"><div class="fb"></div></div>
+            <div><label>AP@K</label><input type="number" step="0.0001" data-ans="map"><div class="fb"></div></div>
+            <div><label>nDCG@K</label><input type="number" step="0.0001" data-ans="ndcg"><div class="fb"></div></div>
+            <div><label>AUC</label><input type="number" step="0.0001" data-ans="auc"><div class="fb"></div></div>
+          </div>
+          <div class="row" style="margin-top:10px"><button class="btn sand sm chk">ตรวจคำตอบ</button><button class="btn ghost sm reveal">เฉลย</button></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hid">
+    <h3 style="margin-top:26px">ตารางคำนวณ nDCG ทีละขั้น</h3>
+    <p class="hint">ส่วนลดตำแหน่งคือ 1 / log₂(i+1) · แถวสีคือรายการที่เกี่ยวข้อง</p>
+    <div class="table-scroll"><table id="ndcgtbl">
+      <thead><tr><th>อันดับ i</th><th>รายการ</th><th>rel</th><th>gain(rel)</th><th>1/log₂(i+1)</th><th>ส่วนเพิ่ม DCG</th><th>DCG สะสม</th><th>Precision@i</th></tr></thead>
+      <tbody></tbody>
+    </table></div>
+    <div class="calc-trace" id="rank-trace"></div>
+    </div>
+
+    <h3 style="margin-top:26px">2.4.2 พฤติกรรมของตัวชี้วัดเมื่อค่าตัด K เปลี่ยน (ของรายการปัจจุบัน)</h3>
+    <p class="hint">Recall ไม่มีวันลดเมื่อ K เพิ่ม · Precision มีแนวโน้มลด แต่กระเพื่อมขึ้นได้เมื่อเจอของถูกพอดี · nDCG เพิ่มแบบไม่ลดแล้วอิ่มตัว</p>
+    <svg id="ksweep" class="hid" viewBox="0 0 900 260" style="width:100%;height:auto"></svg>
+    <div class="legend" style="margin-top:6px">
+      <span><i style="background:var(--blue-d)"></i>Precision@K</span>
+      <span><i style="background:var(--sage-d)"></i>Recall@K</span>
+      <span><i style="background:var(--sand-d)"></i>nDCG@K</span>
+      <span><i style="background:var(--lilac-d)"></i>AP@K</span>
+    </div>
+  </div>
+
+
+  <!-- ─────────── MRR / MAP ข้ามผู้ใช้สามคน ─────────── -->
+  <div class="panel lab" id="s3u" style="margin-top:22px">
+    <div class="panelhead">
+      <div><h3 style="font-size:19px">2.3.1–2.3.2 · MRR@10 และ MAP@10 เมื่อเฉลี่ยข้ามผู้ใช้สามคน</h3>
+        <p class="hint" style="margin:0">RR และ AP วัดผู้ใช้ทีละคน ส่วน <b>MRR</b> และ <b>MAP</b> คือค่าเฉลี่ยข้ามผู้ใช้ · แก้ “อันดับที่พบของถูก” ได้ทุกช่อง (คั่นด้วยจุลภาค) ผู้ใช้แต่ละคนมีของถูกสามชิ้น K = 10</p></div>
+      <div class="row">
+        <button class="btn ghost sm" data-u3="base">ค่าตั้งต้นของบท</button>
+        <button class="btn ghost sm" data-u3="swap">สลับ A ↔ B</button>
+        <button class="btn ghost sm" data-u3="top">A เก่งทุกคน (1, 2, 3)</button>
+        <label class="toggle"><input type="checkbox" id="u3pr"> โหมดฝึก (ซ่อนคำตอบ)</label>
+      </div>
+    </div>
+    <div class="grid g23">
+      <div>
+        <div class="table-scroll"><table id="u3tbl">
+          <thead><tr><th class="l">ผู้ใช้</th><th>อันดับที่พบของถูก · Model A</th><th>RR (A)</th><th>AP@10 (A)</th><th>อันดับที่พบของถูก · Model B</th><th>RR (B)</th><th>AP@10 (B)</th></tr></thead>
+          <tbody></tbody>
+        </table></div>
+        <p class="note" style="margin-top:8px">RR = 1 / อันดับของถูก<b>ชิ้นแรก</b> · AP@10 = ค่าเฉลี่ยของ Precision ณ ทุกตำแหน่งที่พบของถูก = (1/r₁ + 2/r₂ + 3/r₃) ÷ 3</p>
+      </div>
+      <div>
+        <div class="stats" style="grid-template-columns:1fr 1fr">
+          <div class="stat st-l"><div class="v u3hid" id="u3-mrra">–</div><div class="l">MRR@10 · Model A</div></div>
+          <div class="stat st-b"><div class="v u3hid" id="u3-mrrb">–</div><div class="l">MRR@10 · Model B</div></div>
+          <div class="stat st-a"><div class="v u3hid" id="u3-mapa">–</div><div class="l">MAP@10 · Model A</div></div>
+          <div class="stat st-g"><div class="v u3hid" id="u3-mapb">–</div><div class="l">MAP@10 · Model B</div></div>
+        </div>
+        <div class="anscheck" id="u3ans" style="display:none">
+          <h4>กรอกคำตอบที่คำนวณด้วยมือ</h4>
+          <div class="ansgrid">
+            <div><label>MRR@10 (A)</label><input type="number" step="0.0001" id="u3i-mrra"><div class="fb"></div></div>
+            <div><label>MRR@10 (B)</label><input type="number" step="0.0001" id="u3i-mrrb"><div class="fb"></div></div>
+            <div><label>MAP@10 (A)</label><input type="number" step="0.0001" id="u3i-mapa"><div class="fb"></div></div>
+            <div><label>MAP@10 (B)</label><input type="number" step="0.0001" id="u3i-mapb"><div class="fb"></div></div>
+          </div>
+          <div class="row" style="margin-top:10px"><button class="btn sand sm" id="u3chk">ตรวจคำตอบ</button><button class="btn ghost sm" id="u3rev">เฉลย</button></div>
+        </div>
+        <div class="card blue u3hid" style="margin-top:12px"><h3>อ่านผลอย่างไร</h3>
+          <div id="u3read" class="note"></div></div>
+      </div>
+    </div>
+    <div class="calc-trace u3hid" id="u3trace"></div>
+  </div>
+
+  <div class="grid g3">
+    <div class="card blue"><h3>สี่ตัวแรกมองไม่เห็นตำแหน่ง</h3>
+      กด “Model A” แล้ว “Model B” — Precision Recall F1 และ HR <b>ไม่เปลี่ยนเลย</b> (0.3000 · 1.0000 · 0.4615 · 1) ขณะที่ RR AP nDCG AUC เปลี่ยนทันที ตรงกับตารางที่ 2.3</div>
+    <div class="card lilac"><h3>ขนาดของความต่างขึ้นกับตัวชี้วัด</h3>
+      A/B ต่างกัน 4.00 เท่าใน RR · 2.47 เท่าใน AP · 1.73 เท่าใน nDCG · 2.25 เท่าใน AUC — “ดีกว่าอย่างมีนัยสำคัญ” จึงไม่มีความหมายหากไม่ระบุตัวชี้วัด</div>
+    <div class="card sage"><h3>nDCG เท่านั้นที่ใช้ระดับความเกี่ยวข้อง</h3>
+      กด “ความเกี่ยวข้องหลายระดับ” แล้วสลับฟังก์ชันผลได้เป็นเลขชี้กำลัง ตัวชี้วัดอื่นนิ่งสนิท มีเพียง nDCG ที่ขยับ — และรายงานว่า “ใช้ nDCG@10” โดยไม่ระบุฟังก์ชันผลได้ยังทำซ้ำไม่ได้</div>
+  </div>
+  <div class="warn" style="margin-top:18px"><b>กฎที่ห้ามละเมิด · </b>ห้ามเปรียบเทียบตัวชี้วัดที่ค่า K ต่างกัน Recall@20 = 0.72 กับ Recall@10 = 0.55 เทียบกันไม่ได้ เพราะ Recall เพิ่มขึ้นเสมอเมื่อ K เพิ่ม แม้แบบจำลองจะแย่กว่าก็ตาม ลองเปลี่ยน K ในสนามทดลองแล้วดูกราฟยืนยัน</div>
+</div></section>
+
+<!-- ══════════════════════════════════════ 2.4 -->
+<section id="s4"><div class="wrap">
+  <span class="kick r">2.4</span>
+  <h2 class="sec">พื้นที่ใต้เส้นโค้ง ROC (AUC) — นับคู่ทีละคู่</h2>
+  <p class="lead">AUC คือความน่าจะเป็นที่แบบจำลองให้คะแนนรายการที่ผู้ใช้ชอบ สูงกว่า รายการที่ไม่ชอบ เมื่อสุ่มหยิบมาอย่างละหนึ่ง (2.15) ค่าเริ่มต้นคือตัวอย่างการคำนวณ 2.5 (12 รายการ |R⁺| = 5, |R⁻| = 7, 35 คู่) ลากแถบเลื่อนเปลี่ยนคะแนน หรือกดป้ายเพื่อสลับว่าชอบ/ไม่ชอบ</p>
+
+  <div class="panel lab" id="lab-auc">
+    <div class="panelhead">
+      <div class="row">
+        <button class="btn ghost sm" data-preset="book">ตัวอย่าง 2.5</button>
+        <button class="btn ghost sm" data-preset="perfect">แยกได้สมบูรณ์</button>
+        <button class="btn ghost sm" data-preset="random">เดาสุ่ม</button>
+        <button class="btn ghost sm" data-preset="ties">มีคะแนนเท่ากัน 3 คู่</button>
+      </div>
+      <label class="toggle"><input type="checkbox" class="prtoggle"> โหมดฝึก (ซ่อนคำตอบ)</label>
+    </div>
+    <div class="grid g23">
+      <div><div id="aucitems"></div></div>
+      <div>
+        <svg id="rocsvg" viewBox="0 0 320 320" style="width:100%;height:auto" class="hid"></svg>
+        <div class="stats" style="grid-template-columns:1fr 1fr; margin-top:12px">
+          <div class="stat st-a"><div class="v hid" id="v-auc">–</div><div class="l">AUC</div></div>
+          <div class="stat st-b"><div class="v hid" id="v-pairs" style="font-size:20px">–</div><div class="l">คู่ที่เรียงถูก ÷ คู่ทั้งหมด<br>(เท่ากันนับครึ่ง)</div></div>
+        </div>
+        <div class="anscheck showpr">
+          <h4>กรอกคำตอบ</h4>
+          <div class="ansgrid">
+            <div><label>จำนวนคู่ทั้งหมด</label><input type="number" step="1" data-ans="total"><div class="fb"></div></div>
+            <div><label>คู่ที่เรียงถูก (เครดิต)</label><input type="number" step="0.5" data-ans="correct"><div class="fb"></div></div>
+            <div><label>AUC</label><input type="number" step="0.0001" data-ans="auc"><div class="fb"></div></div>
+          </div>
+          <div class="row" style="margin-top:10px"><button class="btn sand sm chk">ตรวจคำตอบ</button><button class="btn ghost sm reveal">เฉลย</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="calc-trace hid" id="auc-trace"></div>
+  </div>
+  <div class="card rose"><h3>ข้อจำกัดของ AUC</h3>
+    AUC ให้น้ำหนักทุกคู่เท่ากัน การเลื่อนของถูกจากอันดับ 400 มา 300 เพิ่ม AUC เท่ากับเลื่อนจาก 4 มา 3 จึงเหมาะเป็นตัวชี้วัดวินิจฉัยระหว่างพัฒนา ไม่เหมาะเป็นตัวชี้วัดหลักของระบบที่แสดงสิบอันดับแรก — ใช้ nDCG@10 แทน</div>
+</div></section>
+
+<!-- ══════════════════════════════════════ 2.5 -->
+<section id="s5"><div class="wrap">
+  <span class="kick s">2.5</span>
+  <h2 class="sec">คุณภาพนอกเหนือความถูกต้อง — สนามทดลอง MovieMini-12</h2>
+  <p class="lead">คลัง 12 เรื่อง ผู้ใช้ 8 คน แสดงผลคนละ 5 อันดับ (40 ช่อง) ค่าเริ่มต้นคือ Model X (จัดอันดับตามความนิยมล้วน ทุกคนเห็นชุดเดียวกัน) กับ Model Y (เฉพาะบุคคล)
+  <b>เปลี่ยนรายการในแต่ละช่อง</b> แล้วดูว่า Coverage จีนี Long-tail ILD Novelty การปรับเทียบ และความเป็นธรรม ตอบสนองอย่างไร — ตัวชี้วัดแต่ละตัว “เห็น” และ “ไม่เห็น” อะไร</p>
+
+  <div class="panel lab" id="lab-beyond">
+    <div class="panelhead">
+      <div class="row">
+        <button class="btn ghost sm" data-preset="A">Model X · ความนิยมล้วน</button>
+        <button class="btn ghost sm" data-preset="B">Model Y · เฉพาะบุคคล</button>
+        <button class="btn ghost sm" data-preset="rand">สุ่มรายการใหม่</button>
+        <button class="btn ghost sm" data-preset="tail">ยัดเรื่องหายากให้ทุกคน</button>
+      </div>
+      <label class="toggle"><input type="checkbox" class="prtoggle"> โหมดฝึก (ซ่อนคำตอบ)</label>
+    </div>
+    <details class="acc"><summary>ตารางคลังภาพยนตร์ 12 เรื่อง (แนว · ค่าย · ผู้เคยชมจาก 500 คน · หัว/หาง) และรายการที่ผู้ใช้ชอบจริง (≥ 4 ดาว)</summary>
+      <div class="body"><div class="table-scroll"><table id="cattbl"><thead><tr><th>รหัส</th><th class="l">ชื่อเรื่อง</th><th>แนว</th><th>ค่าย</th><th>ผู้เคยชม</th><th>p(i)</th><th>−log₂ p(i)</th><th>กลุ่ม</th></tr></thead><tbody></tbody></table></div>
+      <p class="note" style="margin-top:8px">เส้นแบ่งหัว–หาง: เรียงตามความนิยม สะสมจนถึงหนึ่งในสามของปฏิสัมพันธ์ทั้งหมด (1,550 ÷ 3 = 516.67) → หัว = {i1, i4} · หาง = อีก 10 เรื่อง</p>
+      <div id="likedlist" style="margin-top:8px"></div>
+      </div>
+    </details>
+
+    <div class="grid g23" style="margin-top:14px">
+      <div>
+        <h3>รายการ Top-5 ของผู้ใช้แปดคน</h3>
+        <p class="hint">ช่องสีเขียวคือเรื่องที่ผู้ใช้คนนั้นชอบจริง (ใช้คำนวณ Precision@5 และช่องว่างสมภาค)</p>
+        <div class="userlist" id="userlist"></div>
+      </div>
+      <div>
+        <div class="stats" style="grid-template-columns:1fr 1fr">
+          <div class="stat st-b"><div class="v hid" id="b-cov">–</div><div class="l">Coverage@5<br>(2.16)</div></div>
+          <div class="stat st-r"><div class="v hid" id="b-gini">–</div><div class="l">จีนีของการเปิดเผย<br>(2.17) · ข้อมูลนำเข้า = 0.5320</div></div>
+          <div class="stat st-a"><div class="v hid" id="b-lt">–</div><div class="l">LongTailRatio@5 เฉลี่ย<br>(2.18)</div></div>
+          <div class="stat st-l"><div class="v hid" id="b-ild">–</div><div class="l">ILD@5 เฉลี่ย (ตามแนว)<br>(2.19)</div></div>
+          <div class="stat st-g"><div class="v hid" id="b-nov">–</div><div class="l">Novelty@5 เฉลี่ย (บิต)<br>(2.20)</div></div>
+          <div class="stat st-b"><div class="v hid" id="b-p5">–</div><div class="l">Precision@5 เฉลี่ย</div></div>
+          <div class="stat st-r"><div class="v hid" id="b-gap">–</div><div class="l">ParityGap ยาว–สั้น<br>(2.22)</div></div>
+          <div class="stat st-a"><div class="v hid" id="b-pgini">–</div><div class="l">จีนีฝั่งผู้ผลิต (4 ค่าย)</div></div>
+        </div>
+        <svg id="lorenz" viewBox="0 0 340 300" style="width:100%;height:auto;margin-top:12px" class="hid"></svg>
+        <div class="anscheck showpr">
+          <h4>กรอกคำตอบ</h4>
+          <div class="ansgrid">
+            <div><label>Coverage@5</label><input type="number" step="0.0001" data-ans="cov"><div class="fb"></div></div>
+            <div><label>จีนีของการเปิดเผย</label><input type="number" step="0.0001" data-ans="gini"><div class="fb"></div></div>
+            <div><label>LongTail@5 เฉลี่ย</label><input type="number" step="0.0001" data-ans="lt"><div class="fb"></div></div>
+            <div><label>ILD@5 เฉลี่ย</label><input type="number" step="0.0001" data-ans="ild"><div class="fb"></div></div>
+            <div><label>Novelty@5 เฉลี่ย</label><input type="number" step="0.0001" data-ans="nov"><div class="fb"></div></div>
+            <div><label>ParityGap</label><input type="number" step="0.0001" data-ans="gap"><div class="fb"></div></div>
+            <div><label>จีนีฝั่งผู้ผลิต</label><input type="number" step="0.0001" data-ans="pgini"><div class="fb"></div></div>
+          </div>
+          <div class="row" style="margin-top:10px"><button class="btn sand sm chk">ตรวจคำตอบ</button><button class="btn ghost sm reveal">เฉลย</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="calc-trace hid" id="beyond-trace"></div>
+  </div>
+
+  <!-- การปรับเทียบ -->
+  <div class="panel lab" id="lab-cal">
+    <div class="panelhead">
+      <div><h3 style="font-size:19px">2.5.5 การปรับเทียบ (Calibration) — ระยะทางรวมแปรผัน</h3>
+        <p class="hint" style="margin:0">CalibrationError = 0.5 · Σ |q(c) − p(c)| (2.21) · แก้ p(c) จากประวัติ และจำนวนช่องที่แนะนำของแต่ละแนว</p></div>
+      <div class="row">
+        <button class="btn ghost sm" data-preset="basic">ตัวอย่าง 2.11 ส่วนที่ 1</button>
+        <button class="btn ghost sm" data-preset="sophiaA">Sophia · Model X</button>
+        <button class="btn ghost sm" data-preset="sophiaB">Sophia · Model Y</button>
+        <button class="btn ghost sm" data-preset="ex">แบบฝึกหัดข้อ 4</button>
+        <label class="toggle"><input type="checkbox" class="prtoggle"> โหมดฝึก</label>
+      </div>
+    </div>
+    <div class="grid g23">
+      <div><div class="table-scroll"><table id="caltbl"><thead><tr><th>แนว</th><th>p(c) จากประวัติ</th><th>จำนวนช่องที่แนะนำ</th><th>q(c)</th><th>|q − p|</th></tr></thead><tbody></tbody></table></div>
+        <div class="row" style="margin-top:10px"><button class="btn ghost sm" id="caladd">+ เพิ่มแนว</button><span class="note">K = <b id="calk">10</b> ช่อง · p(c) จะถูกทำให้รวมเป็น 1 อัตโนมัติ</span></div>
+      </div>
+      <div>
+        <div class="stat st-l"><div class="v hid" id="c-err">–</div><div class="l">CalibrationError<br><span class="hid" id="c-move"></span></div></div>
+        <div class="anscheck showpr"><h4>กรอกคำตอบ</h4>
+          <div class="ansgrid"><div><label>CalibrationError</label><input type="number" step="0.0001" data-ans="err"><div class="fb"></div></div></div>
+          <div class="row" style="margin-top:10px"><button class="btn sand sm chk">ตรวจคำตอบ</button><button class="btn ghost sm reveal">เฉลย</button></div>
+        </div>
+        <div class="card sage hid" style="margin-top:12px"><h3>เหตุใดต้องคูณ 0.5</h3>เพราะการแจกแจงทั้งสองรวมเป็น 1 สิ่งที่เกินในแนวหนึ่งต้องขาดในอีกแนวหนึ่งเท่ากัน ผลรวม |q − p| จึงนับก้อนเดียวกันสองครั้ง ค่าที่ได้อ่านตรงตัวว่า “ต้องย้ายน้ำหนักกี่ส่วนของรายการจึงจะตรงกัน”</div>
+      </div>
+    </div>
+    <div class="calc-trace hid" id="cal-trace"></div>
+  </div>
+
+  <div class="grid g3">
+    <div class="card rose"><h3>ILD หลอกตาได้</h3>Model X ที่ยัดชุดเดียวกันให้ทุกคน ได้ ILD 0.9000 <b>สูงกว่า</b> Model Y (0.7250) เพราะ ILD เห็นเพียงรายการของผู้ใช้คนเดียว มิติข้ามผู้ใช้ต้องดูจาก Coverage และจีนี</div>
+    <div class="card sand"><h3>อ่านจีนีแบบเปรียบเทียบ</h3>จีนีของข้อมูลนำเข้าคือ 0.5320 Model X (0.5833) ขยายความไม่เท่าเทียมให้แย่ลง Model Y (0.1500) ลดลง — เกณฑ์กำกับควรเขียนว่า “จีนีผลลัพธ์ต้องไม่สูงกว่าจีนีข้อมูลนำเข้า”</div>
+    <div class="card lilac"><h3>ParityGap ศูนย์ ≠ เป็นธรรม</h3>Model X ได้ช่องว่าง 0.0000 เพราะทุกคนแย่เท่ากัน (Leveling Down) ส่วน Model Y ดีกว่าใน<b>ทุกกลุ่ม</b>แต่ได้ 0.2000 ต้องรายงานค่าเฉลี่ยของแต่ละกลุ่มควบคู่กับช่องว่างเสมอ</div>
+  </div>
+  <div class="warn" style="margin-top:18px"><b>กับดักการเขียนโปรแกรม · </b>เวกเตอร์ที่ป้อนเข้าสูตรจีนีต้องมีสมาชิกครบทุกหน่วยที่<b>มีสิทธิ์</b>ถูกเปิดเผย รายการหรือค่ายที่ไม่เคยถูกแนะนำต้องนับเป็นศูนย์ ไม่ใช่ตัดทิ้ง มิฉะนั้นจีนีฝั่งผู้ผลิตของ Model X จะกลายเป็น 0.1333 แทนที่จะเป็น 0.3500 — ผิดในทิศทางที่ทำให้ระบบดูเป็นธรรมกว่าจริง</div>
+</div></section>
+
+
+<section id="ex"><div class="wrap">
+  <span class="kick">แบบฝึกหัด</span>
+  <h2 class="sec">แบบฝึกหัดฝึกคำนวณ — ตรวจคำตอบอัตโนมัติ</h2>
+  <p class="lead">ส่วน ก คือแบบฝึกหัดคำนวณด้วยมือประจำหัวข้อ 2.1–2.5 ส่วน ข คือโจทย์สุ่มใหม่ได้ไม่จำกัด ส่วน ค คือคำถามเชิงแนวคิดพร้อมแนวคำตอบ เกณฑ์ตรวจ: คลาดเคลื่อนไม่เกิน ±0.001 (หรือ ±0.05 สำหรับอันดับคาดหวัง) กด “ดูเฉลย” เพื่อดูการแทนค่าทีละขั้น</p>
+  <div class="scorebar">
+    <div><div class="mini">คะแนนสะสม</div><div class="big" id="scoretxt">0 / 0</div></div>
+    <div class="bar"><i id="scorebar"></i></div>
+    <button class="btn ghost sm" id="ex-reset">ล้างคะแนน</button>
+    <button class="btn sm" id="ex-newall">สุ่มโจทย์ส่วน ข ใหม่ทั้งหมด</button>
+  </div>
+  <h3 style="margin:10px 0 12px">ส่วน ก · แบบฝึกหัดท้ายบท ระดับที่ 1</h3>
+  <div id="quizA"></div>
+  <h3 style="margin:28px 0 12px">ส่วน ข · โจทย์สุ่ม (กด “โจทย์ใหม่” ได้ไม่จำกัด)</h3>
+  <div id="quizB"></div>
+  <h3 style="margin:28px 0 12px">ส่วน ค · คำถามเชิงแนวคิด (ตรวจตัวเอง)</h3>
+  <div id="quizC"></div>
+</div></section>
+
+<footer><div class="wrap">
+  <b>ตำราระบบผู้แนะนำ · บทที่ 2 ระเบียบวิธีประเมินผลระบบผู้แนะนำ</b><br>
+  สื่อการสอนแบบโต้ตอบสำหรับฝึกคำนวณ · ทุกตัวเลขคำนวณสดในเบราว์เซอร์ ไม่มีการส่งข้อมูลออกภายนอก<br>
+  <span style="color:#7B8B99">ครอบคลุมหัวข้อ 2.1–2.5 · ใช้คู่กับเอกสารตำราฉบับเต็มและชุดสไลด์ประจำบท</span>
+</div></footer>
+
+<script>
+"use strict";
+const $ = (s,r)=> (r||document).querySelector(s);
+const $$ = (s,r)=> Array.from((r||document).querySelectorAll(s));
+const f4 = x => Number.isFinite(x) ? (Math.round(x*10000)/10000).toFixed(4) : "NaN";
+const f2 = x => Number.isFinite(x) ? (Math.round(x*100)/100).toFixed(2) : "NaN";
+const log2 = x => Math.log(x)/Math.LN2;
+const CSS = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const disc = i => 1/log2(i+1);           // i = อันดับเริ่มที่ 1
+const rint = (a,b)=> a+Math.floor(Math.random()*(b-a+1));
+const shuffle = a => { for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];} return a; };
+const randn = ()=> { let u=0,v=0; while(!u) u=Math.random(); while(!v) v=Math.random(); return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v); };
+
+/* ═══════════════════════════ ระบบโหมดฝึก / ตรวจคำตอบ ประจำแต่ละสนามทดลอง */
+const LABS = {};
+function setupLab(id, getAnswers, presetFn){
+  const lab = $("#"+id);
+  LABS[id] = {lab, getAnswers};
+  const tg = $(".prtoggle", lab);
+  if(tg) tg.onchange = ()=>{ lab.classList.toggle("practice", tg.checked); tg.parentElement.classList.toggle("on", tg.checked); };
+  $$(".chk", lab).forEach(b=> b.onclick = ()=>{
+    const ans = getAnswers();
+    $$("input[data-ans]", lab).forEach(inp=>{
+      const key=inp.dataset.ans, tol=+(inp.dataset.tol||0.001), fb=inp.nextElementSibling;
+      const truth=ans[key], v=parseFloat(inp.value);
+      inp.classList.remove("ok","bad");
+      if(inp.value===""){ fb.textContent="ยังไม่ได้กรอก"; fb.className="fb"; return; }
+      if(!Number.isFinite(truth)){ fb.textContent="ค่านี้ไม่มีนิยาม (NaN)"; fb.className="fb"; return; }
+      const ok = Math.abs(v-truth) <= tol + 1e-9;
+      inp.classList.add(ok?"ok":"bad"); fb.className="fb "+(ok?"ok":"bad");
+      fb.textContent = ok ? "✓ ถูกต้อง" : "✗ ยังไม่ถูก ลองใหม่";
+    });
+  });
+  $$(".reveal", lab).forEach(b=> b.onclick = ()=>{
+    if(tg){ tg.checked=false; tg.onchange(); }
+    const ans=getAnswers();
+    $$("input[data-ans]", lab).forEach(inp=>{ inp.value = Number.isFinite(ans[inp.dataset.ans]) ? f4(ans[inp.dataset.ans]) : ""; inp.classList.remove("ok","bad"); inp.nextElementSibling.textContent="(เฉลย)"; inp.nextElementSibling.className="fb ok"; });
+  });
+  if(presetFn) $$("[data-preset]", lab).forEach(b=> b.onclick=()=>{ presetFn(b.dataset.preset); clearAns(lab); });
+}
+function clearAns(lab){ $$("input[data-ans]", lab).forEach(inp=>{ inp.value=""; inp.classList.remove("ok","bad"); inp.nextElementSibling.textContent=""; }); }
+
+/* ═══════════════════════════ ฟังก์ชันตัวชี้วัดกลาง (ใช้ทั้งสนามทดลองและแบบฝึกหัด) */
+function ratingMetrics(rows){ // rows: [r, rhat]
+  const n=rows.length; let sa=0, ss=0; const parts=rows.map(([r,p])=>{ const e=p-r; sa+=Math.abs(e); ss+=e*e; return {e,ae:Math.abs(e),se:e*e}; });
+  const mae=sa/n, mse=ss/n; return {n, sa, ss, mae, mse, rmse:Math.sqrt(mse), parts};
+}
+function rankMetrics(rels, K, gainMode="lin", apDen="min"){ // rels: array ของ rel ตามอันดับ (ทั้งรายการ)
+  const gain = r => gainMode==="lin" ? r : Math.pow(2,r)-1;
+  const Rtot = rels.filter(r=>r>0).length;
+  let hits=0, apSum=0, rr=0, dcg=0, cum=0; const rows=[], apTerms=[];
+  for(let j=0;j<rels.length;j++){
+    const i=j+1, g=gain(rels[j]), d=disc(i), inc=g*d;
+    if(i<=K){
+      cum+=inc; dcg+=inc;
+      if(rels[j]>0){ hits++; const term=hits/i; apSum+=term; apTerms.push({rank:i,hits,term}); if(!rr) rr=1/i; }
+      rows.push({i, rel:rels[j], g, d, inc, cum, prec:hits/i, hit:rels[j]>0});
+    }
+  }
+  const ideal = rels.map(gain).sort((a,b)=>b-a).slice(0,K);
+  const idealTerms = ideal.map((g,j)=>g*disc(j+1));
+  const idcg = idealTerms.reduce((a,b)=>a+b,0);
+  const den = apDen==="min" ? Math.min(K,Rtot) : Rtot;
+  const P=hits/K, R=Rtot?hits/Rtot:NaN, F=(Rtot&&(P+R)>0)?2*P*R/(P+R):(Rtot?0:NaN);
+  // AUC ของทั้งรายการ
+  let correct=0, pos=0, neg=0; const pairRows=[];
+  rels.forEach((r,j)=>{ if(r>0){ pos++; let below=0; for(let k=j+1;k<rels.length;k++) if(rels[k]===0) below++; correct+=below; pairRows.push({rank:j+1, below}); } else neg++; });
+  const auc = pos&&neg ? correct/(pos*neg) : NaN;
+  return {K, Rtot, hits, P, R, F, hr:hits>0?1:0, mrr:rr, apSum, apTerms, den, map:den?apSum/den:NaN, dcg, idcg, ideal, idealTerms, ndcg:idcg?dcg/idcg:NaN, rows, auc, aucCorrect:correct, pos, neg, pairRows};
+}
+function aucPairs(items){ // items: [{label:1|0, score}]
+  const pos=items.filter(d=>d.label===1), neg=items.filter(d=>d.label===0);
+  let credit=0; const pairRows=pos.map(p=>{ let wins=0,ties=0; neg.forEach(n=>{ if(p.score>n.score){wins++;} else if(p.score===n.score){ties++;} }); credit+=wins+0.5*ties; return {item:p.id,score:p.score,wins,ties,credit:wins+0.5*ties}; });
+  const total=pos.length*neg.length; return {pos,neg,total,credit,auc:total?credit/total:NaN,pairRows};
+}
+function gini(xs){ // xs: จำนวนครั้ง (ไม่ต้องเรียง)
+  const s=xs.slice().sort((a,b)=>a-b), n=s.length, sum=s.reduce((a,b)=>a+b,0);
+  let num=0; const terms=s.map((x,j)=>{ const i=j+1, c=2*i-n-1; num+=c*x; return {i,x,c,prod:c*x}; });
+  return {sorted:s, n, sum, num, terms, g: sum? num/(n*sum) : NaN};
+}
+function calibErr(p,q){ let s=0; const rows=p.map((pv,i)=>{ const d=Math.abs(q[i]-pv); s+=d; return d; }); return {sum:s, rows, err:0.5*s}; }
+function expRank(rho,I,m){ return 1+(rho-1)*m/(I-1); }
+function fullNdcg(rho,K){ return rho<=K ? disc(rho) : 0; }
+function stats(xs){ const n=xs.length, mean=xs.reduce((a,b)=>a+b,0)/n; const ss=xs.reduce((a,b)=>a+(b-mean)**2,0); const sd=n>1?Math.sqrt(ss/(n-1)):0; return {n,mean,sd,ss,min:Math.min(...xs),max:Math.max(...xs),ci:1.96*sd/Math.sqrt(n)}; }
+function hyperDraw(A,N,m){ // จำนวนรายการ "เหนือกว่า" ที่ติดมาเมื่อสุ่ม m จาก N โดยมี A ตัวเหนือกว่า
+  let k=0, a=A, n=N; for(let j=0;j<m;j++){ if(Math.random()*n < a){ k++; a--; } n--; } return k;
+}
+
+/* ═══════════════════════════ 2.1 MAE / RMSE */
+const RM_PRESETS = {
+  emma:[["The Matrix",5,4.2],["Inception",5,4.6],["Interstellar",4,4.3],["Titanic",1,2.4],["The Notebook",1,1.5]],
+  even:[["รายการ 1",4,3],["รายการ 2",4,3],["รายการ 3",4,3],["รายการ 4",4,3]],
+  spike:[["รายการ 1",4,4],["รายการ 2",4,4],["รายการ 3",4,4],["รายการ 4",4,0]],
+};
+let rmseData = RM_PRESETS.emma.map(r=>r.slice());
+function rmseAnswers(){ const m=ratingMetrics(rmseData.map(r=>[r[1],r[2]])); return {mae:m.mae, rmse:m.rmse}; }
+function drawRmse(){
+  const tb=$("#rmsetbl tbody"), m=ratingMetrics(rmseData.map(r=>[r[1],r[2]]));
+  tb.innerHTML = rmseData.map((r,i)=>{ const p=m.parts[i]; return `<tr><td class="l"><input type="text" value="${r[0]}" data-i="${i}" data-f="0" style="width:120px"></td>
+    <td><input type="number" step="0.1" min="0" max="5" value="${r[1]}" data-i="${i}" data-f="1" style="width:72px"></td>
+    <td><input type="number" step="0.1" min="0" max="5" value="${r[2]}" data-i="${i}" data-f="2" style="width:72px"></td>
+    <td class="num hid">${p.e>=0?"+":""}${f2(p.e)}</td><td class="num hid">${f2(p.ae)}</td><td class="num hid">${f4(p.se)}</td>
+    <td><button class="btn ghost sm" data-del="${i}" title="ลบแถว">✕</button></td></tr>`; }).join("")
+    + `<tr><td class="l"><b>ผลรวม</b></td><td></td><td></td><td></td><td class="num hid"><b>${f4(m.sa)}</b></td><td class="num hid"><b>${f4(m.ss)}</b></td><td></td></tr>`;
+  $("#rmsen").textContent=m.n;
+  $("#v-mae").textContent=f4(m.mae); $("#v-rmse").textContent=f4(m.rmse);
+  const gap=m.rmse-m.mae; $("#v-gap").textContent=f4(gap);
+  $("#gaptext").textContent = gap<0.02 ? "ความผิดพลาดเกือบเท่ากันทุกจุด (RMSE ≈ MAE ตามเงื่อนไขเท่ากับของเยนเซน)"
+    : (gap<0.15 ? "มีความไม่สม่ำเสมอของความผิดพลาดอยู่บ้าง" : "มีความผิดพลาดก้อนใหญ่อย่างน้อยหนึ่งจุดกำลังลาก RMSE ขึ้น — ควรไล่ดูรายช่อง");
+  $("#rmse-trace").innerHTML = `<span class="source-label">ข้อมูลต้นทางอยู่ในตารางด้านบน</span>
+    <h3>ร่องรอยการคำนวณ MAE และ RMSE</h3>
+    <div class="trace-grid">
+      <div class="trace-line"><div class="step">1. |e| ทีละแถว</div><div class="expr">Σ|e| = ${m.parts.map(p=>f2(p.ae)).join(" + ")} = <b>${f4(m.sa)}</b></div></div>
+      <div class="trace-line"><div class="step">2. MAE (2.1)</div><div class="expr">MAE = ${f4(m.sa)} / ${m.n} = <b>${f4(m.mae)}</b></div></div>
+      <div class="trace-line"><div class="step">3. e² ทีละแถว</div><div class="expr">Σe² = ${m.parts.map(p=>f4(p.se)).join(" + ")} = <b>${f4(m.ss)}</b></div></div>
+      <div class="trace-line"><div class="step">4. MSE</div><div class="expr">MSE = ${f4(m.ss)} / ${m.n} = <b>${f4(m.mse)}</b></div></div>
+      <div class="trace-line"><div class="step">5. RMSE (2.2)</div><div class="expr">RMSE = √${f4(m.mse)} = <b>${f4(m.rmse)}</b></div></div>
+      <div class="trace-line"><div class="step">6. ตีความ</div><div class="expr">RMSE − MAE = ${f4(m.rmse)} − ${f4(m.mae)} = <b>${f4(gap)}</b> (≥ 0 เสมอ ตาม 2.3)</div></div>
+    </div><div class="trace-result">MAE = ${f4(m.mae)} · RMSE = ${f4(m.rmse)}</div>`;
+  $$("#rmsetbl input").forEach(inp=> inp.oninput=()=>{ const i=+inp.dataset.i, f=+inp.dataset.f;
+    if(f===0) rmseData[i][0]=inp.value; else { const v=parseFloat(inp.value); if(!isNaN(v)){ rmseData[i][f]=v; drawRmse(); inp.focus(); } } });
+  $$("#rmsetbl [data-del]").forEach(b=> b.onclick=()=>{ if(rmseData.length>2){ rmseData.splice(+b.dataset.del,1); drawRmse(); } });
+}
+$("#rmseadd").onclick=()=>{ rmseData.push([`รายการ ${rmseData.length+1}`, rint(1,5), rint(10,50)/10]); drawRmse(); };
+setupLab("lab-rmse", rmseAnswers, p=>{
+  if(p==="rand") rmseData=Array.from({length:5},(_,i)=>[`รายการ ${i+1}`, rint(1,5), rint(10,50)/10]);
+  else rmseData=RM_PRESETS[p].map(r=>r.slice());
+  drawRmse();
+});
+drawRmse();
+
+/* ═══════════════════════════ 2.2–2.3 ตัวชี้วัดเชิงอันดับ */
+const LIKED = new Set(["i2","i5","i9"]);
+const RK_PRESETS = {
+  A:["i2","i7","i5","i3","i9","i1","i4","i6","i8","i10"],
+  B:["i7","i3","i1","i2","i4","i5","i6","i8","i9","i10"],
+  C:["i5","i2","i1","i9","i3","i7","i4","i6","i8","i10"],
+};
+let rk = RK_PRESETS.A.map(id=>({id, rel:LIKED.has(id)?1:0}));
+let rkK=10, rkGain="lin", rkAp="min";
+function rkRender(){
+  $("#ranklist").innerHTML = rk.map((it,i)=>`
+    <div class="rankrow ${it.rel>0?"hit":""}" draggable="true" data-i="${i}">
+      <div class="pos">${i+1}</div>
+      <div class="nm">${it.id}<small>${it.rel>0?"ชอบจริง ✓":"ไม่เกี่ยวข้อง"}</small></div>
+      <div class="grade">${[0,1,2,3].map(g=>`<button data-i="${i}" data-g="${g}" class="${it.rel===g?(g===0?"on0":"on"):""}">${g}</button>`).join("")}</div>
+      <div class="mv"><button data-mv="up" data-i="${i}">▲</button><button data-mv="dn" data-i="${i}">▼</button></div>
+    </div>`).join("");
+  $$("#ranklist .grade button").forEach(b=> b.onclick=e=>{ e.stopPropagation(); rk[+b.dataset.i].rel=+b.dataset.g; rkAll(); });
+  $$("#ranklist .mv button").forEach(b=> b.onclick=e=>{ e.stopPropagation(); const i=+b.dataset.i, j=b.dataset.mv==="up"?i-1:i+1; if(j<0||j>=rk.length) return; [rk[i],rk[j]]=[rk[j],rk[i]]; rkAll(); });
+  let dragI=null;
+  $$("#ranklist .rankrow").forEach(row=>{
+    row.ondragstart=e=>{ dragI=+row.dataset.i; row.classList.add("drag"); e.dataTransfer.effectAllowed="move"; };
+    row.ondragend=()=>{ row.classList.remove("drag"); $$("#ranklist .rankrow").forEach(r=>r.classList.remove("over")); };
+    row.ondragover=e=>{ e.preventDefault(); row.classList.add("over"); };
+    row.ondragleave=()=> row.classList.remove("over");
+    row.ondrop=e=>{ e.preventDefault(); const to=+row.dataset.i; if(dragI===null||dragI===to) return; const [m]=rk.splice(dragI,1); rk.splice(to,0,m); rkAll(); };
+  });
+}
+function rkAnswers(){ const m=rankMetrics(rk.map(x=>x.rel), rkK, rkGain, rkAp); return {P:m.P,R:m.R,F:m.F,mrr:m.mrr,map:m.map,ndcg:m.ndcg,auc:m.auc}; }
+function rkAll(){
+  rkRender();
+  const m=rankMetrics(rk.map(x=>x.rel), rkK, rkGain, rkAp);
+  $("#m-p").textContent=f4(m.P); $("#m-r").textContent=f4(m.R); $("#m-f").textContent=f4(m.F); $("#m-hr").textContent=m.hr;
+  $("#m-mrr").textContent=f4(m.mrr); $("#m-map").textContent=f4(m.map);
+  $("#m-ndcg").textContent=f4(m.ndcg); $("#m-dcg").textContent=f4(m.dcg); $("#m-idcg").textContent=f4(m.idcg); $("#m-auc").textContent=f4(m.auc);
+  $$(".kk").forEach(e=>e.textContent=rkK);
+  $("#ndcgtbl tbody").innerHTML = m.rows.map(r=>`<tr style="${r.hit?`background:${CSS('--sage-l')}`:""}"><td class="num">${r.i}</td><td>${rk[r.i-1].id}</td><td class="num">${r.rel}</td><td class="num">${f4(r.g)}</td><td class="num">${f4(r.d)}</td><td class="num">${f4(r.inc)}</td><td class="num"><b>${f4(r.cum)}</b></td><td class="num">${r.hit?`<b>${m.hits>=0?r.prec.toFixed(4):""}</b>`:`<span class="mini">${r.prec.toFixed(4)}</span>`}</td></tr>`).join("");
+  const topk=rk.slice(0,rkK), binary=topk.map(x=>x.rel>0?1:0);
+  const first=m.apTerms.length?m.apTerms[0].rank:null;
+  const apExpr=m.apTerms.length?m.apTerms.map(t=>`${t.hits}/${t.rank}`).join(" + "):"0";
+  const dcgExpr=m.rows.filter(r=>r.inc!==0).map(r=>`${f4(r.g)}×${f4(r.d)}`).join(" + ")||"0";
+  $("#rank-trace").innerHTML = `<span class="source-label">SOURCE DATA: Top-${rkK} · gain = ${rkGain==="lin"?"rel":"2^rel − 1"} · |R| = ${m.Rtot}</span>
+    <h3>การแทนสูตรของตัวชี้วัดเชิงอันดับทั้งแปด</h3>
+    <div class="table-scroll"><table><thead><tr><th>อันดับ</th>${topk.map((_,i)=>`<th>${i+1}</th>`).join("")}</tr></thead>
+      <tbody><tr><td class="l"><b>รายการ</b></td>${topk.map(x=>`<td>${x.id}</td>`).join("")}</tr>
+      <tr><td class="l"><b>rel</b></td>${topk.map(x=>`<td>${x.rel}</td>`).join("")}</tr>
+      <tr><td class="l"><b>ทวิภาค</b></td>${binary.map(x=>`<td>${x}</td>`).join("")}</tr></tbody></table></div>
+    <div class="trace-grid" style="margin-top:14px">
+      <div class="trace-line"><div class="step">1. ของถูกใน Top-K</div><div class="expr">${binary.join(" + ")} = <b>${m.hits}</b> · ของที่ชอบทั้งหมด |R| = ${m.Rtot}</div></div>
+      <div class="trace-line"><div class="step">2. Precision@${rkK} (2.4)</div><div class="expr">${m.hits} / ${rkK} = <b>${f4(m.P)}</b></div></div>
+      <div class="trace-line"><div class="step">3. Recall@${rkK} (2.5)</div><div class="expr">${m.Rtot?`${m.hits} / ${m.Rtot} = <b>${f4(m.R)}</b>`:"|R| = 0 → ไม่มีนิยาม"}</div></div>
+      <div class="trace-line"><div class="step">4. F1@${rkK} (2.6)</div><div class="expr">${m.Rtot?`2 × ${f4(m.P)} × ${f4(m.R)} / (${f4(m.P)} + ${f4(m.R)}) = <b>${f4(m.F)}</b>`:"ไม่มีนิยาม"}</div></div>
+      <div class="trace-line"><div class="step">5. HR@${rkK} (2.7)</div><div class="expr">มีของถูกอย่างน้อยหนึ่งชิ้นหรือไม่ → <b>${m.hr}</b></div></div>
+      <div class="trace-line"><div class="step">6. RR (2.8)</div><div class="expr">${first?`1 / ${first} = <b>${f4(m.mrr)}</b>`:"ไม่พบของถูกใน Top-K → RR = <b>0</b>"}</div></div>
+      <div class="trace-line"><div class="step">7. AP@${rkK} (2.9)</div><div class="expr">${m.den?`(${apExpr}) / ${rkAp==="min"?`min(${rkK}, ${m.Rtot})`:`|R|`} = ${f4(m.apSum)} / ${m.den} = <b>${f4(m.map)}</b>`:"ไม่มีนิยาม"}</div></div>
+      <div class="trace-line"><div class="step">8. DCG@${rkK} (2.11)</div><div class="expr">${dcgExpr} = <b>${f4(m.dcg)}</b></div></div>
+      <div class="trace-line"><div class="step">9. IDCG@${rkK} (2.12)</div><div class="expr">เรียงอุดมคติ gain = [${m.ideal.join(", ")}] → ${m.idealTerms.filter(t=>t>0).map(f4).join(" + ")||"0"} = <b>${f4(m.idcg)}</b></div></div>
+      <div class="trace-line"><div class="step">10. nDCG@${rkK} (2.13)</div><div class="expr">${m.idcg?`${f4(m.dcg)} / ${f4(m.idcg)} = <b>${f4(m.ndcg)}</b>`:"IDCG = 0 → ไม่มีนิยาม (ตำราเลือกคัดผู้ใช้ออก)"}</div></div>
+      <div class="trace-line"><div class="step">11. AUC (2.15)</div><div class="expr">${m.pos&&m.neg?`นับรายการไม่เกี่ยวข้องที่อยู่ใต้ของถูกแต่ละชิ้น: ${m.pairRows.map(p=>`อันดับ ${p.rank} → ${p.below}`).join(" · ")} → ${m.aucCorrect} / (${m.pos} × ${m.neg}) = <b>${f4(m.auc)}</b>`:"ไม่มีนิยาม"}</div></div>
+    </div>
+    <div class="trace-result">P ${f4(m.P)} · R ${f4(m.R)} · F1 ${f4(m.F)} · HR ${m.hr} · RR ${f4(m.mrr)} · AP ${f4(m.map)} · nDCG ${f4(m.ndcg)} · AUC ${f4(m.auc)}</div>`;
+  drawKsweep();
+}
+function drawKsweep(){
+  const rels=rk.map(x=>x.rel), N=rels.length, W=900,H=260,pad=50, xs=k=>pad+(k-1)*(W-pad-20)/(N-1), ys=v=>H-36-v*(H-36-24);
+  let g="";
+  for(let t=0;t<=1.001;t+=0.25){ g+=`<line x1="${pad}" y1="${ys(t)}" x2="${W-20}" y2="${ys(t)}" stroke="${CSS('--line')}"/><text x="${pad-8}" y="${ys(t)+4}" font-size="11" text-anchor="end" fill="${CSS('--faint')}">${t.toFixed(2)}</text>`; }
+  for(let k=1;k<=N;k++) g+=`<text x="${xs(k)}" y="${H-14}" font-size="12" text-anchor="middle" fill="${k===rkK?CSS('--ink'):CSS('--faint')}" font-weight="${k===rkK?700:400}">K=${k}</text>`;
+  g+=`<line x1="${xs(rkK)}" y1="${ys(0)}" x2="${xs(rkK)}" y2="${ys(1)}" stroke="${CSS('--sand')}" stroke-width="2"/>`;
+  const series=[["P","--blue-d"],["R","--sage-d"],["ndcg","--sand-d"],["map","--lilac-d"]];
+  series.forEach(([key,col])=>{
+    const pts=[]; for(let k=1;k<=N;k++){ const v=rankMetrics(rels,k,rkGain,rkAp)[key]; pts.push([xs(k), ys(Number.isFinite(v)?v:0)]); }
+    g+=`<path d="${pts.map((p,i)=>`${i?"L":"M"}${p[0].toFixed(1)},${p[1].toFixed(1)}`).join(" ")}" fill="none" stroke="${CSS(col)}" stroke-width="2.4"/>`;
+    g+=pts.map(p=>`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="3.4" fill="#fff" stroke="${CSS(col)}" stroke-width="2"/>`).join("");
+  });
+  $("#ksweep").innerHTML=g;
+}
+$("#rk-k").onchange=e=>{ rkK=+e.target.value; rkAll(); };
+$("#rk-gain").onchange=e=>{ rkGain=e.target.value; rkAll(); };
+$("#rk-apden").onchange=e=>{ rkAp=e.target.value; rkAll(); };
+setupLab("lab-rank", rkAnswers, p=>{
+  if(RK_PRESETS[p]) rk=RK_PRESETS[p].map(id=>({id, rel:LIKED.has(id)?1:0}));
+  else if(p==="graded"){ rk=RK_PRESETS.A.map(id=>({id, rel:0})); rk[0].rel=3; rk[2].rel=2; rk[4].rel=1; rk[8].rel=2; }
+  else if(p==="perfect") rk.sort((a,b)=>b.rel-a.rel);
+  else if(p==="shuffle") shuffle(rk);
+  rkAll();
+});
+rkAll();
+
+/* ═══════════════════════════ 2.4 AUC */
+const AUC_ORDER=["i2","i5","i3","i4","i7","i10","i9","i6","i12","i8","i1","i11"], AUC_POS=new Set(["i2","i3","i7","i9","i12"]);
+let aucData=[];
+function aucPreset(p){
+  if(p==="book") aucData=AUC_ORDER.map((id,i)=>({id,label:AUC_POS.has(id)?1:0,score:+(0.96-0.07*i).toFixed(2)}));
+  else if(p==="perfect") aucData.forEach(d=> d.score=+(d.label? 0.6+Math.random()*0.4 : Math.random()*0.4).toFixed(2));
+  else if(p==="random") aucData.forEach(d=> d.score=+Math.random().toFixed(2));
+  else if(p==="ties"){ aucPreset("book"); aucData[1].score=aucData[0].score; aucData[3].score=aucData[2].score; aucData[5].score=aucData[4].score; }
+  aucRender(); aucCalc();
+}
+function aucRender(){
+  $("#aucitems").innerHTML = aucData.map((d,i)=>`
+    <div style="display:grid;grid-template-columns:44px 84px 1fr 52px;gap:10px;align-items:center;margin-bottom:6px">
+      <span style="font-weight:700;font-size:14.5px">${d.id}</span>
+      <button data-lb="${i}" class="btn sm" style="padding:2px 8px;font-size:12.5px;background:${d.label?CSS('--sage-l'):CSS('--surf')};color:${d.label?CSS('--sage-d'):CSS('--muted')};border-color:${d.label?CSS('--sage'):CSS('--line')}">${d.label?"ชอบ ✓":"ไม่ชอบ"}</button>
+      <input type="range" min="0" max="100" value="${Math.round(d.score*100)}" data-i="${i}">
+      <span class="num" style="font-size:13.5px;color:${CSS('--muted')}">${d.score.toFixed(2)}</span></div>`).join("");
+  $$("#aucitems input").forEach(inp=> inp.oninput=()=>{ aucData[+inp.dataset.i].score=+inp.value/100; inp.nextElementSibling.textContent=(+inp.value/100).toFixed(2); aucCalc(); });
+  $$("#aucitems [data-lb]").forEach(b=> b.onclick=()=>{ const d=aucData[+b.dataset.lb]; d.label=d.label?0:1; aucRender(); aucCalc(); });
+}
+function aucAnswers(){ const a=aucPairs(aucData); return {total:a.total, correct:a.credit, auc:a.auc}; }
+function aucCalc(){
+  const a=aucPairs(aucData);
+  $("#v-auc").textContent=f4(a.auc); $("#v-pairs").textContent=`${a.credit%1?a.credit.toFixed(1):a.credit} / ${a.total}`;
+  const sorted=aucData.slice().sort((x,y)=>y.score-x.score);
+  $("#auc-trace").innerHTML = `<span class="source-label">SOURCE DATA: |R⁺| = ${a.pos.length} · |R⁻| = ${a.neg.length}</span>
+    <h3>นับคู่บวก–ลบ ตามตัวอย่างการคำนวณ 2.5</h3>
+    <div class="table-scroll"><table><thead><tr><th>อันดับตามคะแนน</th><th>รายการ</th><th>ป้าย</th><th>คะแนน</th></tr></thead>
+      <tbody>${sorted.map((d,i)=>`<tr style="${d.label?`background:${CSS('--sage-l')}`:""}"><td>${i+1}</td><td>${d.id}</td><td>${d.label?"ชอบ":"ไม่ชอบ"}</td><td class="num">${d.score.toFixed(2)}</td></tr>`).join("")}</tbody></table></div>
+    <div class="table-scroll"><table style="margin-top:12px"><thead><tr><th>รายการที่ชอบ</th><th>คะแนน</th><th>ไม่ชอบที่คะแนนต่ำกว่า</th><th>คะแนนเท่ากัน</th><th>เครดิต</th></tr></thead>
+      <tbody>${a.pairRows.map(r=>`<tr><td>${r.item}</td><td class="num">${r.score.toFixed(2)}</td><td>${r.wins}</td><td>${r.ties}</td><td>${r.wins} + 0.5×${r.ties} = <b>${f2(r.credit)}</b></td></tr>`).join("")}</tbody></table></div>
+    <div class="trace-grid" style="margin-top:14px">
+      <div class="trace-line"><div class="step">1. คู่ทั้งหมด</div><div class="expr">|R⁺| × |R⁻| = ${a.pos.length} × ${a.neg.length} = <b>${a.total}</b></div></div>
+      <div class="trace-line"><div class="step">2. คู่ที่เรียงถูก</div><div class="expr">${a.pairRows.map(r=>f2(r.credit)).join(" + ")||"0"} = <b>${f2(a.credit)}</b></div></div>
+      <div class="trace-line"><div class="step">3. AUC (2.15)</div><div class="expr">${f2(a.credit)} / ${a.total} = <b>${f4(a.auc)}</b></div></div>
+    </div><div class="trace-result">AUC = ${f4(a.auc)} · ตีความ: โอกาส ${(a.auc*100).toFixed(2)}% ที่รายการที่ชอบจะถูกจัดไว้เหนือรายการที่ไม่ชอบ</div>`;
+  // ROC
+  const pts=[[0,0]]; let tp=0,fp=0; sorted.forEach(d=>{ d.label?tp++:fp++; pts.push([a.neg.length?fp/a.neg.length:0, a.pos.length?tp/a.pos.length:0]); });
+  const S=320,pad=56, sx=v=>pad+v*(S-pad-18), sy=v=>S-pad-v*(S-pad-22);
+  let g=""; for(let t=0;t<=1.0001;t+=0.25){ g+=`<line x1="${sx(t)}" y1="${sy(0)}" x2="${sx(t)}" y2="${sy(1)}" stroke="${CSS('--line')}"/><line x1="${sx(0)}" y1="${sy(t)}" x2="${sx(1)}" y2="${sy(t)}" stroke="${CSS('--line')}"/><text x="${sx(t)}" y="${sy(0)+18}" font-size="10.5" text-anchor="middle" fill="${CSS('--faint')}">${t.toFixed(2)}</text><text x="${sx(0)-8}" y="${sy(t)+4}" font-size="10.5" text-anchor="end" fill="${CSS('--faint')}">${t.toFixed(2)}</text>`; }
+  const path=pts.map((p,i)=>`${i?"L":"M"}${sx(p[0]).toFixed(1)},${sy(p[1]).toFixed(1)}`).join(" ");
+  $("#rocsvg").innerHTML = g+`<path d="M${sx(0)},${sy(0)} ${pts.map(p=>`L${sx(p[0]).toFixed(1)},${sy(p[1]).toFixed(1)}`).join(" ")} L${sx(1)},${sy(0)} Z" fill="${CSS('--sand-l')}" opacity=".75"/>
+    <line x1="${sx(0)}" y1="${sy(0)}" x2="${sx(1)}" y2="${sy(1)}" stroke="${CSS('--faint')}" stroke-dasharray="5 4"/>
+    <path d="${path}" fill="none" stroke="${CSS('--sand-d')}" stroke-width="2.6"/>
+    ${pts.map(p=>`<circle cx="${sx(p[0]).toFixed(1)}" cy="${sy(p[1]).toFixed(1)}" r="3.2" fill="#fff" stroke="${CSS('--sand-d')}" stroke-width="1.6"/>`).join("")}
+    <text x="${(sx(0)+sx(1))/2}" y="${S-4}" font-size="11.5" text-anchor="middle" fill="${CSS('--muted')}">อัตราผลบวกลวง (FPR)</text>
+    <text x="14" y="${(sy(0)+sy(1))/2}" font-size="11.5" text-anchor="middle" fill="${CSS('--muted')}" transform="rotate(-90 14 ${(sy(0)+sy(1))/2})">อัตราผลบวกจริง (TPR)</text>`;
+}
+setupLab("lab-auc", aucAnswers, aucPreset);
+aucPreset("book");
+</script>
+
+<script>
+/* ═══════════════════════════ 2.5 MovieMini-12 */
+const GENRES={sci:"ไซไฟ",rom:"โรแมนติก",act:"แอ็กชัน",thr:"ระทึกขวัญ",ani:"แอนิเมชัน"};
+const GCLS={sci:"g1",rom:"g2",act:"g3",thr:"g4",ani:"g5"};
+const MOVIES=[
+  ["i1","The Matrix","sci","ก",400],["i2","Inception","sci","ก",150],["i3","Interstellar","sci","ก",25],
+  ["i4","Titanic","rom","ข",300],["i5","La La Land","rom","ข",100],["i6","The Notebook","rom","ง",8],
+  ["i7","John Wick","act","ค",250],["i8","Mad Max","act","ง",15],["i9","Parasite","thr","ข",60],
+  ["i10","Toy Story","ani","ข",200],["i11","Coco","ani","ค",40],["i12","Spirited Away","ani","ง",2],
+].map(m=>({id:m[0],name:m[1],genre:m[2],studio:m[3],views:m[4]}));
+const MV = Object.fromEntries(MOVIES.map(m=>[m.id,m]));
+const NPLAT=500, HEAD=new Set(["i1","i4"]), STUDIOS=["ก","ข","ค","ง"];
+const USERS=[
+  {name:"Emma",group:"ยาว",liked:["i1","i2","i3","i7","i9"],A:["i1","i4","i7","i10","i2"],B:["i1","i2","i3","i9","i12"]},
+  {name:"Olivia",group:"ยาว",liked:["i4","i5","i6","i9"],A:["i1","i4","i7","i10","i2"],B:["i4","i5","i6","i11","i9"]},
+  {name:"Sophia",group:"ยาว",liked:["i4","i5","i6","i10","i11"],A:["i1","i4","i7","i10","i2"],B:["i4","i5","i6","i10","i12"]},
+  {name:"Daniel",group:"ยาว",liked:["i2","i7","i9","i12"],A:["i1","i4","i7","i10","i2"],B:["i2","i3","i9","i7","i8"]},
+  {name:"James",group:"สั้น",liked:["i1","i3","i10"],A:["i1","i4","i7","i10","i2"],B:["i1","i2","i3","i10","i5"]},
+  {name:"Michael",group:"สั้น",liked:["i3","i7","i8"],A:["i1","i4","i7","i10","i2"],B:["i3","i7","i8","i2","i1"]},
+  {name:"Ava",group:"สั้น",liked:["i4","i10"],A:["i1","i4","i7","i10","i2"],B:["i2","i4","i6","i11","i10"]},
+  {name:"Ethan",group:"สั้น",liked:["i1","i2","i5","i7"],A:["i1","i4","i7","i10","i2"],B:["i1","i5","i7","i3","i11"]},
+];
+let lists = USERS.map(u=>u.A.slice());
+$("#cattbl tbody").innerHTML = MOVIES.map(m=>`<tr><td>${m.id}</td><td class="l">${m.name}</td><td><span class="chip ${GCLS[m.genre]}">${GENRES[m.genre]}</span></td><td>${m.studio}</td><td class="num">${m.views}</td><td class="num">${(m.views/NPLAT).toFixed(3)}</td><td class="num">${f4(-log2(m.views/NPLAT))}</td><td>${HEAD.has(m.id)?"หัว":"หาง"}</td></tr>`).join("");
+$("#likedlist").innerHTML = `<b>รายการที่ชอบจริง (≥ 4 ดาว):</b> ` + USERS.map(u=>`<span class="chip">${u.name}: ${u.liked.join(" ")}</span>`).join(" ");
+function beyondRender(){
+  $("#userlist").innerHTML = USERS.map((u,ui)=>`<div class="urow"><div class="un">${u.name}<small>ประวัติ${u.group}</small></div><div class="slots">${lists[ui].map((id,si)=>`<select data-u="${ui}" data-s="${si}" class="${u.liked.includes(id)?"hit":""}">${MOVIES.map(m=>`<option value="${m.id}" ${m.id===id?"selected":""}>${m.id} ${m.name}</option>`).join("")}</select>`).join("")}</div></div>`).join("");
+  $$("#userlist select").forEach(s=> s.onchange=()=>{ lists[+s.dataset.u][+s.dataset.s]=s.value; beyondRender(); beyondCalc(); });
+}
+function beyondCompute(L){
+  const K=5, cnt=Object.fromEntries(MOVIES.map(m=>[m.id,0]));
+  L.forEach(l=> l.forEach(id=> cnt[id]++));
+  const counts=MOVIES.map(m=>cnt[m.id]);
+  const union=new Set(L.flat());
+  const cov=union.size/MOVIES.length;
+  const g=gini(counts);
+  const perUser=L.map((l,ui)=>{
+    const u=USERS[ui];
+    const lt=l.filter(id=>!HEAD.has(id)).length/K;
+    let diff=0, pairs=0; for(let a=0;a<K;a++) for(let b=a+1;b<K;b++){ pairs++; if(MV[l[a]].genre!==MV[l[b]].genre) diff++; }
+    const ild=diff/pairs;
+    const novTerms=l.map(id=>-log2(MV[id].views/NPLAT)); const nov=novTerms.reduce((a,b)=>a+b,0)/K;
+    const hits=l.filter(id=>u.liked.includes(id)).length; const p5=hits/K;
+    const dup=new Set(l).size<l.length;
+    return {lt,ild,diff,nov,novTerms,p5,hits,dup};
+  });
+  const avg=k=> perUser.reduce((a,x)=>a+x[k],0)/perUser.length;
+  const long=USERS.map((u,i)=>u.group==="ยาว"?perUser[i].p5:null).filter(x=>x!==null), short=USERS.map((u,i)=>u.group==="สั้น"?perUser[i].p5:null).filter(x=>x!==null);
+  const mL=long.reduce((a,b)=>a+b,0)/long.length, mS=short.reduce((a,b)=>a+b,0)/short.length;
+  const sc=STUDIOS.map(s=> MOVIES.filter(m=>m.studio===s).reduce((a,m)=>a+cnt[m.id],0));
+  const pg=gini(sc);
+  return {K,cnt,counts,union,cov,g,perUser,lt:avg("lt"),ild:avg("ild"),nov:avg("nov"),p5:avg("p5"),mL,mS,gap:Math.abs(mL-mS),sc,pg,total:L.length*K,dup:perUser.some(x=>x.dup)};
+}
+function beyondAnswers(){ const b=beyondCompute(lists); return {cov:b.cov,gini:b.g.g,lt:b.lt,ild:b.ild,nov:b.nov,gap:b.gap,pgini:b.pg.g}; }
+function beyondCalc(){
+  const b=beyondCompute(lists);
+  $("#b-cov").textContent=f4(b.cov); $("#b-gini").textContent=f4(b.g.g); $("#b-lt").textContent=f4(b.lt); $("#b-ild").textContent=f4(b.ild);
+  $("#b-nov").textContent=f4(b.nov); $("#b-p5").textContent=f4(b.p5); $("#b-gap").textContent=f4(b.gap); $("#b-pgini").textContent=f4(b.pg.g);
+  const inGini=gini(MOVIES.map(m=>m.views)).g;
+  $("#beyond-trace").innerHTML = `<span class="source-label">SOURCE DATA: ${USERS.length} ผู้ใช้ × Top-5 = ${b.total} ช่อง${b.dup?" · <span style='color:#F7C9C4'>มีรายการซ้ำในรายการของผู้ใช้บางคน</span>":""}</span>
+    <h3>ร่องรอยการคำนวณตัวชี้วัดนอกเหนือความถูกต้อง</h3>
+    <p class="intro">ขั้นที่ 1 นับจำนวนครั้งที่แต่ละเรื่องถูกแนะนำ (การเปิดเผย) แล้วเรียงจากน้อยไปมากเพื่อคูณสัมประสิทธิ์ (2i − n − 1)</p>
+    <div class="table-scroll"><table><thead><tr><th>เรื่อง</th>${MOVIES.map(m=>`<th>${m.id}</th>`).join("")}<th>รวม</th></tr></thead>
+      <tbody><tr><td class="l"><b>ครั้งที่ถูกแนะนำ</b></td>${b.counts.map(c=>`<td class="num" style="${c===0?`color:${CSS('--rose-d')};font-weight:700`:""}">${c}</td>`).join("")}<td class="num"><b>${b.total}</b></td></tr></tbody></table></div>
+    <div class="table-scroll"><table style="margin-top:10px"><thead><tr><th>อันดับ i</th><th>xᵢ (เรียงแล้ว)</th><th>2i − ${b.g.n} − 1</th><th>ผลคูณ</th></tr></thead>
+      <tbody>${b.g.terms.map(t=>`<tr><td>${t.i}</td><td class="num">${t.x}</td><td class="num">${t.c}</td><td class="num">${t.prod}</td></tr>`).join("")}<tr><td><b>รวม</b></td><td class="num"><b>${b.g.sum}</b></td><td class="num"><b>0</b></td><td class="num"><b>${b.g.num}</b></td></tr></tbody></table></div>
+    <div class="trace-grid" style="margin-top:14px">
+      <div class="trace-line"><div class="step">1. Coverage@5 (2.16)</div><div class="expr">|∪ L₅(u)| / |I| = ${b.union.size} / ${MOVIES.length} = <b>${f4(b.cov)}</b></div></div>
+      <div class="trace-line"><div class="step">2. จีนีของการเปิดเผย (2.17)</div><div class="expr">${b.g.num} / (${b.g.n} × ${b.g.sum}) = <b>${f4(b.g.g)}</b> เทียบข้อมูลนำเข้า ${f4(inGini)} → ${b.g.g>inGini?"<b style='color:"+CSS('--rose-d')+"'>ขยายความไม่เท่าเทียม</b>":"ลดความกระจุกตัว"}</div></div>
+      <div class="trace-line"><div class="step">3. LongTail@5 (2.18)</div><div class="expr">รายผู้ใช้: ${b.perUser.map(x=>f2(x.lt)).join(", ")} → เฉลี่ย <b>${f4(b.lt)}</b> (หัว = {i1, i4})</div></div>
+      <div class="trace-line"><div class="step">4. ILD@5 (2.19)</div><div class="expr">คู่ต่างแนวจาก 10 คู่ รายผู้ใช้: ${b.perUser.map(x=>x.diff).join(", ")} → ${b.perUser.map(x=>f2(x.ild)).join(", ")} → เฉลี่ย <b>${f4(b.ild)}</b></div></div>
+      <div class="trace-line"><div class="step">5. Novelty@5 (2.20)</div><div class="expr">${USERS[0].name}: (${b.perUser[0].novTerms.map(f4).join(" + ")}) / 5 = ${f4(b.perUser[0].nov)} · รายผู้ใช้: ${b.perUser.map(x=>f4(x.nov)).join(", ")} → เฉลี่ย <b>${f4(b.nov)} บิต</b></div></div>
+      <div class="trace-line"><div class="step">6. Precision@5 รายผู้ใช้</div><div class="expr">${USERS.map((u,i)=>`${u.name} ${b.perUser[i].hits}/5`).join(" · ")} → เฉลี่ย <b>${f4(b.p5)}</b></div></div>
+      <div class="trace-line"><div class="step">7. ParityGap (2.22)</div><div class="expr">|ยาว − สั้น| = |${f4(b.mL)} − ${f4(b.mS)}| = <b>${f4(b.gap)}</b></div></div>
+      <div class="trace-line"><div class="step">8. จีนีฝั่งผู้ผลิต</div><div class="expr">ค่าย ก–ง = [${b.sc.join(", ")}] → เรียง [${b.pg.sorted.join(", ")}] → Σ(2i−5)xᵢ = ${b.pg.num} → ${b.pg.num} / (4 × ${b.pg.sum}) = <b>${f4(b.pg.g)}</b></div></div>
+    </div>
+    <div class="trace-result">Coverage ${f4(b.cov)} · Gini ${f4(b.g.g)} · LongTail ${f4(b.lt)} · ILD ${f4(b.ild)} · Novelty ${f4(b.nov)} · P@5 ${f4(b.p5)} · Gap ${f4(b.gap)} · Provider Gini ${f4(b.pg.g)}</div>`;
+  // ลอเรนซ์
+  const s=b.g.sorted, n=s.length, tot=b.g.sum||1; let cum=0; const lor=[0]; s.forEach(x=>{cum+=x; lor.push(cum/tot);});
+  const S=300,pad=52,W=340, sx=v=>pad+v*(W-pad-16), sy=v=>S-pad-v*(S-pad-20);
+  let g=""; for(let t=0;t<=1.0001;t+=0.25){ g+=`<line x1="${sx(t)}" y1="${sy(0)}" x2="${sx(t)}" y2="${sy(1)}" stroke="${CSS('--line')}"/><line x1="${sx(0)}" y1="${sy(t)}" x2="${sx(1)}" y2="${sy(t)}" stroke="${CSS('--line')}"/><text x="${sx(t)}" y="${sy(0)+16}" font-size="10.5" text-anchor="middle" fill="${CSS('--faint')}">${t.toFixed(2)}</text><text x="${sx(0)-7}" y="${sy(t)+4}" font-size="10.5" text-anchor="end" fill="${CSS('--faint')}">${t.toFixed(2)}</text>`; }
+  const path=lor.map((v,i)=>`${i?"L":"M"}${sx(i/n).toFixed(1)},${sy(v).toFixed(1)}`).join(" ");
+  $("#lorenz").innerHTML = g+`<path d="M${sx(0)},${sy(0)} ${lor.map((v,i)=>`L${sx(i/n).toFixed(1)},${sy(v).toFixed(1)}`).join(" ")} L${sx(1)},${sy(0)} Z" fill="${CSS('--rose-l')}" opacity=".8"/>
+    <line x1="${sx(0)}" y1="${sy(0)}" x2="${sx(1)}" y2="${sy(1)}" stroke="${CSS('--sage-d')}" stroke-dasharray="5 4" stroke-width="1.6"/>
+    <path d="${path}" fill="none" stroke="${CSS('--rose-d')}" stroke-width="2.6"/>
+    ${lor.map((v,i)=>`<circle cx="${sx(i/n).toFixed(1)}" cy="${sy(v).toFixed(1)}" r="3" fill="#fff" stroke="${CSS('--rose-d')}" stroke-width="1.6"/>`).join("")}
+    <text x="${(sx(0)+sx(1))/2}" y="${S-6}" font-size="11.5" text-anchor="middle" fill="${CSS('--muted')}">สัดส่วนภาพยนตร์สะสม (เรียงจากถูกแนะนำน้อยสุด)</text>
+    <text x="13" y="${(sy(0)+sy(1))/2}" font-size="11.5" text-anchor="middle" fill="${CSS('--muted')}" transform="rotate(-90 13 ${(sy(0)+sy(1))/2})">สัดส่วนการเปิดเผยสะสม</text>
+    <text x="${sx(0.05)}" y="${sy(0.92)}" font-size="12" fill="${CSS('--sage-d')}">เส้นเท่าเทียมสมบูรณ์</text>
+    <text x="${sx(0.5)}" y="${sy(0.1)}" font-size="12" fill="${CSS('--rose-d')}">เส้นลอเรนซ์ · จีนี ${f4(b.g.g)}</text>`;
+}
+setupLab("lab-beyond", beyondAnswers, p=>{
+  if(p==="A") lists=USERS.map(u=>u.A.slice());
+  else if(p==="B") lists=USERS.map(u=>u.B.slice());
+  else if(p==="rand") lists=USERS.map(()=> shuffle(MOVIES.map(m=>m.id)).slice(0,5));
+  else if(p==="tail") lists=USERS.map(u=>{ const l=u.A.slice(); l[4]="i12"; return l; });
+  beyondRender(); beyondCalc();
+});
+beyondRender(); beyondCalc();
+
+/* ═══════════════════════════ 2.5.5 การปรับเทียบ */
+const CAL_PRESETS={
+  basic:[["แอ็กชัน",0.7,9],["สารคดี",0.2,0],["ตลก",0.1,1]],
+  sophiaA:[["ไซไฟ",0,2],["โรแมนติก",0.6,1],["แอ็กชัน",0,1],["แอนิเมชัน",0.4,1]],
+  sophiaB:[["ไซไฟ",0,0],["โรแมนติก",0.6,3],["แอ็กชัน",0,0],["แอนิเมชัน",0.4,2]],
+  ex:[["กีฬา",0.5,8],["ข่าว",0.3,0],["บันเทิง",0.2,2]],
+};
+let calData=CAL_PRESETS.basic.map(r=>r.slice());
+function calCompute(){
+  const ps=calData.reduce((a,r)=>a+r[1],0)||1, K=calData.reduce((a,r)=>a+r[2],0)||1;
+  const p=calData.map(r=>r[1]/ps), q=calData.map(r=>r[2]/K); const c=calibErr(p,q); return {p,q,K,c};
+}
+function calDraw(){
+  const {p,q,K,c}=calCompute();
+  $("#caltbl tbody").innerHTML = calData.map((r,i)=>`<tr><td><input type="text" value="${r[0]}" data-i="${i}" data-f="0" style="width:100px"></td>
+    <td><input type="number" step="0.05" min="0" max="1" value="${r[1]}" data-i="${i}" data-f="1"> <span class="mini">→ ${f2(p[i])}</span></td>
+    <td><input type="number" step="1" min="0" value="${r[2]}" data-i="${i}" data-f="2"></td>
+    <td class="num hid">${f2(q[i])}</td><td class="num hid">${f2(c.rows[i])}</td></tr>`).join("")
+    + `<tr><td><b>รวม</b></td><td class="num">1.00</td><td class="num">${K}</td><td class="num hid">1.00</td><td class="num hid"><b>${f2(c.sum)}</b></td></tr>`;
+  $("#calk").textContent=K;
+  $("#c-err").textContent=f4(c.err); $("#c-move").textContent=`= ต้องย้ายน้ำหนัก ${(c.err*100).toFixed(1)}% ของรายการ ≈ ${(c.err*K).toFixed(1)} ช่องจาก ${K} ช่อง`;
+  $("#cal-trace").innerHTML=`<span class="source-label">SOURCE DATA: ${calData.length} แนว · K = ${K}</span><h3>การแทนสูตร 2.21</h3>
+    <div class="trace-grid"><div class="trace-line"><div class="step">1. q(c) = ช่อง / K</div><div class="expr">${calData.map((r,i)=>`${r[0]}: ${r[2]}/${K} = ${f2(q[i])}`).join(" · ")}</div></div>
+    <div class="trace-line"><div class="step">2. Σ|q − p|</div><div class="expr">${c.rows.map(f2).join(" + ")} = <b>${f2(c.sum)}</b></div></div>
+    <div class="trace-line"><div class="step">3. × 0.5</div><div class="expr">0.5 × ${f2(c.sum)} = <b>${f4(c.err)}</b></div></div></div>
+    <div class="trace-result">CalibrationError = ${f4(c.err)}</div>`;
+  $$("#caltbl input").forEach(inp=> inp.oninput=()=>{ const i=+inp.dataset.i,f=+inp.dataset.f; if(f===0) calData[i][0]=inp.value; else { const v=parseFloat(inp.value); if(!isNaN(v)){ calData[i][f]=v; calDraw(); inp.focus(); } } });
+}
+$("#caladd").onclick=()=>{ calData.push([`แนว ${calData.length+1}`,0.1,1]); calDraw(); };
+setupLab("lab-cal", ()=>({err:calCompute().c.err}), p=>{ calData=CAL_PRESETS[p].map(r=>r.slice()); calDraw(); });
+calDraw();
+
+/* ═══════════════════════════ ระบบแบบฝึกหัด */
+const QSTATE={}; // id -> {attempted, correct}
+function updateScore(){ const ids=Object.keys(QSTATE); const att=ids.filter(i=>QSTATE[i].attempted).length, ok=ids.filter(i=>QSTATE[i].correct).length; $("#scoretxt").textContent=`${ok} / ${att}`; $("#navscore").textContent=`แบบฝึกหัด ${ok} / ${att}`; $("#scorebar").style.width=(att?ok/att*100:0)+"%"; }
+function renderQuiz(container, q, regen){
+  const el=document.createElement("div"); el.className="quiz"; el.id="q-"+q.id;
+  el.innerHTML=`<div class="qh"><h3>${q.title}</h3><span class="tag">${q.tag}</span></div><div class="q">${q.html}</div>
+    <div class="ansgrid">${q.fields.map(f=>`<div><label>${f.label}</label><input type="number" step="any" data-key="${f.key}"><div class="fb"></div></div>`).join("")}</div>
+    <div class="row" style="margin-top:10px"><button class="btn sand sm qchk">ตรวจคำตอบ</button><button class="btn ghost sm qsol">ดูเฉลย</button>${regen?`<button class="btn ghost sm qnew">โจทย์ใหม่</button>`:""}</div>
+    <div class="verdict"></div><div class="sol">${q.solution}</div>`;
+  const old=$("#q-"+q.id); if(old) old.replaceWith(el); else container.appendChild(el);
+  QSTATE[q.id]=QSTATE[q.id]||{attempted:false,correct:false};
+  if(regen){ QSTATE[q.id]={attempted:false,correct:false}; updateScore(); }
+  $(".qchk",el).onclick=()=>{
+    let all=true, any=false;
+    q.fields.forEach(f=>{ const inp=$(`input[data-key="${f.key}"]`,el), fb=inp.nextElementSibling, v=parseFloat(inp.value), tol=f.tol||0.001; inp.classList.remove("ok","bad");
+      if(inp.value===""){ all=false; fb.textContent="ยังไม่ได้กรอก"; fb.className="fb"; return; } any=true;
+      const ok=Math.abs(v-q.answers[f.key])<=tol+1e-9; if(!ok) all=false; inp.classList.add(ok?"ok":"bad"); fb.className="fb "+(ok?"ok":"bad"); fb.textContent=ok?"✓ ถูกต้อง":"✗ ยังไม่ถูก"; });
+    if(any){ QSTATE[q.id].attempted=true; QSTATE[q.id].correct=all; el.classList.toggle("done-ok",all); el.classList.toggle("done-bad",!all); }
+    $(".verdict",el).innerHTML = all ? `<span class="ok">ถูกต้องครบทุกช่อง</span>` : `<span class="bad">ยังไม่ครบ — ลองทบทวนสูตรแล้วตรวจอีกครั้ง หรือกด “ดูเฉลย”</span>`;
+    updateScore();
+  };
+  $(".qsol",el).onclick=()=>{ el.classList.toggle("show"); if(!QSTATE[q.id].attempted){ QSTATE[q.id].attempted=true; updateScore(); } };
+  if(regen) $(".qnew",el).onclick=()=>{ renderQuiz(container, regen(), regen); };
+}
+const tbl=(head,rows)=>`<div class="table-scroll"><table><thead><tr>${head.map(h=>`<th>${h}</th>`).join("")}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+
+/* ---------- ตัวสร้างโจทย์ ---------- */
+function qRating(id, fixed){
+  const truth = fixed ? fixed.r : Array.from({length:5},()=>rint(1,5));
+  const pred = fixed ? fixed.p : truth.map(r=>Math.max(1,Math.min(5,+(r+randn()*0.9).toFixed(1))));
+  const m=ratingMetrics(truth.map((r,i)=>[r,pred[i]]));
+  return {id, tag:"2.1 MAE / RMSE", title: fixed?fixed.title:"คำนวณ MAE และ RMSE",
+    html:`${fixed?fixed.intro:"คะแนนจริงและคะแนนที่แบบจำลองทำนายของห้ารายการ"}${tbl(["รายการ",...truth.map((_,i)=>"#"+(i+1))],[["คะแนนจริง r",...truth],["คะแนนที่ทาย r̂",...pred.map(p=>p.toFixed(1))]])}`,
+    fields:[{key:"mae",label:"MAE"},{key:"rmse",label:"RMSE"}], answers:{mae:m.mae,rmse:m.rmse},
+    solution:`<b>e = r̂ − r:</b> ${m.parts.map(p=>(p.e>=0?"+":"")+f2(p.e)).join(", ")}<br><b>MAE</b> = (${m.parts.map(p=>f2(p.ae)).join(" + ")}) / ${m.n} = ${f4(m.sa)} / ${m.n} = <b>${f4(m.mae)}</b><br><b>RMSE</b> = √((${m.parts.map(p=>f4(p.se)).join(" + ")}) / ${m.n}) = √${f4(m.mse)} = <b>${f4(m.rmse)}</b><br>${fixed?fixed.note||"":`RMSE − MAE = ${f4(m.rmse-m.mae)} — ${m.rmse-m.mae>0.15?"มีความผิดพลาดก้อนใหญ่อยู่":"ความผิดพลาดกระจายค่อนข้างสม่ำเสมอ"}`}`};
+}
+function qRank(id, fixed){
+  const ids=["i1","i2","i3","i4","i5","i6","i7","i8","i9","i10"];
+  const order = fixed ? fixed.order : shuffle(ids.slice());
+  const liked = fixed ? fixed.liked : new Set(shuffle(ids.slice()).slice(0,3));
+  const K = fixed ? 10 : [5,10][rint(0,1)];
+  const rels=order.map(x=>liked.has(x)?1:0), m=rankMetrics(rels,K,"lin","min");
+  const apExpr=m.apTerms.map(t=>`${t.hits}/${t.rank}`).join(" + ")||"0";
+  return {id, tag:"2.2–2.3 ตัวชี้วัดเชิงอันดับ", title: fixed?fixed.title:`คำนวณตัวชี้วัดเชิงอันดับที่ K = ${K}`,
+    html:`ระบบจัดอันดับสิบรายการได้เป็น <b>${order.join(", ")}</b> โดยรายการที่ผู้ใช้ชอบจริงคือ <b>{${[...liked].join(", ")}}</b> ใช้ gain เชิงเส้นและตัวหาร AP = min(K, |R|)`,
+    fields:[{key:"P",label:`Precision@${K}`},{key:"R",label:`Recall@${K}`},{key:"F",label:`F1@${K}`},{key:"mrr",label:"RR"},{key:"map",label:`AP@${K}`},{key:"ndcg",label:`nDCG@${K}`}],
+    answers:{P:m.P,R:m.R,F:m.F,mrr:m.mrr,map:m.map,ndcg:m.ndcg},
+    solution:`ของถูกใน Top-${K} อยู่ที่อันดับ <b>${m.apTerms.map(t=>t.rank).join(", ")||"ไม่มี"}</b> (hits = ${m.hits}, |R| = ${m.Rtot})<br>
+      <b>P</b> = ${m.hits}/${K} = ${f4(m.P)} · <b>R</b> = ${m.hits}/${m.Rtot} = ${f4(m.R)} · <b>F1</b> = 2PR/(P+R) = ${f4(m.F)}<br>
+      <b>RR</b> = ${m.apTerms.length?`1/${m.apTerms[0].rank}`:"0"} = ${f4(m.mrr)}<br>
+      <b>AP</b> = (${apExpr}) / min(${K}, ${m.Rtot}) = ${f4(m.apSum)} / ${m.den} = ${f4(m.map)}<br>
+      <b>DCG</b> = ${m.rows.filter(r=>r.hit).map(r=>`1/log₂(${r.i}+1)`).join(" + ")||"0"} = ${m.rows.filter(r=>r.hit).map(r=>f4(r.d)).join(" + ")||"0"} = ${f4(m.dcg)}<br>
+      <b>IDCG</b> = ${m.idealTerms.filter(t=>t>0).map(f4).join(" + ")} = ${f4(m.idcg)} → <b>nDCG</b> = ${f4(m.dcg)} / ${f4(m.idcg)} = <b>${f4(m.ndcg)}</b>${fixed?"<br>"+fixed.note:""}`};
+}
+function qAuc(id){
+  const n=8, order=shuffle(Array.from({length:n},(_,i)=>"i"+(i+1))), pos=new Set(shuffle(order.slice()).slice(0,3));
+  const rels=order.map(x=>pos.has(x)?1:0), m=rankMetrics(rels,n);
+  return {id, tag:"2.4 AUC", title:"คำนวณ AUC ด้วยการนับคู่",
+    html:`แบบจำลองจัดอันดับ ${n} รายการได้เป็น <b>${order.join(" · ")}</b> รายการที่ผู้ใช้ชอบจริงคือ <b>{${[...pos].join(", ")}}</b> ไม่มีคะแนนเท่ากัน`,
+    fields:[{key:"total",label:"จำนวนคู่ทั้งหมด",tol:0},{key:"correct",label:"คู่ที่เรียงถูก",tol:0},{key:"auc",label:"AUC"}],
+    answers:{total:m.pos*m.neg,correct:m.aucCorrect,auc:m.auc},
+    solution:`|R⁺| = ${m.pos}, |R⁻| = ${m.neg} → คู่ทั้งหมด = ${m.pos} × ${m.neg} = <b>${m.pos*m.neg}</b><br>รายการไม่เกี่ยวข้องที่อยู่ใต้ของถูกแต่ละชิ้น: ${m.pairRows.map(p=>`อันดับ ${p.rank} → ${p.below}`).join(" · ")} รวม <b>${m.aucCorrect}</b><br><b>AUC</b> = ${m.aucCorrect} / ${m.pos*m.neg} = <b>${f4(m.auc)}</b>`};
+}
+function qCalib(id, fixed){
+  const names=fixed?fixed.names:["แอ็กชัน","สารคดี","ตลก"];
+  let p; if(fixed) p=fixed.p; else { const a=rint(4,7), b=rint(1,9-a); p=[a/10,b/10,(10-a-b)/10]; }
+  const K=10; let cnt; if(fixed) cnt=fixed.cnt; else { const a=rint(4,10), b=rint(0,10-a); cnt=[a,b,10-a-b]; }
+  const q=cnt.map(c=>c/K), c=calibErr(p,q);
+  return {id, tag:"2.5.5 การปรับเทียบ", title: fixed?fixed.title:"ค่าคลาดเคลื่อนของการปรับเทียบ",
+    html:`ประวัติของผู้ใช้แบ่งตามแนวเป็น ${names.map((n,i)=>`${n} ${p[i].toFixed(2)}`).join(" · ")} ระบบแนะนำ ${K} รายการเป็น ${names.map((n,i)=>`${n} ${cnt[i]}`).join(", ")} จงคำนวณ CalibrationError (2.21)${fixed?" และต้องย้ายอย่างน้อยกี่ช่องจึงจะให้ค่าลดลงเหลือไม่เกิน 0.10":""}`,
+    fields:[{key:"err",label:"CalibrationError"},...(fixed?[{key:"move",label:"จำนวนช่องที่ต้องย้าย",tol:0}]:[])],
+    answers:{err:c.err, move:Math.ceil((c.err-0.10)*K-1e-9)},
+    solution:`q(c) = ${names.map((n,i)=>`${n} ${q[i].toFixed(2)}`).join(" · ")}<br>Σ|q − p| = ${c.rows.map(f2).join(" + ")} = ${f2(c.sum)} → CalibrationError = 0.5 × ${f2(c.sum)} = <b>${f4(c.err)}</b><br>ตีความ: ต้องย้ายน้ำหนัก ${(c.err*100).toFixed(0)}% ของรายการ = ${(c.err*K).toFixed(1)} ช่อง${fixed?`<br>เพื่อให้เหลือ ≤ 0.10 ต้องย้ายอย่างน้อย ${Math.ceil((c.err-0.10)*K-1e-9)} ช่องจากแนวที่เกินไปยังแนวที่ขาด (เช่น ย้ายจาก ${names[0]} ไป ${names[1]})`:""}`};
+}
+function qGini(id){
+  const n=6, xs=Array.from({length:n},()=>rint(0,12)); if(xs.every(x=>x===0)) xs[0]=5;
+  const g=gini(xs);
+  return {id, tag:"2.5.2 จีนี", title:"สัมประสิทธิ์จีนีของการเปิดเผย",
+    html:`คลังมี ${n} รายการ จำนวนครั้งที่แต่ละรายการถูกแนะนำคือ ${tbl(["รายการ",...xs.map((_,i)=>"i"+(i+1))],[["ครั้ง",...xs]])}จงคำนวณจีนีตามสูตร 2.17 (อย่าลืมเรียงจากน้อยไปมาก และรายการที่ได้ศูนย์ต้องนับด้วย)`,
+    fields:[{key:"num",label:"Σ(2i − n − 1)·xᵢ",tol:0},{key:"g",label:"Gini"}], answers:{num:g.num,g:g.g},
+    solution:`เรียงแล้ว: [${g.sorted.join(", ")}] · สัมประสิทธิ์ 2i − ${n} − 1: [${g.terms.map(t=>t.c).join(", ")}] (ผลรวมเป็นศูนย์)<br>ผลคูณ: ${g.terms.map(t=>`${t.c}×${t.x}`).join(" + ")} = <b>${g.num}</b><br>Gini = ${g.num} / (${n} × ${g.sum}) = <b>${f4(g.g)}</b>`};
+}
+function qNovelty(id){
+  const K=5, pick=shuffle(MOVIES.slice()).slice(0,K), terms=pick.map(m=>-log2(m.views/NPLAT)), nov=terms.reduce((a,b)=>a+b,0)/K;
+  return {id, tag:"2.5.4 ความแปลกใหม่", title:"Novelty@5 ของรายการหนึ่งชุด",
+    html:`ฐานผู้ใช้ทั้งแพลตฟอร์ม 500 คน ระบบแนะนำ ${tbl(["เรื่อง",...pick.map(m=>m.name)],[["ผู้เคยชม",...pick.map(m=>m.views)]])}จงคำนวณ Novelty@5 = (1/K) Σ −log₂ p(i) หน่วยเป็นบิต`,
+    fields:[{key:"nov",label:"Novelty@5 (บิต)"}], answers:{nov},
+    solution:`p(i) = ผู้เคยชม / 500 → −log₂ p: ${pick.map((m,i)=>`${m.name} ${f4(terms[i])}`).join(" · ")}<br>เฉลี่ย = (${terms.map(f4).join(" + ")}) / 5 = <b>${f4(nov)} บิต</b>`};
+}
+function qCoverage(id){
+  const cat=10, users=4, K=3, L=Array.from({length:users},()=>shuffle(Array.from({length:cat},(_,i)=>"i"+(i+1))).slice(0,K));
+  const uni=new Set(L.flat()); const cnt=Array.from({length:cat},(_,i)=>L.flat().filter(x=>x==="i"+(i+1)).length); const g=gini(cnt);
+  return {id, tag:"2.5.1 ความครอบคลุม", title:"Coverage@K และจีนี จากรายการของผู้ใช้หลายคน",
+    html:`คลังมี ${cat} รายการ (i1–i10) ระบบแนะนำผู้ใช้ ${users} คน คนละ ${K} รายการ${tbl(["ผู้ใช้","Top-3"],L.map((l,i)=>[`u${i+1}`,l.join(" ")]))}จงคำนวณ Coverage@3 (2.16) และจีนีของการเปิดเผย (รายการที่ไม่เคยถูกแนะนำนับเป็นศูนย์)`,
+    fields:[{key:"cov",label:"Coverage@3"},{key:"g",label:"Gini"}], answers:{cov:uni.size/cat, g:g.g},
+    solution:`ยูเนียน = {${[...uni].sort((a,b)=>+a.slice(1)-+b.slice(1)).join(", ")}} ขนาด ${uni.size} → Coverage = ${uni.size}/${cat} = <b>${f4(uni.size/cat)}</b><br>จำนวนครั้ง i1–i10: [${cnt.join(", ")}] → เรียง [${g.sorted.join(", ")}] → Σ(2i−11)xᵢ = ${g.num} → Gini = ${g.num}/(10 × ${g.sum}) = <b>${f4(g.g)}</b>`};
+}
+
+
+/* ---------- ข้อ 5–8 ระดับที่ 1 (เพิ่มตามตำราฉบับปรับปรุง) ---------- */
+function qGiniFixed(id){
+  const xs=[0,0,2,3,5,10], g=gini(xs), g2=gini([2,3,5,10]);
+  return {id, tag:"2.5.2 จีนี", title:"ข้อ 4 · จีนีของการเปิดเผย (0, 0, 2, 3, 5, 10) และกับดักการตัดศูนย์",
+    html:`คลัง 6 รายการ ผู้ใช้ 4 คน คนละ 5 รายการ นับการเปิดเผยได้ ${tbl(["รายการ","i1","i2","i3","i4","i5","i6"],[["ครั้ง",...xs]])}จงคำนวณจีนีตามสูตร 2.17 แล้วคำนวณซ้ำเมื่อ “เผลอ” ตัดรายการที่ได้ศูนย์ทิ้ง`,
+    fields:[{key:"num",label:"Σ(2i − n − 1)·xᵢ",tol:0},{key:"g",label:"Gini (นับศูนย์)"},{key:"g2",label:"Gini (ตัดศูนย์ทิ้ง)"}], answers:{num:g.num,g:g.g,g2:g2.g},
+    solution:`เรียงแล้ว [0, 0, 2, 3, 5, 10] · สัมประสิทธิ์ (−5, −3, −1, +1, +3, +5) · ผลคูณ 0, 0, −2, 3, 15, 50 → Σ = <b>66</b><br>G = 66 / (6 × 20) = <b>0.5500</b><br>ตัดศูนย์: [2, 3, 5, 10] × (−3, −1, +1, +3) = −6 − 3 + 5 + 30 = 26 → 26 / (4 × 20) = <b>0.3250</b> ต่ำกว่าจริง 41% และซ่อนข้อเท็จจริงว่าหนึ่งในสามของคลังไม่ถูกแนะนำเลย`};
+}
+function qCovNovFixed(id){
+  const p={a:.5,b:.25,c:.125,d:1/16,e:1/32}, L=[["a","b","c"],["a","b","d"],["a","c","e"],["a","b","c"]];
+  const nov=L.map(l=>l.reduce((s,x)=>s-log2(p[x]),0)/3), mean=nov.reduce((a,b)=>a+b,0)/4;
+  return {id, tag:"2.5.1/2.5.4 Coverage · Novelty", title:"ข้อ 5 · Coverage@3 และ Novelty@3 ของระบบ",
+    html:`คลัง 10 รายการ ผู้ใช้ 4 คนได้ Top-3: u1 = (a, b, c) · u2 = (a, b, d) · u3 = (a, c, e) · u4 = (a, b, c) โดย p(a) = 1/2, p(b) = 1/4, p(c) = 1/8, p(d) = 1/16, p(e) = 1/32`,
+    fields:[{key:"cov",label:"Coverage@3"},{key:"u2",label:"Novelty ของ u2"},{key:"nov",label:"Novelty@3 เฉลี่ย"}], answers:{cov:0.5,u2:nov[1],nov:mean},
+    solution:`ปรากฏ {a, b, c, d, e} → Coverage@3 = 5/10 = <b>0.5000</b><br>−log₂ p: a = 1, b = 2, c = 3, d = 4, e = 5 บิต<br>u1 = (1+2+3)/3 = 2.0000 · u2 = (1+2+4)/3 = <b>2.3333</b> · u3 = (1+3+5)/3 = 3.0000 · u4 = 2.0000<br>เฉลี่ย = (2 + 2.3333 + 3 + 2)/4 = <b>2.3333 บิต</b> — Novelty ถูกดึงขึ้นด้วยรายการหายากไม่กี่ชิ้น`};
+}
+
+/* ---------- ส่วน ก: แบบฝึกหัดท้ายบท ระดับ 1 ---------- */
+const QA=[
+  qRank("A1",{title:"ข้อ 1 · Model C", order:["i5","i2","i1","i9","i3","i7","i4","i6","i8","i10"], liked:new Set(["i2","i5","i9"]),
+    note:"เทียบตารางที่ 2.3 (ตัวชี้วัดแปดตัวบนข้อมูลชุดเดียวกัน): A ได้ nDCG 0.8855 (ของถูกที่อันดับ 1, 3, 5) ส่วน C มีของถูกที่อันดับ 1, 2, 4 ซึ่งอยู่ต้นกว่า nDCG ของ C จึงสูงกว่า A แม้ Precision Recall F1 และ HR จะเท่ากันทุกตัว"}),
+  (()=>{ const q1=qRating("A2a",{title:"ข้อ 2 · ชุดที่ 1 (3, 5, 3, 5, 4)", r:[4,4,4,4,4], p:[3,5,3,5,4], intro:"คะแนนจริง 4 ทุกรายการ กับคำทำนายชุดที่ 1", note:"ความผิดพลาดกระจายเท่ากันทุกจุดที่พลาด (|e| = 1) RMSE จึงใกล้ MAE"}); return q1; })(),
+  qRating("A2b",{title:"ข้อ 2 · ชุดที่ 2 (4, 4, 4, 4, 0)", r:[4,4,4,4,4], p:[4,4,4,4,0], intro:"คะแนนจริง 4 ทุกรายการ กับคำทำนายชุดที่ 2", note:"MAE เท่ากับชุดที่ 1 พอดี (0.8000) แต่ RMSE สูงกว่าสองเท่า — RMSE สะท้อนความเสี่ยงของการพลาดหนักจุดเดียวที่ทำลายความไว้วางใจของผู้ใช้คนหนึ่งได้ดีกว่า"}),
+  qCalib("A4",{title:"ข้อ 3 · กีฬา / ข่าว / บันเทิง", names:["กีฬา","ข่าว","บันเทิง"], p:[0.5,0.3,0.2], cnt:[8,0,2]}),
+  qGiniFixed("A5"), qCovNovFixed("A6"),
+];
+QA.forEach(q=> renderQuiz($("#quizA"), q, null));
+
+/* ---------- ส่วน ข: โจทย์สุ่ม ---------- */
+const GENS=[["B1",qRating],["B2",qRank],["B3",qAuc],["B4",qCalib],["B5",qGini],["B6",qNovelty],["B7",qCoverage]];
+function renderAllB(){ GENS.forEach(([id,gen])=> renderQuiz($("#quizB"), gen(id), ()=>gen(id))); }
+renderAllB();
+$("#ex-newall").onclick=renderAllB;
+$("#ex-reset").onclick=()=>{ Object.keys(QSTATE).forEach(k=> QSTATE[k]={attempted:false,correct:false}); $$(".quiz").forEach(el=>{ el.classList.remove("done-ok","done-bad","show"); $$("input",el).forEach(i=>{ i.value=""; i.classList.remove("ok","bad"); i.nextElementSibling.textContent=""; }); $(".verdict",el).textContent=""; }); updateScore(); };
+
+/* ---------- ส่วน ค: เชิงแนวคิด ---------- */
+const QC=[
+  ["เหตุใด RMSE ที่ต่ำกว่าจึงไม่รับประกันว่าจัดอันดับได้ดีกว่า","การทำนายแม่นในช่วงกลางของสเกล (ที่มีข้อมูลมากที่สุด) ลด RMSE ได้มาก แต่ไม่ช่วยให้สิบอันดับแรกดีขึ้น RMSE ให้น้ำหนักทุกช่องเท่ากันรวมทั้งช่องที่ไม่มีวันถูกแสดง ส่วนคุณภาพอันดับขึ้นกับตำแหน่งของของถูกเพียงไม่กี่ชิ้น"],
+  ["ยกตัวอย่างสถานการณ์ที่ควรใช้ MRR แทน MAP","งานที่ผู้ใช้ต้องการคำตอบเดียวแล้วหยุดค้นทันที เช่น ระบบค้นหาภายในองค์กร หรือการแนะนำคำตอบที่ถูกต้องหนึ่งข้อ MRR สนใจเฉพาะของถูกชิ้นแรก ส่วน MAP เหมาะเมื่อผู้ใช้ต้องการหลายรายการ"],
+  ["เหตุใดจึงต้องประกาศตัวชี้วัดหลักก่อนเห็นผล","เพราะการเลือกตัวชี้วัดคือการเลือกข้อสรุป บนข้อมูลชุดเดียวกัน (ตารางที่ 2.3) Precision@10 บอกว่า A = B ส่วน MRR บอกว่า A ดีกว่า 4 เท่า ถ้าเลือกหลังเห็นผลจะเกิดการเลือกตัวชี้วัดที่เข้าข้างตนเอง ตัวชี้วัดที่เหลือควรเป็นตัวชี้วัดกำกับที่มีเกณฑ์เพดานชัดเจน"],
+  ["ILD ของ Model X (ยัดชุดเดียวให้ทุกคน) สูงกว่า Model Y ที่เป็นเฉพาะบุคคล — สรุปได้หรือไม่ว่า Model X หลากหลายกว่า","ไม่ได้ ILD วัดเฉพาะความแตกต่างภายในรายการของผู้ใช้คนเดียว มองไม่เห็นความซ้ำซากข้ามผู้ใช้ ต้องดู Coverage (0.4167 เทียบ 1.0000) และจีนี (0.5833 เทียบ 0.1500) ควบคู่เสมอ"],
+  ["ParityGap ของ Model X เท่ากับ 0.0000 แปลว่าเป็นธรรมที่สุดหรือไม่","ไม่ใช่ นี่คือ Leveling Down ทุกกลุ่มได้ 0.4000 เพราะทุกคนได้ชุดเดียวกันจึงแย่พอ ๆ กัน Model Y ดีกว่าในทุกกลุ่ม (0.75 และ 0.55) แต่ได้ช่องว่าง 0.20 ต้องรายงานค่าเฉลี่ยรายกลุ่มควบคู่กับช่องว่างเสมอ"],
+  ["ตัวชี้วัดทั้งแปดตัวบนข้อมูลชุดเดียวกันให้ข้อสรุปต่างกันได้อย่างไร","ทีมที่รายงาน Precision@10 จะสรุปว่า Model A และ B ดีเท่ากัน (0.3000 ทั้งคู่) ทีมที่รายงาน MRR จะสรุปว่า A ดีกว่า 4.00 เท่า ทีมที่รายงาน nDCG จะสรุปว่าดีกว่า 1.73 เท่า ข้อมูลชุดเดียวกันแท้ ๆ แต่ข้อสรุปต่างกันสิ้นเชิง จึงต้องประกาศตัวชี้วัดหลักตั้งแต่ก่อนเห็นผล และรายงานตัวชี้วัดกำกับควบคู่เสมอ"],
+  ["Model ที่ชนะเจ็ดจากเก้าคอลัมน์ ถือว่าดีกว่าโดยสมบูรณ์หรือไม่","ไม่ใช่ การนับจำนวนคอลัมน์ที่ชนะไม่ใช่เกณฑ์ตัดสิน เพราะแต่ละคอลัมน์มีน้ำหนักเชิงนโยบายต่างกัน และสองคอลัมน์ที่แพ้ (ILD กับ ParityGap) เป็นผลจากนิยามของตัวชี้วัดเอง ไม่ใช่ข้อด้อยของ Model วิธีที่ถูกต้องคือประกาศตัวชี้วัดหลักหนึ่งตัวพร้อมเกณฑ์ของตัวชี้วัดกำกับไว้ล่วงหน้า แล้วตัดสินตามเกณฑ์นั้น"],
+];
+$("#quizC").innerHTML = QC.map((q,i)=>`<details class="acc"><summary>${i+1}. ${q[0]}</summary><div class="body"><b style="color:var(--sage-d)">แนวคำตอบ · </b>${q[1]}</div></details>`).join("");
+
+updateScore();
+
+/* ═══════════════════════════ ไฮไลต์เมนู */
+const secs=$$("section[id]"), navs=$$("nav a");
+window.addEventListener("scroll",()=>{ let cur=null; secs.forEach(s=>{ if(window.scrollY+120>=s.offsetTop) cur=s.id; }); navs.forEach(a=> a.classList.toggle("on", a.getAttribute("href")==="#"+cur)); },{passive:true});
+window.dispatchEvent(new Event("scroll"));
+
+/* ═══════════════════════════ MRR / MAP ข้ามผู้ใช้สามคน (2.3.1–2.3.2) */
+(()=>{
+  const BASE=[["Emma",[1,3,5],[4,6,9]],["James",[2,4,8],[1,5,7]],["Daniel",[2,3,5],[4,6,10]]];
+  let U3=BASE.map(r=>[r[0],r[1].slice(),r[2].slice()]);
+  const tb=$("#u3tbl tbody"); if(!tb) return;
+  const parse=v=>v.split(/[,\s]+/).map(x=>parseInt(x,10)).filter(x=>Number.isFinite(x)&&x>=1&&x<=10).sort((a,b)=>a-b).slice(0,3);
+  const rr=r=>r.length?1/r[0]:0;
+  const ap=r=>r.length?r.reduce((s,rank,i)=>s+(i+1)/rank,0)/3:0;
+  function draw(){
+    tb.innerHTML=U3.map(([n,a,b],i)=>`<tr><td class="l"><b>${n}</b></td>
+      <td><input class="cell" data-u3i="${i}" data-m="a" value="${a.join(', ')}" style="width:92px"></td>
+      <td class="u3hid">${f4(rr(a))}</td><td class="u3hid">${f4(ap(a))}</td>
+      <td><input class="cell" data-u3i="${i}" data-m="b" value="${b.join(', ')}" style="width:92px"></td>
+      <td class="u3hid">${f4(rr(b))}</td><td class="u3hid">${f4(ap(b))}</td></tr>`).join("");
+    $$("#u3tbl input").forEach(inp=> inp.onchange=()=>{ const i=+inp.dataset.u3i, m=inp.dataset.m;
+      const v=parse(inp.value); if(v.length) U3[i][m==="a"?1:2]=v; draw(); });
+    const mrrA=U3.reduce((s,r)=>s+rr(r[1]),0)/3, mrrB=U3.reduce((s,r)=>s+rr(r[2]),0)/3;
+    const mapA=U3.reduce((s,r)=>s+ap(r[1]),0)/3, mapB=U3.reduce((s,r)=>s+ap(r[2]),0)/3;
+    $("#u3-mrra").textContent=f4(mrrA); $("#u3-mrrb").textContent=f4(mrrB);
+    $("#u3-mapa").textContent=f4(mapA); $("#u3-mapb").textContent=f4(mapB);
+    ANS={mrra:mrrA,mrrb:mrrB,mapa:mapA,mapb:mapB};
+    $("#u3trace").innerHTML = U3.map(([n,a,b])=>
+      `<b>${n}</b> · A: RR = 1/${a[0]} = ${f4(rr(a))} · AP = (${a.map((r,i)=>`${i+1}/${r}`).join(" + ")}) / 3 = ${f4(ap(a))}<br>`+
+      `<span style="padding-left:${n.length*8}px"></span>B: RR = 1/${b[0]} = ${f4(rr(b))} · AP = (${b.map((r,i)=>`${i+1}/${r}`).join(" + ")}) / 3 = ${f4(ap(b))}`).join("<br>")+
+      `<br><b>MRR (A)</b> = (${U3.map(r=>f4(rr(r[1]))).join(" + ")}) / 3 = <b>${f4(mrrA)}</b> · <b>MRR (B)</b> = (${U3.map(r=>f4(rr(r[2]))).join(" + ")}) / 3 = <b>${f4(mrrB)}</b>`+
+      `<br><b>MAP (A)</b> = (${U3.map(r=>f4(ap(r[1]))).join(" + ")}) / 3 = <b>${f4(mapA)}</b> · <b>MAP (B)</b> = (${U3.map(r=>f4(ap(r[2]))).join(" + ")}) / 3 = <b>${f4(mapB)}</b>`;
+    const win = mrrA>mrrB?"Model A":(mrrB>mrrA?"Model B":"เสมอกัน");
+    const winm = mapA>mapB?"Model A":(mapB>mapA?"Model B":"เสมอกัน");
+    $("#u3read").innerHTML = `MRR ชี้ว่า <b>${win}</b> พาของถูก<b>ชิ้นแรก</b>ขึ้นมาได้สูงกว่า ส่วน MAP ชี้ว่า <b>${winm}</b> ดีกว่าเมื่อคิดของถูก<b>ทุกชิ้น</b><br>`+
+      `ผู้ใช้รายคนอาจให้ผลกลับด้านกับค่าเฉลี่ย เช่นค่าตั้งต้นของบท James ได้ RR (B) = 1.0000 สูงกว่า A แต่เมื่อเฉลี่ยสามคนแล้ว A ยังชนะ — ค่าเฉลี่ยจึงต้องรายงานคู่กับค่ารายผู้ใช้เสมอ`;
+    prupd();
+  }
+  let ANS={};
+  function prupd(){ const on=$("#u3pr").checked;
+    $$("#s3u .u3hid").forEach(e=> e.style.visibility = on?"hidden":"visible");
+    $("#u3ans").style.display = on?"block":"none"; }
+  $("#u3pr").onchange=prupd;
+  $$("#s3u [data-u3]").forEach(b=> b.onclick=()=>{
+    const p=b.dataset.u3;
+    if(p==="base") U3=BASE.map(r=>[r[0],r[1].slice(),r[2].slice()]);
+    if(p==="swap") U3=U3.map(([n,a,b2])=>[n,b2.slice(),a.slice()]);
+    if(p==="top")  U3=U3.map(([n,,b2])=>[n,[1,2,3],b2.slice()]);
+    draw();
+  });
+  $("#u3chk").onclick=()=>{ ["mrra","mrrb","mapa","mapb"].forEach(k=>{
+      const inp=$("#u3i-"+k), fb=inp.nextElementSibling, v=parseFloat(inp.value);
+      inp.classList.remove("ok","bad");
+      if(inp.value===""){ fb.className="fb"; fb.textContent="ยังไม่ได้กรอก"; return; }
+      const ok=Math.abs(v-ANS[k])<=0.001; inp.classList.add(ok?"ok":"bad");
+      fb.className="fb "+(ok?"ok":"bad"); fb.textContent=ok?"✓ ถูกต้อง":"✗ ยังไม่ถูก"; }); };
+  $("#u3rev").onclick=()=>{ $("#u3pr").checked=false; prupd(); };
+  draw();
+})();
+
+</script>
+</body>
+</html>

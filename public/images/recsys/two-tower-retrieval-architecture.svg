@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 500" width="100%" height="100%">
+  
+    <defs>
+      <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#15263a"/>
+        <stop offset="100%" stop-color="#0f1d2c"/>
+      </linearGradient>
+      <linearGradient id="mintGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#5ee0c2"/>
+        <stop offset="100%" stop-color="#38bdf8"/>
+      </linearGradient>
+      <linearGradient id="accentGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#38bdf8"/>
+        <stop offset="100%" stop-color="#818cf8"/>
+      </linearGradient>
+      <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+        <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.35"/>
+      </filter>
+      <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#5ee0c2" />
+      </marker>
+      <marker id="arrowSky" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8" />
+      </marker>
+      <marker id="arrowIndigo" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#818cf8" />
+      </marker>
+    </defs>
+    <style>
+      text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+      .title { font-weight: 700; fill: #ffffff; }
+      .subtitle { fill: #94a3b8; font-size: 13px; }
+      .badge-text { font-size: 11px; font-weight: 600; text-anchor: middle; fill: #0b1927; }
+      .card-title { font-size: 15px; font-weight: 600; fill: #5ee0c2; }
+      .card-desc { font-size: 12.5px; fill: #cbd5e1; }
+      .formula { font-family: "Courier New", monospace; font-size: 13px; fill: #fbbf24; }
+      .axis { stroke: #475569; stroke-width: 1.5; }
+      .grid { stroke: #1e293b; stroke-width: 1; stroke-dasharray: 4,4; }
+    </style>
+
+  <rect width="100%" height="100%" rx="14" fill="#0b1927" stroke="#253a52" stroke-width="1.5"/>
+
+  <text x="40" y="42" class="title" font-size="20">Two-Tower Dual Encoder: สถาปัตยกรรมสองหอคอยเพื่อการค้นคืนระดับเสี้ยววินาที</text>
+  <text x="40" y="66" class="subtitle">แยกหอคอยผู้ใช้ (User Tower) และหอคอยสินค้า (Item Tower) ออกจากกันอย่างสมบูรณ์ เพื่อให้ดัชนีเวกเตอร์สินค้าคำนวณออฟไลน์ล่วงหน้าได้</text>
+
+  <g transform="translate(50, 95)">
+    <!-- Left Tower: User Tower -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="250" height="370" rx="10" fill="#15263a" stroke="#38bdf8" stroke-width="1.5" filter="url(#shadow)"/>
+      <rect x="15" y="15" width="115" height="22" rx="11" fill="#38bdf8"/>
+      <text x="72" y="30" class="badge-text">ONLINE TOWER</text>
+      <text x="15" y="60" fill="#ffffff" font-weight="700" font-size="16">User Tower (หอคอยผู้ใช้)</text>
+
+      <g transform="translate(15, 80)">
+        <rect x="0" y="0" width="220" height="110" rx="6" fill="#0f1d2c" stroke="#253a52"/>
+        <text x="15" y="24" fill="#38bdf8" font-weight="600" font-size="12">User Inputs (ข้อมูลสด):</text>
+        <text x="15" y="46" fill="#94a3b8" font-size="11">• User ID &amp; Demographics</text>
+        <text x="15" y="66" fill="#94a3b8" font-size="11">• ประวัติการคลิกล่าสุด (Real-time)</text>
+        <text x="15" y="86" fill="#94a3b8" font-size="11">• เวลา บริบท และอุปกรณ์</text>
+      </g>
+
+      <!-- MLP -->
+      <line x1="125" y1="190" x2="125" y2="220" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrowSky)"/>
+      <rect x="25" y="220" width="200" height="50" rx="6" fill="#162e47" stroke="#38bdf8"/>
+      <text x="125" y="250" fill="#38bdf8" font-weight="700" font-size="13" text-anchor="middle">Deep MLP Layers (u)</text>
+
+      <!-- User Embedding -->
+      <line x1="125" y1="270" x2="125" y2="300" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrowSky)"/>
+      <rect x="25" y="300" width="200" height="42" rx="6" fill="#0f766e" stroke="#5ee0c2"/>
+      <text x="125" y="326" class="formula" font-size="14" text-anchor="middle">u ∈ ℝ^128 (เวกเตอร์ u)</text>
+    </g>
+
+    <!-- Center: Inner Product & MIPS -->
+    <g transform="translate(300, 100)">
+      <rect x="0" y="0" width="240" height="190" rx="10" fill="#162e47" stroke="#fbbf24" stroke-width="1.5" filter="url(#shadow)"/>
+      <text x="120" y="30" fill="#fbbf24" font-weight="700" font-size="14" text-anchor="middle">MIPS / Vector Search</text>
+      <text x="120" y="55" fill="#ffffff" font-weight="600" font-size="13" text-anchor="middle">Score = ⟨u, v⟩</text>
+      <line x1="20" y1="70" x2="220" y2="70" stroke="#253a52"/>
+      <text x="120" y="98" fill="#5ee0c2" font-weight="700" font-size="14" text-anchor="middle">ANN Index (FAISS/HNSW)</text>
+      <text x="25" y="125" fill="#cbd5e1" font-size="11">• ค้นคืนจาก 1,000,000 ชิ้น</text>
+      <text x="25" y="145" fill="#cbd5e1" font-size="11">• ใช้เวลาเพียง &lt; 5 ms</text>
+      <text x="25" y="168" fill="#fbbf24" font-weight="600" font-size="11.5">⚡ ผลลัพธ์: Top 1,000 Candidates</text>
+    </g>
+
+    <!-- Flow line User -> Center -->
+    <line x1="250" y1="321" x2="350" y2="290" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arrowSky)"/>
+
+    <!-- Right Tower: Item Tower -->
+    <g transform="translate(590, 0)">
+      <rect x="0" y="0" width="250" height="370" rx="10" fill="#15263a" stroke="#5ee0c2" stroke-width="1.5" filter="url(#shadow)"/>
+      <rect x="15" y="15" width="125" height="22" rx="11" fill="#5ee0c2"/>
+      <text x="77" y="30" class="badge-text">OFFLINE PRECOMPUTE</text>
+      <text x="15" y="60" fill="#ffffff" font-weight="700" font-size="16">Item Tower (หอคอยสินค้า)</text>
+
+      <g transform="translate(15, 80)">
+        <rect x="0" y="0" width="220" height="110" rx="6" fill="#0f1d2c" stroke="#253a52"/>
+        <text x="15" y="24" fill="#5ee0c2" font-weight="600" font-size="12">Item Inputs (ข้อมูลสินค้า):</text>
+        <text x="15" y="46" fill="#94a3b8" font-size="11">• Item ID &amp; หมวดหมู่</text>
+        <text x="15" y="66" fill="#94a3b8" font-size="11">• Text Embeddings (ชื่อเรื่อง)</text>
+        <text x="15" y="86" fill="#94a3b8" font-size="11">• Image Embeddings (โปสเตอร์)</text>
+      </g>
+
+      <!-- MLP -->
+      <line x1="125" y1="190" x2="125" y2="220" stroke="#5ee0c2" stroke-width="2" marker-end="url(#arrow)"/>
+      <rect x="25" y="220" width="200" height="50" rx="6" fill="#162e47" stroke="#5ee0c2"/>
+      <text x="125" y="250" fill="#5ee0c2" font-weight="700" font-size="13" text-anchor="middle">Deep MLP Layers (v)</text>
+
+      <!-- Item Embedding -->
+      <line x1="125" y1="270" x2="125" y2="300" stroke="#5ee0c2" stroke-width="2" marker-end="url(#arrow)"/>
+      <rect x="25" y="300" width="200" height="42" rx="6" fill="#0f766e" stroke="#5ee0c2"/>
+      <text x="125" y="326" class="formula" font-size="14" text-anchor="middle">v ∈ ℝ^128 (เวกเตอร์ v)</text>
+    </g>
+
+    <!-- Flow line Item -> Center -->
+    <line x1="590" y1="321" x2="490" y2="290" stroke="#5ee0c2" stroke-width="2.5" marker-end="url(#arrow)"/>
+  </g>
+</svg>

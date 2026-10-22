@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 480" width="100%" height="100%">
+  
+    <defs>
+      <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#15263a"/>
+        <stop offset="100%" stop-color="#0f1d2c"/>
+      </linearGradient>
+      <linearGradient id="mintGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#5ee0c2"/>
+        <stop offset="100%" stop-color="#38bdf8"/>
+      </linearGradient>
+      <linearGradient id="accentGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#38bdf8"/>
+        <stop offset="100%" stop-color="#818cf8"/>
+      </linearGradient>
+      <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+        <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.35"/>
+      </filter>
+      <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#5ee0c2" />
+      </marker>
+      <marker id="arrowSky" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8" />
+      </marker>
+      <marker id="arrowIndigo" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#818cf8" />
+      </marker>
+    </defs>
+    <style>
+      text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+      .title { font-weight: 700; fill: #ffffff; }
+      .subtitle { fill: #94a3b8; font-size: 13px; }
+      .badge-text { font-size: 11px; font-weight: 600; text-anchor: middle; fill: #0b1927; }
+      .card-title { font-size: 15px; font-weight: 600; fill: #5ee0c2; }
+      .card-desc { font-size: 12.5px; fill: #cbd5e1; }
+      .formula { font-family: "Courier New", monospace; font-size: 13px; fill: #fbbf24; }
+      .axis { stroke: #475569; stroke-width: 1.5; }
+      .grid { stroke: #1e293b; stroke-width: 1; stroke-dasharray: 4,4; }
+    </style>
+
+  <rect width="100%" height="100%" rx="14" fill="#0b1927" stroke="#253a52" stroke-width="1.5"/>
+
+  <text x="40" y="42" class="title" font-size="20">Content-Based Profiling: การหลอมรวมเวกเตอร์สินค้าสู่โปรไฟล์ผู้ใช้</text>
+  <text x="40" y="66" class="subtitle">นำประวัติสินค้าที่ผู้ใช้ชอบ คูณถ่วงน้ำหนักด้วยคะแนนความพอใจ รวมเป็นเวกเตอร์แทนตัวตนเพื่อเปรียบเทียบกับสินค้าใหม่</text>
+
+  <g transform="translate(40, 100)">
+    <!-- Column 1: Rated Items -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="230" height="280" rx="10" fill="#15263a" stroke="#38bdf8" stroke-width="1.2" filter="url(#shadow)"/>
+      <text x="115" y="30" fill="#38bdf8" font-weight="700" font-size="14" text-anchor="middle">1. สินค้าที่ผู้ใช้เคยโต้ตอบ</text>
+
+      <!-- Item 1 -->
+      <rect x="15" y="50" width="200" height="60" rx="6" fill="#0f1d2c" stroke="#253a52"/>
+      <text x="25" y="70" fill="#ffffff" font-weight="600" font-size="12">Movie A (5 ★) <tspan fill="#38bdf8" font-weight="500" font-size="11">· Action</tspan></text>
+      <text x="25" y="91" class="formula" font-size="11">v1 = [1.0, 0.8, 0.0]</text>
+
+      <!-- Item 2 -->
+      <rect x="15" y="120" width="200" height="60" rx="6" fill="#0f1d2c" stroke="#253a52"/>
+      <text x="25" y="140" fill="#ffffff" font-weight="600" font-size="12">Movie B (4 ★) <tspan fill="#38bdf8" font-weight="500" font-size="11">· Action</tspan></text>
+      <text x="25" y="161" class="formula" font-size="11">v2 = [0.9, 0.2, 0.1]</text>
+
+      <!-- Item 3 -->
+      <rect x="15" y="190" width="200" height="60" rx="6" fill="#0f1d2c" stroke="#253a52"/>
+      <text x="25" y="210" fill="#ffffff" font-weight="600" font-size="12">Movie C (1 ★) <tspan fill="#f43f5e" font-weight="500" font-size="11">· Romance</tspan></text>
+      <text x="25" y="231" class="formula" font-size="11">v3 = [0.0, 0.0, 1.0]</text>
+    </g>
+
+    <!-- Arrow 1 -> 2 -->
+    <line x1="240" y1="140" x2="275" y2="140" stroke="#5ee0c2" stroke-width="3" marker-end="url(#arrow)"/>
+
+    <!-- Column 2: Weighted Aggregation -->
+    <g transform="translate(285, 0)">
+      <rect x="0" y="0" width="240" height="280" rx="10" fill="#15263a" stroke="#5ee0c2" stroke-width="1.2" filter="url(#shadow)"/>
+      <text x="120" y="30" fill="#5ee0c2" font-weight="700" font-size="14" text-anchor="middle">2. ถ่วงน้ำหนักคะแนน</text>
+
+      <rect x="15" y="55" width="210" height="95" rx="6" fill="#0f1d2c" stroke="#253a52"/>
+      <text x="25" y="78" fill="#94a3b8" font-size="12">สูตรผลรวมถ่วงน้ำหนัก:</text>
+      <text x="25" y="105" class="formula" font-size="14">u = Σ (r_ui - μ) · v_i</text>
+      <text x="25" y="130" fill="#cbd5e1" font-size="11">(หักลบค่าเฉลี่ยเพื่อคุมดาวลบ)</text>
+
+      <rect x="15" y="165" width="210" height="95" rx="6" fill="#0f1d2c" stroke="#5ee0c2"/>
+      <text x="25" y="190" fill="#5ee0c2" font-weight="600" font-size="12">เวกเตอร์โปรไฟล์ผู้ใช้ (u):</text>
+      <text x="25" y="215" class="formula" font-size="13">u = [0.85, 0.42, -0.65]</text>
+      <text x="25" y="240" fill="#94a3b8" font-size="11">Normalized L2 Unit Vector</text>
+    </g>
+
+    <!-- Arrow 2 -> 3 -->
+    <line x1="535" y1="140" x2="575" y2="140" stroke="#38bdf8" stroke-width="3" marker-end="url(#arrowSky)"/>
+
+    <!-- Column 3: Cosine Match -->
+    <g transform="translate(585, 0)">
+      <rect x="0" y="0" width="250" height="280" rx="10" fill="#15263a" stroke="#38bdf8" stroke-width="1.2" filter="url(#shadow)"/>
+      <text x="125" y="30" fill="#38bdf8" font-weight="700" font-size="14" text-anchor="middle">3. แมตช์กับสินค้าใหม่</text>
+
+      <g transform="translate(15, 60)">
+        <rect x="0" y="0" width="220" height="85" rx="6" fill="#0f2a24" stroke="#5ee0c2"/>
+        <text x="15" y="24" fill="#5ee0c2" font-weight="700" font-size="12">Movie X (Sci-Fi Action)</text>
+        <text x="15" y="44" class="formula" font-size="11">cos(u, v_x) = 0.94</text>
+        <text x="15" y="68" fill="#5ee0c2" font-weight="600" font-size="12">✅ แนะนำเป็นอันดับ 1</text>
+      </g>
+
+      <g transform="translate(15, 160)">
+        <rect x="0" y="0" width="220" height="85" rx="6" fill="#2d1520" stroke="#f43f5e"/>
+        <text x="15" y="24" fill="#f43f5e" font-weight="700" font-size="12">Movie Y (Pure Romance)</text>
+        <text x="15" y="44" class="formula" font-size="11">cos(u, v_y) = -0.62</text>
+        <text x="15" y="68" fill="#f43f5e" font-weight="600" font-size="12">❌ ตัดทิ้ง ไม่แนะนำ</text>
+      </g>
+    </g>
+  </g>
+</svg>

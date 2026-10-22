@@ -1,0 +1,144 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 500" width="100%" height="100%">
+  
+    <defs>
+      <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#15263a"/>
+        <stop offset="100%" stop-color="#0f1d2c"/>
+      </linearGradient>
+      <linearGradient id="mintGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#5ee0c2"/>
+        <stop offset="100%" stop-color="#38bdf8"/>
+      </linearGradient>
+      <linearGradient id="accentGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#38bdf8"/>
+        <stop offset="100%" stop-color="#818cf8"/>
+      </linearGradient>
+      <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+        <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.35"/>
+      </filter>
+      <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#5ee0c2" />
+      </marker>
+      <marker id="arrowSky" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8" />
+      </marker>
+      <marker id="arrowIndigo" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#818cf8" />
+      </marker>
+    </defs>
+    <style>
+      text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+      .title { font-weight: 700; fill: #ffffff; }
+      .subtitle { fill: #94a3b8; font-size: 13px; }
+      .badge-text { font-size: 11px; font-weight: 600; text-anchor: middle; fill: #0b1927; }
+      .card-title { font-size: 15px; font-weight: 600; fill: #5ee0c2; }
+      .card-desc { font-size: 12.5px; fill: #cbd5e1; }
+      .formula { font-family: "Courier New", monospace; font-size: 13px; fill: #fbbf24; }
+      .axis { stroke: #475569; stroke-width: 1.5; }
+      .grid { stroke: #1e293b; stroke-width: 1; stroke-dasharray: 4,4; }
+    </style>
+
+  <rect width="100%" height="100%" rx="14" fill="#0b1927" stroke="#253a52" stroke-width="1.5"/>
+
+  <text x="40" y="42" class="title" font-size="20">End-to-End Production Recommender System: สถาปัตยกรรมสังเคราะห์ใหญ่</text>
+  <text x="40" y="66" class="subtitle">แผนผังเชื่อมโยงวิชา Recommending System ครบทั้ง 10 บท ตั้งแต่การเก็บข้อมูล ออฟไลน์เทรนนิ่ง สตรีมมิ่งสด สู่การประเมินผลต่อเนื่อง</text>
+
+  <g transform="translate(30, 95)">
+    <!-- Column 1: Offline Training Layer -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="260" height="360" rx="10" fill="#15263a" stroke="#38bdf8" stroke-width="1.5" filter="url(#shadow)"/>
+      <rect x="15" y="15" width="125" height="22" rx="11" fill="#38bdf8"/>
+      <text x="77" y="30" class="badge-text">OFFLINE TRAINING</text>
+      <text x="15" y="60" fill="#ffffff" font-weight="700" font-size="15">คลังข้อมูล &amp; การเทรนรอบดึก</text>
+
+      <g transform="translate(15, 80)">
+        <rect x="0" y="0" width="230" height="60" rx="6" fill="#0f1d2c" stroke="#253a52"/>
+        <text x="15" y="24" fill="#38bdf8" font-weight="600" font-size="12">Data Lake / Feature Store</text>
+        <text x="15" y="45" fill="#94a3b8" font-size="11">ประวัติเรตติ้ง, บันทึกการคลิก, แคตตาล็อก</text>
+      </g>
+
+      <g transform="translate(15, 150)">
+        <rect x="0" y="0" width="230" height="90" rx="6" fill="#162e47" stroke="#38bdf8"/>
+        <text x="15" y="24" fill="#5ee0c2" font-weight="600" font-size="12">โมเดลหลัก (Chapters 3 - 7):</text>
+        <text x="15" y="45" fill="#cbd5e1" font-size="11">• Matrix Factorization / LightGCN</text>
+        <text x="15" y="63" fill="#cbd5e1" font-size="11">• Two-Tower Dual Encoders</text>
+        <text x="15" y="81" fill="#cbd5e1" font-size="11">• Multimodal Encoders (ViT/BERT)</text>
+      </g>
+
+      <g transform="translate(15, 250)">
+        <rect x="0" y="0" width="230" height="50" rx="6" fill="#0f766e" stroke="#5ee0c2"/>
+        <text x="115" y="30" fill="#ffffff" font-weight="600" font-size="12" text-anchor="middle">FAISS / Vector Index Sync ↗</text>
+      </g>
+    </g>
+
+    <!-- Arrow 1 -> 2 -->
+    <line x1="265" y1="180" x2="305" y2="180" stroke="#5ee0c2" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <!-- Column 2: Online Serving Funnel -->
+    <g transform="translate(310, 0)">
+      <rect x="0" y="0" width="310" height="360" rx="10" fill="#15263a" stroke="#5ee0c2" stroke-width="1.5" filter="url(#shadow)"/>
+      <rect x="15" y="15" width="135" height="22" rx="11" fill="#5ee0c2"/>
+      <text x="82" y="30" class="badge-text">ONLINE SERVING (SLA &lt; 80ms)</text>
+      <text x="15" y="60" fill="#ffffff" font-weight="700" font-size="15">สายพานตัดสินใจแบบเรียลไทม์</text>
+
+      <!-- 3 stages inside funnel -->
+      <g transform="translate(15, 80)">
+        <rect x="0" y="0" width="280" height="65" rx="6" fill="#0f1d2c" stroke="#38bdf8"/>
+        <text x="15" y="22" fill="#38bdf8" font-weight="700" font-size="12">Stage 1: Retrieval (&lt; 10ms)</text>
+        <text x="15" y="42" fill="#cbd5e1" font-size="11">MIPS Search คัด 1,000,000 → 1,000 ชิ้น</text>
+        <text x="15" y="58" fill="#94a3b8" font-size="10.5">Two-Tower Vector Similarity</text>
+      </g>
+
+      <g transform="translate(15, 155)">
+        <rect x="0" y="0" width="280" height="65" rx="6" fill="#0f1d2c" stroke="#5ee0c2"/>
+        <text x="15" y="22" fill="#5ee0c2" font-weight="700" font-size="12">Stage 2: Ranking (40-50ms)</text>
+        <text x="15" y="42" fill="#cbd5e1" font-size="11">Deep Model ทาย pCTR คัดเหลือ 100 ชิ้น</text>
+        <text x="15" y="58" fill="#94a3b8" font-size="10.5">ผสม Context, สภาพอากาศ, อุปกรณ์สด</text>
+      </g>
+
+      <g transform="translate(15, 230)">
+        <rect x="0" y="0" width="280" height="65" rx="6" fill="#0f1d2c" stroke="#fbbf24"/>
+        <text x="15" y="22" fill="#fbbf24" font-weight="700" font-size="12">Stage 3: Reranking (&lt; 15ms)</text>
+        <text x="15" y="42" fill="#cbd5e1" font-size="11">MMR Diversity, กรองซ้ำ, Business Rules</text>
+        <text x="15" y="58" fill="#fbbf24" font-size="10.5">ส่งต่อให้ LLM เรียงและสร้างคำอธิบาย</text>
+      </g>
+
+      <!-- Result Badge -->
+      <rect x="55" y="310" width="200" height="32" rx="6" fill="#0f766e"/>
+      <text x="155" y="331" fill="#ffffff" font-weight="700" font-size="12" text-anchor="middle">📱 User Screen (Top 10)</text>
+    </g>
+
+    <!-- Arrow 2 -> 3 -->
+    <line x1="625" y1="180" x2="665" y2="180" stroke="#5ee0c2" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <!-- Column 3: Evaluation & Governance -->
+    <g transform="translate(670, 0)">
+      <rect x="0" y="0" width="230" height="360" rx="10" fill="#15263a" stroke="#818cf8" stroke-width="1.5" filter="url(#shadow)"/>
+      <rect x="15" y="15" width="135" height="22" rx="11" fill="#818cf8"/>
+      <text x="82" y="30" class="badge-text">METRICS &amp; GOVERNANCE</text>
+      <text x="15" y="60" fill="#ffffff" font-weight="700" font-size="15">การวัดผล &amp; ควบคุม (Ch 2 &amp; 8)</text>
+
+      <g transform="translate(15, 80)">
+        <rect x="0" y="0" width="200" height="75" rx="6" fill="#0f1d2c" stroke="#253a52"/>
+        <text x="15" y="22" fill="#818cf8" font-weight="600" font-size="12">A/B Testing &amp; CTR</text>
+        <text x="15" y="42" fill="#94a3b8" font-size="11">• nDCG@10, Hit Rate</text>
+        <text x="15" y="60" fill="#94a3b8" font-size="11">• Conversion Rate (CVR)</text>
+      </g>
+
+      <g transform="translate(15, 165)">
+        <rect x="0" y="0" width="200" height="75" rx="6" fill="#0f1d2c" stroke="#253a52"/>
+        <text x="15" y="22" fill="#fb7185" font-weight="600" font-size="12">Responsible RecSys</text>
+        <text x="15" y="42" fill="#94a3b8" font-size="11">• Gini Exposure &lt; 0.55</text>
+        <text x="15" y="60" fill="#94a3b8" font-size="11">• C-Fairness &amp; P-Fairness</text>
+      </g>
+
+      <g transform="translate(15, 250)">
+        <rect x="0" y="0" width="200" height="90" rx="6" fill="#162e47" stroke="#5ee0c2"/>
+        <text x="15" y="22" fill="#5ee0c2" font-weight="600" font-size="12">Closed Feedback Loop</text>
+        <text x="15" y="42" fill="#cbd5e1" font-size="11">ฟีดแบ็กคลิกสดส่งเข้า Kafka</text>
+        <text x="15" y="60" fill="#cbd5e1" font-size="11">เทรน Continuous Learning</text>
+        <text x="15" y="78" fill="#fbbf24" font-size="10.5">ครบวงจรแบบอัตโนมัติ</text>
+      </g>
+    </g>
+  </g>
+</svg>

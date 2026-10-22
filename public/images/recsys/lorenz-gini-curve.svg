@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 460" width="100%" height="100%">
+  
+    <defs>
+      <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#15263a"/>
+        <stop offset="100%" stop-color="#0f1d2c"/>
+      </linearGradient>
+      <linearGradient id="mintGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#5ee0c2"/>
+        <stop offset="100%" stop-color="#38bdf8"/>
+      </linearGradient>
+      <linearGradient id="accentGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#38bdf8"/>
+        <stop offset="100%" stop-color="#818cf8"/>
+      </linearGradient>
+      <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+        <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.35"/>
+      </filter>
+      <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#5ee0c2" />
+      </marker>
+      <marker id="arrowSky" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8" />
+      </marker>
+      <marker id="arrowIndigo" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#818cf8" />
+      </marker>
+    </defs>
+    <style>
+      text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+      .title { font-weight: 700; fill: #ffffff; }
+      .subtitle { fill: #94a3b8; font-size: 13px; }
+      .badge-text { font-size: 11px; font-weight: 600; text-anchor: middle; fill: #0b1927; }
+      .card-title { font-size: 15px; font-weight: 600; fill: #5ee0c2; }
+      .card-desc { font-size: 12.5px; fill: #cbd5e1; }
+      .formula { font-family: "Courier New", monospace; font-size: 13px; fill: #fbbf24; }
+      .axis { stroke: #475569; stroke-width: 1.5; }
+      .grid { stroke: #1e293b; stroke-width: 1; stroke-dasharray: 4,4; }
+    </style>
+
+  <rect width="100%" height="100%" rx="14" fill="#0b1927" stroke="#253a52" stroke-width="1.5"/>
+
+  <text x="40" y="42" class="title" font-size="20">Lorenz Curve &amp; Gini Index: วัดความเหลื่อมล้ำในการแนะนำสินค้า</text>
+  <text x="40" y="66" class="subtitle">เส้นโค้งลอเรนซ์แสดงการสะสมการมองเห็น (Exposure) ของสินค้า ยิ่งโค้งห่างจากแนวทแยงมาก ยิ่งกระจุกตัวที่สินค้าฮิตเพียงไม่กี่ชิ้น</text>
+
+  <g transform="translate(80, 100)">
+    <!-- Square Plot Box 260x260 -->
+    <rect x="40" y="20" width="260" height="260" fill="#0f1d2c" stroke="#475569" stroke-width="1.5"/>
+
+    <!-- Diagonal Line of Perfect Equality -->
+    <line x1="40" y1="280" x2="300" y2="20" stroke="#38bdf8" stroke-width="2" stroke-dasharray="4,4"/>
+    <text x="170" y="142" fill="#38bdf8" font-size="10.5" text-anchor="middle" transform="rotate(-45 170 142)">ความเสมอภาคสมบูรณ์ (Gini = 0)</text>
+
+    <!-- Lorenz Curve (Skewed) -->
+    <!-- Area A between diagonal and curve -->
+    <path d="M 40 280 L 300 20 Q 280 230 40 280 Z" fill="#f43f5e" fill-opacity="0.25"/>
+    <!-- Area B below curve -->
+    <path d="M 40 280 Q 280 230 300 20 L 300 280 Z" fill="#5ee0c2" fill-opacity="0.15"/>
+    <path d="M 40 280 Q 280 230 300 20" fill="none" stroke="#5ee0c2" stroke-width="3"/>
+
+    <!-- Labels on Graph -->
+    <text x="190" y="195" fill="#f43f5e" font-weight="700" font-size="18">A</text>
+    <text x="240" y="255" fill="#5ee0c2" font-weight="700" font-size="18">B</text>
+
+    <text x="40" y="305" fill="#94a3b8" font-size="11">0%</text>
+    <text x="150" y="305" fill="#94a3b8" font-size="12">สัดส่วนสินค้าสะสม (Cumulative Items) →</text>
+    <text x="285" y="305" fill="#94a3b8" font-size="11">100%</text>
+
+    <!-- Explanatory Box on Right -->
+    <g transform="translate(360, 20)">
+      <rect x="0" y="0" width="420" height="260" rx="10" fill="#15263a" stroke="#304b65" stroke-width="1.2" filter="url(#shadow)"/>
+      <text x="25" y="35" class="card-title">สูตรสัมประสิทธิ์จีนี (Gini Coefficient):</text>
+      <text x="25" y="70" class="formula" font-size="17">Gini = Area A / (Area A + Area B)</text>
+
+      <line x1="25" y1="95" x2="395" y2="95" stroke="#253a52" stroke-width="1"/>
+
+      <text x="25" y="125" fill="#5ee0c2" font-weight="700" font-size="13">• Gini = 0 (กระจายสม่ำเสมอ):</text>
+      <text x="35" y="145" fill="#cbd5e1" font-size="12">สินค้าทุกชิ้นในคลังถูกนำมาแนะนำเท่าๆ กัน</text>
+
+      <text x="25" y="180" fill="#f43f5e" font-weight="700" font-size="13">• Gini เข้าใกล้ 1.0 (ผูกขาดรุนแรง):</text>
+      <text x="35" y="200" fill="#cbd5e1" font-size="12">ระบบแนะนำเฉพาะสินค้าดัง 1% ซ้ำๆ สินค้าอื่นไม่เคยถูกพบ</text>
+
+      <text x="25" y="235" fill="#fbbf24" font-weight="600" font-size="11.5">💡 ค่าแนะนำในธุรกิจ: 0.35 – 0.55 (เพื่อสมดุลของฮิตกับความหลากหลาย)</text>
+    </g>
+  </g>
+</svg>

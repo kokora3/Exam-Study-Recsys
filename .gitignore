@@ -1,0 +1,18 @@
+# Video files
+*.mp4
+*.mkv
+*.avi
+*.mov
+*.wmv
+*.flv
+*.webm
+
+# Temporary and cache directories
+tmp/
+scratch/
+.idea/
+.vscode/
+
+# OS generated files
+.DS_Store
+Thumbs.db
