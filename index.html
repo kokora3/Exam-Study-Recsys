@@ -157,6 +157,205 @@ body.sidebar-open:after{content:"";display:none;position:fixed;inset:110px 0 0;b
 <link href="public/css/section-tasks.css?v=20260917-2" rel="stylesheet">
 <link href="public/css/recsys-course.css?v=20261020-13" rel="stylesheet">
 <link href="public/css/recsys-reading.css?v=20261020-ergonomics1" rel="stylesheet">
+
+<style>
+/* Enhanced Horizontal Tabs Carousel & Chapter Dropdown */
+.tabs-container {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  gap: 5px;
+}
+.tabs-scroll-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid var(--line2);
+  background: #0d1b2b;
+  color: #aab8c7;
+  cursor: pointer;
+  flex: 0 0 auto;
+  font-size: 11px;
+  transition: all 0.16s ease;
+  z-index: 2;
+  user-select: none;
+}
+.tabs-scroll-btn:hover {
+  background: #172d47;
+  color: #fff;
+  border-color: var(--accent);
+}
+.tabs-scroll-btn.hidden {
+  opacity: 0.2;
+  cursor: default;
+  pointer-events: none;
+}
+.tabs {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  gap: 6px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 4px 2px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(94, 224, 194, 0.35) transparent;
+}
+@supports not (scrollbar-color: auto) {
+  .tabs::-webkit-scrollbar {
+    height: 4px;
+  }
+  .tabs::-webkit-scrollbar-thumb {
+    background: rgba(94, 224, 194, 0.35);
+    border-radius: 4px;
+  }
+  .tabs::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+.tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 11px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: rgba(13, 27, 43, 0.7);
+  color: #9fb0c3;
+  cursor: pointer;
+  white-space: nowrap;
+  font-size: 13px;
+  font-weight: 600;
+  flex: 0 0 auto;
+  transition: all 0.18s ease;
+}
+.tab:hover {
+  background: rgba(22, 43, 68, 0.85);
+  color: #edf2f7;
+  border-color: rgba(94, 224, 194, 0.35);
+}
+.tab.active {
+  background: rgba(94, 224, 194, 0.14);
+  color: #5ee0c2;
+  border-color: rgba(94, 224, 194, 0.55);
+  box-shadow: 0 0 12px rgba(94, 224, 194, 0.12);
+}
+.tab .tab-badge {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 11px;
+  font-weight: 700;
+}
+.tab.active .tab-badge {
+  background: rgba(94, 224, 194, 0.25);
+  color: #fff;
+}
+
+/* Chapter Menu Dropdown */
+.chapter-menu-wrap {
+  position: relative;
+  flex: 0 0 auto;
+}
+.chapter-menu-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(94, 224, 194, 0.4);
+  background: linear-gradient(145deg, rgba(94, 224, 194, 0.12), rgba(13, 27, 43, 0.85));
+  color: #5ee0c2;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.18s ease;
+}
+.chapter-menu-btn:hover {
+  background: linear-gradient(145deg, rgba(94, 224, 194, 0.22), rgba(20, 42, 67, 0.95));
+  border-color: #5ee0c2;
+  box-shadow: 0 0 16px rgba(94, 224, 194, 0.2);
+}
+.chapter-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 100;
+  min-width: 320px;
+  max-width: 420px;
+  max-height: 75vh;
+  overflow-y: auto;
+  background: #091422;
+  border: 1px solid #2d4c6f;
+  border-radius: 14px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.7);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.chapter-dropdown[hidden] {
+  display: none;
+}
+.chapter-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 9px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #c4d3e2;
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  width: 100%;
+}
+.chapter-option:hover {
+  background: #122438;
+  color: #fff;
+  border-color: #2b496c;
+}
+.chapter-option.active {
+  background: rgba(94, 224, 194, 0.12);
+  color: #5ee0c2;
+  border-color: rgba(94, 224, 194, 0.35);
+  font-weight: 700;
+}
+.chapter-option-code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 5px;
+  background: #172a3e;
+  color: #92a8bf;
+  flex: 0 0 auto;
+}
+.chapter-option.active .chapter-option-code {
+  background: rgba(94, 224, 194, 0.2);
+  color: #5ee0c2;
+}
+.chapter-option-title {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.chapter-option-tasks {
+  font-size: 11px;
+  color: var(--muted);
+  flex: 0 0 auto;
+}
+</style>
 </head>
 <body>
 <header class="topbar">
@@ -168,7 +367,21 @@ body.sidebar-open:after{content:"";display:none;position:fixed;inset:110px 0 0;b
     <small>Exam Study Guide • 10 Chapters</small>
   </div>
 </div>
-<nav aria-label="เลือกบทเรียน" class="tabs" id="tabs"></nav>
+
+<div class="chapter-menu-wrap">
+  <button class="chapter-menu-btn" id="chapterMenuBtn" type="button" aria-haspopup="true" aria-expanded="false" title="เลือกดูบทเรียนทั้งหมด 10 บท">
+    <span>📚 ทั้งหมด 10 บท</span>
+    <span class="chevron" aria-hidden="true">▾</span>
+  </button>
+  <div class="chapter-dropdown" id="chapterMenu" hidden role="menu"></div>
+</div>
+
+<div class="tabs-container" id="tabsContainer">
+  <button class="tabs-scroll-btn prev" id="tabsScrollPrev" type="button" aria-label="เลื่อนแถบไปทางซ้าย" title="เลื่อนแถบไปทางซ้าย">◀</button>
+  <nav aria-label="เลือกบทเรียน" class="tabs" id="tabs"></nav>
+  <button class="tabs-scroll-btn next" id="tabsScrollNext" type="button" aria-label="เลื่อนแถบไปทางขวา" title="เลื่อนแถบไปทางขวา">▶</button>
+</div>
+
 <div class="top-actions">
   <div class="reader-toolbar" id="readerToolbar">
     <button aria-controls="readerPopover" aria-expanded="false" aria-label="ตั้งค่าการอ่าน (Font, Theme, Size)" class="reader-btn" id="readerSettingsBtn" title="ตั้งค่าการอ่าน (ฟอนต์, ขนาด, ธีม)">
@@ -252,6 +465,10 @@ window.RECSYS_COURSE.register(DATA);
 const accentsDark = { recsys: ['#5ee0c2', '94,224,194'] };
 const accentsLight = { recsys: ['#0d766e', '13,118,110'] };
 const tabs = document.getElementById('tabs');
+const tabsScrollPrev = document.getElementById('tabsScrollPrev');
+const tabsScrollNext = document.getElementById('tabsScrollNext');
+const chapterMenuBtn = document.getElementById('chapterMenuBtn');
+const chapterMenu = document.getElementById('chapterMenu');
 const sideNav = document.getElementById('sideNav');
 const sideHead = document.getElementById('sideHead');
 const hero = document.getElementById('hero');
@@ -275,35 +492,123 @@ function setAccent(id){
 }
 window.setAccent = setAccent;
 
+function cleanChapterTitle(title) {
+  return String(title || '').replace(/^บทที่\s*\d+:\s*/, '').trim();
+}
+
 function switchRecsysChapter(chapterId) {
   window.RECSYS_COURSE?.setActiveChapter?.(chapterId);
   const root = document.getElementById('subject-recsys');
   if (root) root.classList.add('active');
+  closeChapterMenu();
   buildTabs();
   renderHero();
   buildSidebar();
   closeSidebar();
+  scrollActiveTabIntoView();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 window.switchRecsysChapter = switchRecsysChapter;
 
+function scrollActiveTabIntoView() {
+  requestAnimationFrame(() => {
+    const activeTab = tabs.querySelector('.tab.active');
+    if (activeTab) {
+      activeTab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+    updateScrollButtons();
+  });
+}
+
+function updateScrollButtons() {
+  if (!tabs || !tabsScrollPrev || !tabsScrollNext) return;
+  const maxScroll = tabs.scrollWidth - tabs.clientWidth;
+  tabsScrollPrev.classList.toggle('hidden', tabs.scrollLeft <= 4);
+  tabsScrollNext.classList.toggle('hidden', tabs.scrollLeft >= maxScroll - 4);
+}
+
 function buildTabs() {
   const chapters = (window.RECSYS_CHAPTERS || []).filter(c => c.lessons?.length);
   const activeId = window.RECSYS_COURSE?.getActiveChapterId?.() || 'recsys-foundations';
+
+  // 1. Build tabs
   tabs.innerHTML = chapters.map(ch => {
     const isActive = ch.id === activeId;
-    const cleanTitle = ch.title.replace(/^บทที่\s*\d+:\s*/, '');
-    return `<button class="tab ${isActive ? 'active' : ''}" type="button" onclick="switchRecsysChapter('${ch.id}')" title="Chapter ${ch.number}: ${cleanTitle}"><span>Ch ${ch.number}</span> <small>${cleanTitle.slice(0, 16)}${cleanTitle.length > 16 ? '…' : ''}</small></button>`;
+    const cleanTitle = cleanChapterTitle(ch.title);
+    return `
+      <button class="tab ${isActive ? 'active' : ''}" type="button" onclick="switchRecsysChapter('${ch.id}')" title="Chapter ${ch.number}: ${cleanTitle}">
+        <span class="tab-badge">Ch ${ch.number}</span>
+        <span class="tab-text">${cleanTitle}</span>
+      </button>
+    `;
   }).join('');
+
+  // 2. Build chapter dropdown menu
+  if (chapterMenu) {
+    chapterMenu.innerHTML = chapters.map(ch => {
+      const isActive = ch.id === activeId;
+      const cleanTitle = cleanChapterTitle(ch.title);
+      return `
+        <button class="chapter-option ${isActive ? 'active' : ''}" type="button" role="menuitem" onclick="switchRecsysChapter('${ch.id}')">
+          <span class="chapter-option-code">Ch ${ch.number}</span>
+          <span class="chapter-option-title" title="${cleanTitle}">${cleanTitle}</span>
+          <span class="chapter-option-tasks">${ch.lessons.length} tasks</span>
+        </button>
+      `;
+    }).join('');
+  }
+
+  updateScrollButtons();
 }
 window.buildTabs = buildTabs;
+
+// Dropdown Toggle
+function toggleChapterMenu(e) {
+  if (e) e.stopPropagation();
+  const isHidden = chapterMenu.hidden;
+  chapterMenu.hidden = !isHidden;
+  chapterMenuBtn.setAttribute('aria-expanded', String(isHidden));
+}
+function closeChapterMenu() {
+  if (!chapterMenu) return;
+  chapterMenu.hidden = true;
+  if (chapterMenuBtn) chapterMenuBtn.setAttribute('aria-expanded', 'false');
+}
+
+if (chapterMenuBtn) chapterMenuBtn.onclick = toggleChapterMenu;
+document.addEventListener('click', (e) => {
+  if (chapterMenu && !chapterMenu.hidden && !e.target.closest('.chapter-menu-wrap')) {
+    closeChapterMenu();
+  }
+});
+
+// Tab Scroll Controls & Mouse Wheel
+if (tabs) {
+  tabs.addEventListener('scroll', updateScrollButtons, { passive: true });
+  tabs.addEventListener('wheel', (e) => {
+    if (e.deltaY !== 0) {
+      e.preventDefault();
+      tabs.scrollLeft += e.deltaY;
+    }
+  }, { passive: false });
+}
+if (tabsScrollPrev) {
+  tabsScrollPrev.onclick = () => {
+    tabs.scrollBy({ left: -260, behavior: 'smooth' });
+  };
+}
+if (tabsScrollNext) {
+  tabsScrollNext.onclick = () => {
+    tabs.scrollBy({ left: 260, behavior: 'smooth' });
+  };
+}
 
 function renderHero() {
   const s = subject('recsys');
   const activeChId = window.RECSYS_COURSE?.getActiveChapterId?.() || 'recsys-foundations';
   const ch = (window.RECSYS_CHAPTERS || []).find(c => c.id === activeChId);
   const chNum = ch ? ch.number : '00';
-  const chTitle = ch ? ch.title.replace(/^บทที่\s*\d+:\s*/, '') : 'Foundations';
+  const chTitle = ch ? cleanChapterTitle(ch.title) : 'Foundations';
   const chKicker = ch?.kicker || 'RECOMMENDING SYSTEM';
   const chLessons = ch ? ch.lessons.length : 0;
   hero.innerHTML = `
@@ -333,7 +638,7 @@ function buildSidebar(){
   const activeChId = window.RECSYS_COURSE?.getActiveChapterId?.() || 'recsys-foundations';
   const ch = (window.RECSYS_CHAPTERS || []).find(c => c.id === activeChId);
   const chNum = ch ? ch.number : '00';
-  const chTitle = ch ? ch.title.replace(/^บทที่\s*\d+:\s*/, '') : 'Recommending System';
+  const chTitle = ch ? cleanChapterTitle(ch.title) : 'Recommending System';
   const chLessons = ch ? ch.lessons.length : 0;
   sideHead.innerHTML = `<div class="code">204729 • Chapter ${chNum}</div><h1>${chTitle}</h1><p>สารบัญ (${chLessons} Tasks)</p>`;
   const root = document.getElementById('subject-recsys');
@@ -759,6 +1064,7 @@ document.addEventListener('keydown', event => {
     openSearch();
   }
   if(event.key === 'Escape'){
+    closeChapterMenu();
     closeTerm();
     closePdfModal();
     closeSearch();
