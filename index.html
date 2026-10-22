@@ -1890,6 +1890,134 @@ body.sidebar-open:after{content:"";display:none;position:fixed;inset:110px 0 0;b
 }
 
 /* ==========================================================================
+   GENERAL LESSONS (CH 00 - 09) RELAXED TYPOGRAPHY & BREATHING ROOM
+   ========================================================================== */
+.section-task-body {
+  padding: 26px 30px !important;
+}
+
+/* 1. Bullet list spacing across all main lessons and easy-explain */
+.rs-lesson-content ul,
+.rs-lesson-content ol,
+.easy-explain ul,
+.easy-explain ol {
+  padding-left: 26px !important;
+  margin: 18px 0 24px !important;
+}
+
+.rs-lesson-content > ul > li,
+.rs-lesson-content > ol > li,
+.easy-explain > ul > li,
+.easy-explain > ol > li {
+  margin-bottom: 18px !important;
+  line-height: 1.86 !important;
+}
+
+.rs-lesson-content ul ul li,
+.rs-lesson-content ol ol li,
+.easy-explain ul ul li,
+.easy-explain ol ol li {
+  margin-bottom: 8px !important;
+  line-height: 1.76 !important;
+}
+
+/* 2. Paragraphs & Lead text in lessons */
+.rs-lesson-content p,
+.easy-explain p {
+  line-height: 1.84 !important;
+  margin: 14px 0 16px !important;
+}
+
+.section-task-body > .lead {
+  margin: 16px 0 24px !important;
+  line-height: 1.86 !important;
+}
+
+/* 3. Concept explanation boxes (.easy-explain) */
+.easy-explain {
+  margin: 26px 0 32px !important;
+  padding: 26px 28px !important;
+  border-radius: 16px !important;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.08) !important;
+}
+.easy-explain h3 {
+  margin-bottom: 16px !important;
+  font-size: 20px !important;
+  font-weight: 800 !important;
+}
+.easy-explain .example {
+  margin-top: 18px !important;
+  padding: 16px 20px !important;
+  border-radius: 12px !important;
+  line-height: 1.78 !important;
+}
+
+/* 4. Lesson Tables */
+.rs-lesson-content table {
+  margin: 28px 0 !important;
+  border-radius: 14px !important;
+  overflow: hidden !important;
+}
+.rs-lesson-content th {
+  padding: 14px 18px !important;
+  font-weight: 800 !important;
+}
+.rs-lesson-content td {
+  padding: 13px 18px !important;
+  line-height: 1.74 !important;
+}
+
+/* 5. Callouts and warning boxes */
+.callout {
+  margin: 24px 0 !important;
+  padding: 18px 22px !important;
+  border-radius: 0 14px 14px 0 !important;
+  line-height: 1.78 !important;
+}
+
+/* 6. Formula blocks */
+.formula {
+  margin: 20px 0 !important;
+  padding: 14px 18px !important;
+  border-radius: 12px !important;
+  line-height: 1.6 !important;
+}
+
+/* 7. Grid Cards */
+.card {
+  padding: 22px 24px !important;
+  border-radius: 16px !important;
+}
+.card ul li {
+  margin-bottom: 10px !important;
+  line-height: 1.76 !important;
+}
+
+/* 8. Figure Grid & Visual Containers */
+.recsys-figure-grid {
+  margin: 28px 0 32px !important;
+  gap: 24px !important;
+}
+.recsys-figure {
+  border-radius: 16px !important;
+  overflow: hidden !important;
+}
+
+@media (max-width: 640px) {
+  .section-task-body {
+    padding: 18px 16px !important;
+  }
+  .easy-explain {
+    padding: 20px 16px !important;
+    margin: 20px 0 24px !important;
+  }
+  .rs-lesson-content th,
+  .rs-lesson-content td {
+    padding: 11px 13px !important;
+  }
+}
+
+/* ==========================================================================
    GLOBAL CONTENT FONT-SIZE SCALING SYSTEM
    Proportionally scales all text in content, headings, tables, formulas,
    cards, quizzes, and sidebars when user selects เล็ก / กลาง / ใหญ่ / ใหญ่มาก
