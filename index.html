@@ -1525,14 +1525,14 @@ body.sidebar-open:after{content:"";display:none;position:fixed;inset:110px 0 0;b
 
 /* ==========================================================================
    FAST-TRACK CHEAT SHEET DEDICATED STYLES
-   Professional typography, formula cards, decision tables & deep link buttons
+   Professional typography, relaxed breathing room, formula cards & figures
    ========================================================================== */
 .cs-card {
-  margin: 18px 0 24px;
+  margin: 30px 0 42px;
   border: 1px solid var(--line2);
   background: var(--panel);
-  border-radius: 16px;
-  padding: 22px 24px;
+  border-radius: 18px;
+  padding: 30px 34px;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
 }
 .cs-header {
@@ -1540,14 +1540,14 @@ body.sidebar-open:after{content:"";display:none;position:fixed;inset:110px 0 0;b
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin-bottom: 16px;
-  padding-bottom: 12px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
   border-bottom: 1px solid var(--line);
   flex-wrap: wrap;
 }
 .cs-header h3 {
   margin: 0;
-  font-size: 20px;
+  font-size: 21px;
   color: var(--text);
   font-weight: 800;
   display: flex;
@@ -1558,19 +1558,47 @@ body.sidebar-open:after{content:"";display:none;position:fixed;inset:110px 0 0;b
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  padding: 4px 10px;
+  padding: 5px 12px;
   border-radius: 999px;
   background: rgba(var(--accent-rgb), 0.15);
   border: 1px solid rgba(var(--accent-rgb), 0.4);
   color: var(--accent);
-  font-size: 12px;
+  font-size: 12.5px;
   font-weight: 750;
   letter-spacing: 0.02em;
 }
+
+/* Bullet list spacing: creates relaxed breathing room between concepts */
+.cs-card > ul,
+.cs-card > ol {
+  padding-left: 24px;
+  margin: 20px 0 26px;
+}
+.cs-card > ul > li,
+.cs-card > ol > li {
+  margin-bottom: 20px !important;
+  line-height: 1.88 !important;
+}
+.cs-card ul ul,
+.cs-card ol ol {
+  margin-top: 10px;
+  margin-bottom: 14px;
+  padding-left: 20px;
+}
+.cs-card ul ul li,
+.cs-card ol ol li {
+  margin-bottom: 9px !important;
+  line-height: 1.78 !important;
+}
+.cs-card p {
+  line-height: 1.86 !important;
+  margin: 14px 0 16px !important;
+}
+
 .cs-formula-card {
-  margin: 16px 0;
-  padding: 16px 20px;
-  border-radius: 12px;
+  margin: 26px 0;
+  padding: 20px 24px;
+  border-radius: 14px;
   background: var(--panel2);
   border-left: 4px solid var(--accent);
   border-top: 1px solid var(--line2);
@@ -1578,10 +1606,10 @@ body.sidebar-open:after{content:"";display:none;position:fixed;inset:110px 0 0;b
   border-bottom: 1px solid var(--line2);
 }
 .cs-formula-title {
-  font-size: 14px;
+  font-size: 14.5px;
   font-weight: 800;
   color: var(--accent);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -1592,22 +1620,23 @@ body.sidebar-open:after{content:"";display:none;position:fixed;inset:110px 0 0;b
   font-weight: 700;
   color: var(--text);
   background: rgba(0, 0, 0, 0.18);
-  padding: 10px 14px;
-  border-radius: 8px;
-  margin: 8px 0;
+  padding: 12px 18px;
+  border-radius: 10px;
+  margin: 10px 0;
   overflow-x: auto;
   border: 1px solid var(--line);
+  line-height: 1.6;
 }
 .cs-formula-legend {
   font-size: 13.5px;
   color: var(--muted);
-  line-height: 1.6;
-  margin-top: 8px;
+  line-height: 1.68;
+  margin-top: 10px;
 }
 .cs-table-wrap {
   overflow-x: auto;
-  margin: 16px 0;
-  border-radius: 12px;
+  margin: 28px 0;
+  border-radius: 14px;
   border: 1px solid var(--line2);
   background: var(--panel);
 }
@@ -1619,18 +1648,18 @@ body.sidebar-open:after{content:"";display:none;position:fixed;inset:110px 0 0;b
 }
 .cs-table th {
   background: var(--panel2);
-  padding: 12px 14px;
+  padding: 14px 18px;
   font-weight: 800;
   color: var(--text);
   border-bottom: 2px solid var(--line2);
   white-space: nowrap;
 }
 .cs-table td {
-  padding: 11px 14px;
+  padding: 13px 18px;
   border-bottom: 1px solid var(--line);
   color: var(--text);
   vertical-align: top;
-  line-height: 1.6;
+  line-height: 1.72;
 }
 .cs-table tr:last-child td {
   border-bottom: none;
@@ -1639,9 +1668,9 @@ body.sidebar-open:after{content:"";display:none;position:fixed;inset:110px 0 0;b
   background: rgba(var(--accent-rgb), 0.04);
 }
 .cs-trap-box {
-  margin: 16px 0;
-  padding: 16px 18px;
-  border-radius: 12px;
+  margin: 26px 0;
+  padding: 20px 24px;
+  border-radius: 14px;
   background: rgba(255, 180, 87, 0.08);
   border: 1px solid rgba(255, 180, 87, 0.32);
 }
@@ -1649,26 +1678,36 @@ body.sidebar-open:after{content:"";display:none;position:fixed;inset:110px 0 0;b
   font-size: 15px;
   font-weight: 800;
   color: #ffb457;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   display: flex;
   align-items: center;
   gap: 6px;
 }
-.cs-trap-box p, .cs-trap-box li {
+.cs-trap-box p {
   font-size: 14.5px;
-  line-height: 1.65;
+  line-height: 1.75;
   color: var(--text);
-  margin: 5px 0;
+  margin: 6px 0;
+}
+.cs-trap-box ul {
+  padding-left: 22px;
+  margin: 10px 0;
+}
+.cs-trap-box li {
+  font-size: 14.5px;
+  line-height: 1.8;
+  color: var(--text);
+  margin-bottom: 12px;
 }
 .cs-link-box {
-  margin: 18px 0 6px;
-  padding: 14px 18px;
-  border-radius: 12px;
+  margin: 30px 0 12px;
+  padding: 18px 24px;
+  border-radius: 14px;
   background: rgba(var(--accent-rgb), 0.06);
   border: 1px solid rgba(var(--accent-rgb), 0.28);
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 .cs-link-title {
   font-size: 14px;
@@ -1680,14 +1719,14 @@ body.sidebar-open:after{content:"";display:none;position:fixed;inset:110px 0 0;b
 }
 .cs-btn-row {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 .cs-btn-link {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 8px 14px;
+  padding: 9px 16px;
   border-radius: 8px;
   font-size: 13px;
   font-weight: 700;
@@ -1714,6 +1753,85 @@ body.sidebar-open:after{content:"";display:none;position:fixed;inset:110px 0 0;b
   color: #050608;
 }
 
+/* Embedded Infographic Figures inside Fast-Track Summary */
+.cs-figure {
+  margin: 28px 0 !important;
+  border-radius: 16px !important;
+  overflow: hidden;
+  border: 1px solid var(--line2);
+  background: var(--panel2);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  outline: none;
+}
+.cs-figure:hover,
+.cs-figure:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.2);
+  border-color: rgba(var(--accent-rgb), 0.55);
+}
+.cs-figure .image-stage {
+  padding: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #0b1017;
+  position: relative;
+  min-height: 220px;
+}
+.cs-figure .image-stage img {
+  max-width: 100%;
+  height: auto;
+  max-height: 480px;
+  object-fit: contain;
+  border-radius: 8px;
+  transition: transform 0.24s ease;
+}
+.cs-figure:hover .image-stage img {
+  transform: scale(1.015);
+}
+.cs-figure .zoom-hint {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #fff;
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  pointer-events: none;
+  opacity: 0.85;
+  transition: opacity 0.2s ease;
+}
+.cs-figure:hover .zoom-hint {
+  opacity: 1;
+}
+.cs-figure figcaption {
+  padding: 14px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  background: var(--panel);
+  border-top: 1px solid var(--line);
+  flex-wrap: wrap;
+  font-size: 13.5px;
+}
+.cs-figure figcaption strong {
+  color: var(--text);
+  font-weight: 750;
+}
+.cs-fig-note {
+  color: var(--muted);
+  font-weight: 400;
+  margin-left: 4px;
+}
+
 /* Sepia & Light overrides for Fast-Track elements */
 [data-theme="sepia"] .cs-formula-math {
   background: #f4eedf !important;
@@ -1729,6 +1847,9 @@ body.sidebar-open:after{content:"";display:none;position:fixed;inset:110px 0 0;b
 }
 [data-theme="sepia"] .cs-btn-link.primary:hover {
   color: #ffffff !important;
+}
+[data-theme="sepia"] .cs-figure .image-stage {
+  background: #ede4d3 !important;
 }
 
 [data-theme="light"] .cs-formula-math {
@@ -1746,7 +1867,27 @@ body.sidebar-open:after{content:"";display:none;position:fixed;inset:110px 0 0;b
 [data-theme="light"] .cs-btn-link.primary:hover {
   color: #ffffff !important;
 }
+[data-theme="light"] .cs-figure .image-stage {
+  background: #f1f5f9 !important;
+}
 
+[data-theme="slate"] .cs-figure .image-stage {
+  background: #0e0f12 !important;
+}
+
+@media (max-width: 640px) {
+  .cs-card {
+    padding: 20px 18px !important;
+    margin: 20px 0 28px !important;
+  }
+  .cs-figure .image-stage {
+    padding: 14px;
+    min-height: 180px;
+  }
+  .cs-figure figcaption {
+    padding: 10px 14px;
+  }
+}
 
 /* ==========================================================================
    GLOBAL CONTENT FONT-SIZE SCALING SYSTEM
