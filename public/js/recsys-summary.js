@@ -23,8 +23,8 @@
         lead: 'ระบบแนะนำขับเคลื่อนด้วยบริบทของผู้ใช้! สรุปสถาปัตยกรรมโปรดักชันยุคใหม่ (Candidate Generation → Scoring → Re-ranking) และความท้าทายหลักที่ข้อสอบต้องถาม',
         body: `<div class="cs-card">
             <div class="cs-header">
-              <h3>⚡ หัวใจสำคัญบทที่ 1 ใน 2 นาที</h3>
-              <span class="cs-badge-pill">⏱️ อ่านเร็ว 2 นาที · Ch 01</span>
+              <h3>⚡ หัวใจสำคัญบทที่ 1</h3>
+              <span class="cs-badge-pill">Ch 01</span>
             </div>
 
             <ul>
@@ -139,7 +139,7 @@
         body: `<div class="cs-card">
             <div class="cs-header">
               <h3>⚡ สรุปสูตรและการเลือกตัวชี้วัดในห้องสอบ</h3>
-              <span class="cs-badge-pill">⏱️ อ่านเร็ว 2 นาที · Ch 02</span>
+              <span class="cs-badge-pill">Ch 02</span>
             </div>
 
             <div class="cs-table-wrap">
@@ -250,7 +250,7 @@
         body: `<div class="cs-card">
             <div class="cs-header">
               <h3>⚡ สรุปกระบวนการสร้าง Content-Based Recommender</h3>
-              <span class="cs-badge-pill">⏱️ อ่านเร็ว 2 นาที · Ch 03</span>
+              <span class="cs-badge-pill">Ch 03</span>
             </div>
 
             <ul>
@@ -328,7 +328,7 @@
         body: `<div class="cs-card">
             <div class="cs-header">
               <h3>⚡ สรุปกลยุทธ์การผสานสื่อ (Multimodal Fusion Strategies)</h3>
-              <span class="cs-badge-pill">⏱️ อ่านเร็ว 2 นาที · Ch 04</span>
+              <span class="cs-badge-pill">Ch 04</span>
             </div>
 
             <div class="cs-table-wrap">
@@ -416,7 +416,7 @@
         body: `<div class="cs-card">
             <div class="cs-header">
               <h3>⚡ สรุปข้อแตกต่าง User-kNN vs Item-kNN</h3>
-              <span class="cs-badge-pill">⏱️ อ่านเร็ว 2 นาที · Ch 05</span>
+              <span class="cs-badge-pill">Ch 05</span>
             </div>
 
             <div class="cs-table-wrap">
@@ -510,7 +510,7 @@
         body: `<div class="cs-card">
             <div class="cs-header">
               <h3>⚡ สรุปวิวัฒนาการโมเดลจาก SVD สู่ Two-Tower</h3>
-              <span class="cs-badge-pill">⏱️ อ่านเร็ว 2 นาที · Ch 06</span>
+              <span class="cs-badge-pill">Ch 06</span>
             </div>
 
             <ul>
@@ -589,7 +589,7 @@
         body: `<div class="cs-card">
             <div class="cs-header">
               <h3>⚡ 3 บทบาทหลักของ LLM ใน Recommender Systems</h3>
-              <span class="cs-badge-pill">⏱️ อ่านเร็ว 2 นาที · Ch 07</span>
+              <span class="cs-badge-pill">Ch 07</span>
             </div>
 
             <ol>
@@ -683,7 +683,7 @@
         body: `<div class="cs-card">
             <div class="cs-header">
               <h3>⚡ สรุป 4 เสาหลักของ Responsible AI ในระบบแนะนำ</h3>
-              <span class="cs-badge-pill">⏱️ อ่านเร็ว 2 นาที · Ch 08</span>
+              <span class="cs-badge-pill">Ch 08</span>
             </div>
 
             <div class="cs-table-wrap">
@@ -770,7 +770,7 @@
         body: `<div class="cs-card">
             <div class="cs-header">
               <h3>⚡ Master Decision Matrix: เจอโจทย์แบบนี้ เลือกโมเดลใด?</h3>
-              <span class="cs-badge-pill">⏱️ อ่านเร็ว 2 นาที · Ch 09</span>
+              <span class="cs-badge-pill">Ch 09</span>
             </div>
 
             <div class="cs-table-wrap">
