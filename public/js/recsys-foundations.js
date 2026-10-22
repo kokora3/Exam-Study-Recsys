@@ -7,7 +7,7 @@
   const source = (doc, page, topic) => ({ ...doc, page, topic });
   const question = (id, q, choices, answer, explanation, reasons) => ({ id, q, choices, answer, explanation, reasons, version: 1 });
 
-  window.RECSYS_CHAPTERS = [{
+  window.RECSYS_CHAPTERS = [...(window.RECSYS_CHAPTERS || []), {
     id: 'recsys-foundations',
     number: '00',
     title: 'ปูพื้นฐานคณิตศาสตร์และข้อมูลระบบแนะนำ (Foundations)',

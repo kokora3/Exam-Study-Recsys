@@ -1112,6 +1112,7 @@ body.sidebar-open:after{content:"";display:none;position:fixed;inset:110px 0 0;b
 <aside aria-hidden="true" aria-labelledby="termTitle" class="term-modal" id="termModal" role="dialog"><article class="term-terminal"><header class="term-head"><div class="term-title-wrap"><span class="term-path">คำอธิบายแนวคิด</span><strong class="term-title" id="termTitle">Technical term</strong></div><button aria-label="ปิดคำอธิบายศัพท์" class="term-close" id="termClose" type="button">×</button></header><div class="term-body"><div class="term-article" id="termArticle"></div><p class="term-related" id="termRelated"></p><p class="term-hint">กด Esc, ปุ่ม × หรือคลิกพื้นที่นอกการ์ดเพื่อปิด</p></div></article></aside>
 <div aria-hidden="true" aria-labelledby="pdfTitle" aria-modal="true" class="pdf-modal" id="pdfModal" role="dialog"><article class="pdf-dialog"><header class="pdf-head"><div class="pdf-title-wrap"><span class="pdf-eyebrow">Section document</span><strong class="pdf-title" id="pdfTitle">เอกสารประกอบ</strong></div><div class="pdf-actions"><a class="pdf-external" id="pdfExternal" rel="noreferrer" target="_blank">เปิดแยก ↗</a><button aria-label="ปิดเอกสาร" class="pdf-close" id="pdfClose" type="button">×</button></div></header><div class="pdf-frame-wrap"><iframe class="pdf-frame" id="pdfFrame" loading="lazy" title="เอกสาร PDF ประกอบหัวข้อ"></iframe><p class="pdf-fallback">Browser นี้ไม่รองรับ PDF viewer กรุณากด “เปิดแยก”</p></div></article></div>
 
+<script src="public/js/recsys-summary.js"></script>
 <script src="public/js/recsys-foundations.js"></script>
 <script src="public/js/recsys-introduction.js"></script>
 <script src="public/js/recsys-metrics.js"></script>
@@ -1205,15 +1206,22 @@ function updateScrollButtons() {
 
 function buildTabs() {
   const chapters = (window.RECSYS_CHAPTERS || []).filter(c => c.lessons?.length);
-  const activeId = window.RECSYS_COURSE?.getActiveChapterId?.() || 'recsys-foundations';
+  const activeId = window.RECSYS_COURSE?.getActiveChapterId?.() || (chapters[0] ? chapters[0].id : 'recsys-summary');
+
+  // Update chapter dropdown button count dynamically
+  if (chapterMenuBtn) {
+    const span = chapterMenuBtn.querySelector('span:first-child');
+    if (span) span.textContent = '📚 ทั้งหมด ' + chapters.length + ' บท';
+  }
 
   // 1. Build tabs
   tabs.innerHTML = chapters.map(ch => {
     const isActive = ch.id === activeId;
     const cleanTitle = cleanChapterTitle(ch.title);
+    const badge = ch.badge || ('Ch ' + ch.number);
     return `
-      <button class="tab ${isActive ? 'active' : ''}" type="button" onclick="switchRecsysChapter('${ch.id}')" title="Chapter ${ch.number}: ${cleanTitle}">
-        <span class="tab-badge">Ch ${ch.number}</span>
+      <button class="tab ${isActive ? 'active' : ''}" type="button" onclick="switchRecsysChapter('${ch.id}')" title="${badge}: ${cleanTitle}">
+        <span class="tab-badge">${badge}</span>
         <span class="tab-text">${cleanTitle}</span>
       </button>
     `;
@@ -1224,9 +1232,10 @@ function buildTabs() {
     chapterMenu.innerHTML = chapters.map(ch => {
       const isActive = ch.id === activeId;
       const cleanTitle = cleanChapterTitle(ch.title);
+      const badge = ch.badge || ('Ch ' + ch.number);
       return `
         <button class="chapter-option ${isActive ? 'active' : ''}" type="button" role="menuitem" onclick="switchRecsysChapter('${ch.id}')">
-          <span class="chapter-option-code">Ch ${ch.number}</span>
+          <span class="chapter-option-code">${badge}</span>
           <span class="chapter-option-title" title="${cleanTitle}">${cleanTitle}</span>
           <span class="chapter-option-tasks">${ch.lessons.length} tasks</span>
         </button>
@@ -1283,16 +1292,18 @@ function renderHero() {
   const s = subject('recsys');
   const activeChId = window.RECSYS_COURSE?.getActiveChapterId?.() || 'recsys-foundations';
   const ch = (window.RECSYS_CHAPTERS || []).find(c => c.id === activeChId);
-  const chNum = ch ? ch.number : '00';
+  const chNum = ch ? (ch.badge || ('Ch ' + ch.number)) : '00';
   const chTitle = ch ? cleanChapterTitle(ch.title) : 'Foundations';
   const chKicker = ch?.kicker || 'RECOMMENDING SYSTEM';
+  const allChapters = (window.RECSYS_CHAPTERS || []).filter(ch => ch.lessons?.length);
+  const totalChapters = allChapters.length || 11;
   const chLessons = ch ? ch.lessons.length : 0;
   hero.innerHTML = `
     <div class="eyebrow">204729 • CHAPTER ${chNum} • ${chKicker}</div>
     <h1>${ch?.title || s.title}</h1>
     <p class="thai">${ch?.description || s.thai}</p>
     <div class="hero-meta">
-      <span class="pill">บทที่ ${chNum} จาก 10 บท</span>
+      <span class="pill">บทที่ ${chNum} จาก ${totalChapters} บท</span>
       <span class="pill">${chLessons} หัวข้อเรียน (Tasks)</span>
       <span class="pill">Multiple Choice เฉลยละเอียด</span>
       <span class="pill">ภาพ &amp; Interactive Infographics</span>
@@ -1313,7 +1324,7 @@ function closeSidebar(){
 function buildSidebar(){
   const activeChId = window.RECSYS_COURSE?.getActiveChapterId?.() || 'recsys-foundations';
   const ch = (window.RECSYS_CHAPTERS || []).find(c => c.id === activeChId);
-  const chNum = ch ? ch.number : '00';
+  const chNum = ch ? (ch.badge || ('Ch ' + ch.number)) : '00';
   const chTitle = ch ? cleanChapterTitle(ch.title) : 'Recommending System';
   const chLessons = ch ? ch.lessons.length : 0;
   sideHead.innerHTML = `<div class="code">204729 • Chapter ${chNum}</div><h1>${chTitle}</h1><p>สารบัญ (${chLessons} Tasks)</p>`;
@@ -1801,9 +1812,42 @@ function init(){
   installGlossaryTerms();
   const root = document.getElementById('subject-recsys');
   if (root) root.classList.add('active');
-  const activeId = window.RECSYS_COURSE?.getActiveChapterId?.() || 'recsys-foundations';
-  switchRecsysChapter(activeId);
+
+  const chapters = (window.RECSYS_CHAPTERS || []).filter(c => c.lessons?.length);
+  const hashId = location.hash.slice(1);
+  let targetId = window.RECSYS_COURSE?.getActiveChapterId?.() || (chapters[0] ? chapters[0].id : 'recsys-summary');
+
+  if (hashId) {
+    const matchedCh = chapters.find(c => c.id === hashId || c.lessons?.some(l => l.id === hashId));
+    if (matchedCh) {
+      targetId = matchedCh.id;
+    }
+  }
+
+  switchRecsysChapter(targetId);
+
+  if (hashId) {
+    setTimeout(() => {
+      window.RECSYS_COURSE?.openLesson?.(hashId);
+    }, 120);
+  }
 }
+
+window.addEventListener('hashchange', () => {
+  const hashId = location.hash.slice(1);
+  if (hashId) {
+    const chapters = (window.RECSYS_CHAPTERS || []).filter(c => c.lessons?.length);
+    const matchedCh = chapters.find(c => c.id === hashId || c.lessons?.some(l => l.id === hashId));
+    if (matchedCh) {
+      if (window.RECSYS_COURSE?.getActiveChapterId?.() !== matchedCh.id) {
+        switchRecsysChapter(matchedCh.id);
+      }
+      setTimeout(() => {
+        window.RECSYS_COURSE?.openLesson?.(hashId);
+      }, 100);
+    }
+  }
+});
 
 init();
 </script>
