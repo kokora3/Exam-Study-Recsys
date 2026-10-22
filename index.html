@@ -2654,12 +2654,14 @@ const termRelated = document.getElementById('termRelated');
 const termClose = document.getElementById('termClose');
 let termReturnFocus = null;
 
-function closeTerm(){
+function closeTerm(restoreFocus = true){
   if (!termModal) return;
   termModal.classList.remove('open');
   termModal.setAttribute('aria-hidden', 'true');
   document.body.classList.remove('term-open');
-  termReturnFocus?.focus?.();
+  if (restoreFocus) {
+    termReturnFocus?.focus?.();
+  }
 }
 function renderRelated(termKey, text){
   if(!text) return '';
@@ -2689,8 +2691,17 @@ function openTerm(termKey){
   if (termClose) setTimeout(() => termClose.focus(), 30);
 }
 window.openTerm = openTerm;
-if (termClose) termClose.onclick = closeTerm;
-if (termModal) termModal.onclick = (e) => { if(e.target === termModal) closeTerm(); };
+if (termClose) termClose.onclick = () => closeTerm(true);
+if (termModal) termModal.onclick = (e) => { if(e.target === termModal) closeTerm(true); };
+
+// Automatically close term modal when clicking anywhere else on the page
+function handleTermOutsideClick(e) {
+  if (!termModal || !termModal.classList.contains('open')) return;
+  if (e.target.closest('#termModal, .term-trigger, .term-chip')) return;
+  closeTerm(false);
+}
+document.addEventListener('pointerdown', handleTermOutsideClick);
+document.addEventListener('click', handleTermOutsideClick);
 
 function termMatch(text, term){
   const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
