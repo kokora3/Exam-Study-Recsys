@@ -1256,6 +1256,220 @@ body.sidebar-open:after{content:"";display:none;position:fixed;inset:110px 0 0;b
   color: #ffffff !important;
 }
 
+
+/* ==========================================================================
+   GLOBAL CONTENT FONT-SIZE SCALING SYSTEM
+   Proportionally scales all text in content, headings, tables, formulas,
+   cards, quizzes, and sidebars when user selects เล็ก / กลาง / ใหญ่ / ใหญ่มาก
+   ========================================================================== */
+
+/* 1. เล็ก (Small - กะทัดรัด) */
+html[data-font-size="sm"] {
+  --fs-body: 15px;
+  --fs-lead: 17.5px;
+  --fs-h1: clamp(28px, 3.2vw, 44px);
+  --fs-h2: 28px;
+  --fs-h3: 18px;
+  --fs-h4: 15.5px;
+  --fs-card: 14px;
+  --fs-table: 13.5px;
+  --fs-quiz-q: 16px;
+  --fs-choice: 14.5px;
+  --fs-explain: 14px;
+  --fs-formula: 13.5px;
+  --fs-meta: 12.5px;
+  --fs-sub: 11.5px;
+  --lh-body: 1.72;
+}
+
+/* 2. กลาง (Medium - มาตรฐาน) [DEFAULT] */
+html[data-font-size="md"],
+html:not([data-font-size]) {
+  --fs-body: 17px;
+  --fs-lead: 20px;
+  --fs-h1: clamp(32px, 4vw, 54px);
+  --fs-h2: 34px;
+  --fs-h3: 21px;
+  --fs-h4: 18px;
+  --fs-card: 16px;
+  --fs-table: 15px;
+  --fs-quiz-q: 18px;
+  --fs-choice: 16px;
+  --fs-explain: 15.5px;
+  --fs-formula: 15px;
+  --fs-meta: 14px;
+  --fs-sub: 12.5px;
+  --lh-body: 1.82;
+}
+
+/* 3. ใหญ่ (Large - อ่านสบาย) */
+html[data-font-size="lg"] {
+  --fs-body: 20px;
+  --fs-lead: 23.5px;
+  --fs-h1: clamp(36px, 4.5vw, 60px);
+  --fs-h2: 38px;
+  --fs-h3: 24px;
+  --fs-h4: 21px;
+  --fs-card: 18.5px;
+  --fs-table: 17.5px;
+  --fs-quiz-q: 21px;
+  --fs-choice: 18.5px;
+  --fs-explain: 18px;
+  --fs-formula: 17px;
+  --fs-meta: 16px;
+  --fs-sub: 14px;
+  --lh-body: 1.85;
+}
+
+/* 4. ใหญ่มาก (Extra Large - ตัวโตชัดเจน) */
+html[data-font-size="xl"] {
+  --fs-body: 23px;
+  --fs-lead: 27px;
+  --fs-h1: clamp(40px, 5vw, 66px);
+  --fs-h2: 43px;
+  --fs-h3: 27px;
+  --fs-h4: 24px;
+  --fs-card: 21px;
+  --fs-table: 20px;
+  --fs-quiz-q: 24px;
+  --fs-choice: 21px;
+  --fs-explain: 20.5px;
+  --fs-formula: 19px;
+  --fs-meta: 18px;
+  --fs-sub: 15.5px;
+  --lh-body: 1.88;
+}
+
+/* Base Body Application */
+html[data-font-size] body {
+  font-size: var(--fs-body) !important;
+  line-height: var(--lh-body) !important;
+}
+
+/* Paragraphs & Core Prose across ALL sections */
+html[data-font-size] .content p,
+html[data-font-size] .content li,
+html[data-font-size] .section-task-body p,
+html[data-font-size] .section-task-body li,
+html[data-font-size] .callout p,
+html[data-font-size] .callout li,
+html[data-font-size] .numbered li,
+html[data-font-size] .term-article p,
+html[data-font-size] .cs-card p,
+html[data-font-size] .cs-card li,
+html[data-font-size] .cs-trap-box p,
+html[data-font-size] .cs-trap-box li,
+html[data-font-size] .easy-explain p,
+html[data-font-size] .easy-explain li,
+html[data-font-size] .easy-explain .example {
+  font-size: var(--fs-body) !important;
+  line-height: var(--lh-body) !important;
+}
+
+/* Lead text & hero subtitle */
+html[data-font-size] .lead,
+html[data-font-size] .content .lead {
+  font-size: var(--fs-lead) !important;
+  line-height: var(--lh-body) !important;
+}
+html[data-font-size] .hero .thai {
+  font-size: calc(var(--fs-lead) * 1.1) !important;
+}
+
+/* Headings */
+html[data-font-size] .hero h1,
+html[data-font-size] .content h1 {
+  font-size: var(--fs-h1) !important;
+}
+html[data-font-size] .content h2 {
+  font-size: var(--fs-h2) !important;
+}
+html[data-font-size] .content h3,
+html[data-font-size] .card h3,
+html[data-font-size] .easy-explain h3,
+html[data-font-size] .compare h3,
+html[data-font-size] .cs-header h3 {
+  font-size: var(--fs-h3) !important;
+}
+html[data-font-size] .section-questions-title,
+html[data-font-size] .cs-trap-title,
+html[data-font-size] .cs-link-title,
+html[data-font-size] .section-task-title {
+  font-size: var(--fs-h4) !important;
+}
+
+/* Cards, Tables, Figures & Callouts */
+html[data-font-size] .card p,
+html[data-font-size] .card ul,
+html[data-font-size] .card li,
+html[data-font-size] table,
+html[data-font-size] th,
+html[data-font-size] td,
+html[data-font-size] .cs-table,
+html[data-font-size] .cs-table th,
+html[data-font-size] .cs-table td,
+html[data-font-size] .callout,
+html[data-font-size] .compare p,
+html[data-font-size] .stepper b,
+html[data-font-size] .flash-grid span,
+html[data-font-size] .edu-figure figcaption {
+  font-size: var(--fs-card) !important;
+}
+
+/* Quiz & Practice Questions & Choices */
+html[data-font-size] .quiz-q,
+html[data-font-size] .section-question-prompt {
+  font-size: var(--fs-quiz-q) !important;
+  line-height: var(--lh-body) !important;
+}
+html[data-font-size] .choice,
+html[data-font-size] .choice span {
+  font-size: var(--fs-choice) !important;
+}
+html[data-font-size] .explain,
+html[data-font-size] .answer-summary,
+html[data-font-size] .section-answer-feedback,
+html[data-font-size] .practice-note {
+  font-size: var(--fs-explain) !important;
+  line-height: var(--lh-body) !important;
+}
+
+/* Formulas, Code & Technical terms */
+html[data-font-size] .cs-formula-math,
+html[data-font-size] .formula,
+html[data-font-size] pre,
+html[data-font-size] code,
+html[data-font-size] .section-answer-input {
+  font-size: var(--fs-formula) !important;
+}
+
+/* Secondary Meta, Links & Toolbars */
+html[data-font-size] .side-link,
+html[data-font-size] .cs-btn-link,
+html[data-font-size] .rs-nav-btn,
+html[data-font-size] .rs-nav-indicator,
+html[data-font-size] .term-related,
+html[data-font-size] .term-hint,
+html[data-font-size] .cs-formula-legend,
+html[data-font-size] .stepper small,
+html[data-font-size] .chips span {
+  font-size: var(--fs-meta) !important;
+}
+
+/* Keep reader settings popup controls stable in size */
+.reader-popover {
+  font-size: 13px !important;
+}
+.reader-popover .reader-section-title {
+  font-size: 12px !important;
+}
+.reader-popover .reader-opt-btn span {
+  font-size: 13px !important;
+}
+.reader-popover .reader-opt-btn small {
+  font-size: 11px !important;
+}
+
 </style>
 </head>
 <body>
@@ -1306,12 +1520,12 @@ body.sidebar-open:after{content:"";display:none;position:fixed;inset:110px 0 0;b
         </div>
       </div>
       <div>
-        <div class="reader-section-title">ขนาดตัวอักษร (Font Size)</div>
+        <div class="reader-section-title">ขนาดตัวอักษรเนื้อหา (Font Size)</div>
         <div class="reader-options-row" id="fontSizeOptions">
-          <button class="reader-opt-btn" data-size-val="sm"><span>16px</span><small>กะทัดรัด</small></button>
-          <button class="reader-opt-btn" data-size-val="md"><span>18px</span><small>มาตรฐาน</small></button>
-          <button class="reader-opt-btn" data-size-val="lg"><span>20px</span><small>ใหญ่สบาย</small></button>
-          <button class="reader-opt-btn" data-size-val="xl"><span>22px</span><small>ใหญ่พิเศษ</small></button>
+          <button class="reader-opt-btn" data-size-val="sm"><span>เล็ก</span><small>กะทัดรัด</small></button>
+          <button class="reader-opt-btn" data-size-val="md"><span>กลาง</span><small>มาตรฐาน</small></button>
+          <button class="reader-opt-btn" data-size-val="lg"><span>ใหญ่</span><small>อ่านสบาย</small></button>
+          <button class="reader-opt-btn" data-size-val="xl"><span>ใหญ่มาก</span><small>ตัวโตชัดเจน</small></button>
         </div>
       </div>
       <div>
