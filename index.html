@@ -1032,6 +1032,497 @@ body.sidebar-open:after{content:"";display:none;position:fixed;inset:110px 0 0;b
 }
 
 
+
+/* ==========================================================================
+   3. SLATE MODE ADAPTATIONS (AI CHATBOT OBSIDIAN/BLACK - ChatGPT / Gemini / Claude)
+   Comfortable, eye-friendly, deep charcoal black background & balanced contrast
+   ========================================================================== */
+[data-theme="slate"] {
+  --bg: #111215 !important;
+  --panel: #18191d !important;
+  --panel2: #1e1f25 !important;
+  --line: #292a31 !important;
+  --line2: #373842 !important;
+  --text: #f3f4f6 !important;
+  --muted: #9ca3af !important;
+}
+
+[data-theme="slate"] html,
+[data-theme="slate"] body {
+  background: radial-gradient(circle at 80% -10%, rgba(94, 224, 194, 0.05), transparent 30rem),
+              linear-gradient(180deg, #141518 0%, #111215 45%, #0d0e11 100%) !important;
+  color: #f3f4f6 !important;
+}
+
+[data-theme="slate"] .topbar {
+  background: rgba(18, 19, 23, 0.95) !important;
+  border-bottom: 1px solid #27282f !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35) !important;
+}
+[data-theme="slate"] .brand b {
+  color: #f3f4f6 !important;
+}
+[data-theme="slate"] .brand small {
+  color: #9ca3af !important;
+}
+[data-theme="slate"] .brand-mark {
+  background: linear-gradient(145deg, #5ee0c2, rgba(94, 224, 194, 0.2)) !important;
+  color: #031014 !important;
+  box-shadow: 0 0 20px rgba(94, 224, 194, 0.25) !important;
+}
+[data-theme="slate"] .nav-toggle,
+[data-theme="slate"] .icon-btn,
+[data-theme="slate"] .search-trigger {
+  background: #17181c !important;
+  border-color: #292a31 !important;
+  color: #9ca3af !important;
+}
+[data-theme="slate"] .nav-toggle:hover,
+[data-theme="slate"] .icon-btn:hover,
+[data-theme="slate"] .search-trigger:hover {
+  background: #202127 !important;
+  border-color: #383944 !important;
+  color: #f3f4f6 !important;
+}
+[data-theme="slate"] .chapter-menu-btn {
+  background: #17181c !important;
+  border-color: #292a31 !important;
+  color: #e5e7eb !important;
+}
+[data-theme="slate"] .chapter-menu-btn:hover {
+  background: #202127 !important;
+  border-color: #5ee0c2 !important;
+  color: #ffffff !important;
+}
+[data-theme="slate"] .chapter-dropdown {
+  background: #17181c !important;
+  border-color: #2e2f38 !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6) !important;
+}
+[data-theme="slate"] .chapter-option {
+  color: #d1d5db !important;
+}
+[data-theme="slate"] .chapter-option:hover {
+  background: #22232a !important;
+  color: #ffffff !important;
+}
+[data-theme="slate"] .chapter-option.active {
+  background: rgba(94, 224, 194, 0.12) !important;
+  border-color: rgba(94, 224, 194, 0.3) !important;
+  color: #ffffff !important;
+}
+[data-theme="slate"] .tabs-scroll-btn {
+  background: #17181c !important;
+  border-color: #292a31 !important;
+  color: #9ca3af !important;
+}
+[data-theme="slate"] .tabs-scroll-btn:hover {
+  background: #22232a !important;
+  color: #ffffff !important;
+}
+[data-theme="slate"] .tab {
+  color: #9ca3af !important;
+}
+[data-theme="slate"] .tab:hover {
+  background: #1e1f25 !important;
+  color: #f3f4f6 !important;
+}
+[data-theme="slate"] .tab.active {
+  background: rgba(94, 224, 194, 0.12) !important;
+  border-color: rgba(94, 224, 194, 0.35) !important;
+  color: #ffffff !important;
+}
+[data-theme="slate"] .tab .tab-badge {
+  background: #202127 !important;
+  color: #9ca3af !important;
+  border-color: #2e2f38 !important;
+}
+[data-theme="slate"] .tab.active .tab-badge {
+  background: #5ee0c2 !important;
+  color: #031014 !important;
+}
+
+/* Sidebar */
+[data-theme="slate"] .sidebar {
+  background: rgba(16, 17, 20, 0.96) !important;
+  border-right-color: #26272e !important;
+}
+[data-theme="slate"] .side-head {
+  border-bottom-color: #26272e !important;
+}
+[data-theme="slate"] .side-head h1 {
+  color: #f3f4f6 !important;
+}
+[data-theme="slate"] .side-head p {
+  color: #9ca3af !important;
+}
+[data-theme="slate"] .side-link {
+  color: #9ca3af !important;
+}
+[data-theme="slate"] .side-link:hover {
+  background: #1e1f25 !important;
+  color: #f3f4f6 !important;
+}
+[data-theme="slate"] .side-link.active {
+  background: rgba(94, 224, 194, 0.12) !important;
+  border-color: rgba(94, 224, 194, 0.25) !important;
+  color: #ffffff !important;
+}
+
+/* Content, Cards & Panels */
+[data-theme="slate"] .hero h1,
+[data-theme="slate"] .content h1,
+[data-theme="slate"] .content h2,
+[data-theme="slate"] .content h3 {
+  color: #f3f4f6 !important;
+}
+[data-theme="slate"] .content p,
+[data-theme="slate"] .content li {
+  color: #d1d5db !important;
+}
+[data-theme="slate"] .subject-content section {
+  border-top-color: #26272e !important;
+}
+[data-theme="slate"] .card,
+[data-theme="slate"] .cs-card {
+  background: #18191d !important;
+  border-color: #2b2c34 !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25) !important;
+}
+[data-theme="slate"] .cs-header {
+  border-bottom-color: #282931 !important;
+}
+[data-theme="slate"] .cs-header h3 {
+  color: #f3f4f6 !important;
+}
+[data-theme="slate"] .easy-explain {
+  background: #17181c !important;
+  border-color: #2d2e37 !important;
+}
+[data-theme="slate"] .easy-explain h3 {
+  color: #f3f4f6 !important;
+}
+[data-theme="slate"] .easy-explain p,
+[data-theme="slate"] .easy-explain li {
+  color: #d1d5db !important;
+}
+[data-theme="slate"] .easy-explain .example {
+  background: #121316 !important;
+  border-color: #282930 !important;
+  color: #e5e7eb !important;
+}
+[data-theme="slate"] .audit-panel {
+  background: #17181c !important;
+  border-color: #292a32 !important;
+}
+[data-theme="slate"] .audit-grid div {
+  background: #121316 !important;
+  border-color: #26272e !important;
+}
+
+/* Tables */
+[data-theme="slate"] table,
+[data-theme="slate"] .cs-table {
+  background: #131417 !important;
+  border-color: #282930 !important;
+}
+[data-theme="slate"] th,
+[data-theme="slate"] .cs-table th {
+  background: #1b1c21 !important;
+  color: #f3f4f6 !important;
+  border-bottom-color: #282930 !important;
+}
+[data-theme="slate"] td,
+[data-theme="slate"] .cs-table td {
+  color: #d1d5db !important;
+  border-bottom-color: #24252c !important;
+}
+[data-theme="slate"] td + td,
+[data-theme="slate"] th + th,
+[data-theme="slate"] .cs-table th + th,
+[data-theme="slate"] .cs-table td + td {
+  border-left-color: #24252c !important;
+}
+[data-theme="slate"] tbody tr:hover,
+[data-theme="slate"] .cs-table tbody tr:hover {
+  background: #191a1f !important;
+}
+
+/* Grids, Lists, Callouts */
+[data-theme="slate"] .stepper > div,
+[data-theme="slate"] .flash-grid > div,
+[data-theme="slate"] .compare > div {
+  background: #18191d !important;
+  border-color: #2b2c34 !important;
+}
+[data-theme="slate"] .flow span,
+[data-theme="slate"] .process-line span {
+  background: #1c1d22 !important;
+  border-color: #2f3037 !important;
+  color: #e5e7eb !important;
+}
+[data-theme="slate"] .layer-stack {
+  border-color: #2b2c34 !important;
+}
+[data-theme="slate"] .layer-stack > div {
+  background: #16171b !important;
+  border-bottom-color: #27282e !important;
+}
+[data-theme="slate"] .numbered li {
+  background: #18191d !important;
+  border-color: #2b2c34 !important;
+  color: #d1d5db !important;
+}
+[data-theme="slate"] .chips span {
+  background: #1f2026 !important;
+  border-color: #2f303a !important;
+  color: #d1d5db !important;
+}
+[data-theme="slate"] .callout {
+  background: rgba(94, 224, 194, 0.06) !important;
+  border-left-color: #5ee0c2 !important;
+  color: #d1d5db !important;
+}
+[data-theme="slate"] .callout.warn {
+  background: rgba(251, 191, 36, 0.07) !important;
+  border-left-color: #fbbf24 !important;
+}
+[data-theme="slate"] .callout.exam {
+  background: rgba(52, 211, 153, 0.07) !important;
+  border-left-color: #34d399 !important;
+}
+
+/* Formulas, Code & Traps */
+[data-theme="slate"] pre,
+[data-theme="slate"] code,
+[data-theme="slate"] .formula,
+[data-theme="slate"] .cs-formula-math {
+  background: #0d0e11 !important;
+  border-color: #26272e !important;
+  color: #e5e7eb !important;
+}
+[data-theme="slate"] .cs-formula-card {
+  background: #15161a !important;
+  border-color: #282931 !important;
+}
+[data-theme="slate"] .cs-trap-box {
+  background: rgba(245, 158, 11, 0.08) !important;
+  border-color: rgba(245, 158, 11, 0.28) !important;
+}
+[data-theme="slate"] .cs-trap-title {
+  color: #fbbf24 !important;
+}
+[data-theme="slate"] .cs-link-box {
+  background: rgba(94, 224, 194, 0.06) !important;
+  border-color: rgba(94, 224, 194, 0.2) !important;
+}
+[data-theme="slate"] .cs-btn-link {
+  background: #1e1f25 !important;
+  border-color: #2f313a !important;
+  color: #d1d5db !important;
+}
+[data-theme="slate"] .cs-btn-link:hover {
+  background: #25262e !important;
+  border-color: #5ee0c2 !important;
+  color: #5ee0c2 !important;
+}
+[data-theme="slate"] .cs-btn-link.primary {
+  background: rgba(94, 224, 194, 0.16) !important;
+  border-color: rgba(94, 224, 194, 0.4) !important;
+  color: #5ee0c2 !important;
+}
+[data-theme="slate"] .cs-btn-link.primary:hover {
+  background: #5ee0c2 !important;
+  color: #0d0e11 !important;
+}
+
+/* Quizzes & Practice */
+[data-theme="slate"] .quiz-card {
+  background: #17181c !important;
+  border-color: #2b2c34 !important;
+}
+[data-theme="slate"] .quiz-q {
+  color: #f3f4f6 !important;
+}
+[data-theme="slate"] .choice {
+  background: #1e1f25 !important;
+  border-color: #2e3038 !important;
+  color: #d1d5db !important;
+}
+[data-theme="slate"] .choice:hover {
+  background: #262730 !important;
+  border-color: rgba(94, 224, 194, 0.4) !important;
+  color: #ffffff !important;
+}
+[data-theme="slate"] .choice .letter {
+  background: #272832 !important;
+  color: #a1a1aa !important;
+}
+[data-theme="slate"] .choice.correct {
+  border-color: rgba(52, 211, 153, 0.55) !important;
+  background: rgba(52, 211, 153, 0.12) !important;
+  color: #d1fae5 !important;
+}
+[data-theme="slate"] .choice.wrong {
+  border-color: rgba(244, 63, 94, 0.5) !important;
+  background: rgba(244, 63, 94, 0.1) !important;
+  color: #ffe4e6 !important;
+}
+[data-theme="slate"] .explain {
+  background: #131417 !important;
+  border-left-color: #5ee0c2 !important;
+  color: #cbd5e1 !important;
+}
+
+/* Modals, Search & Overlays */
+[data-theme="slate"] .term-terminal,
+[data-theme="slate"] .pdf-dialog,
+[data-theme="slate"] .search-box {
+  background: #151619 !important;
+  border-color: #2d2e36 !important;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.7) !important;
+}
+[data-theme="slate"] .term-head,
+[data-theme="slate"] .pdf-head {
+  background: #1c1d22 !important;
+  border-bottom-color: #292a32 !important;
+}
+[data-theme="slate"] .term-title,
+[data-theme="slate"] .pdf-title,
+[data-theme="slate"] .search-title b {
+  color: #f3f4f6 !important;
+}
+[data-theme="slate"] .term-close,
+[data-theme="slate"] .pdf-close,
+[data-theme="slate"] #searchClose {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #e4e4e7 !important;
+}
+[data-theme="slate"] .term-body {
+  background: #151619 !important;
+}
+[data-theme="slate"] .term-article p {
+  color: #d1d5db !important;
+}
+[data-theme="slate"] .search-box input {
+  background: #101114 !important;
+  border: 1px solid #2c2d35 !important;
+  color: #f3f4f6 !important;
+}
+[data-theme="slate"] .search-item:hover {
+  background: #1e1f25 !important;
+}
+
+/* Section Tasks & Accordion */
+[data-theme="slate"] .section-task-head {
+  background: #18191d !important;
+  border-color: #2b2c34 !important;
+}
+[data-theme="slate"] .section-task-toggle {
+  color: #f3f4f6 !important;
+}
+[data-theme="slate"] .section-task-body {
+  border-top-color: #26272e !important;
+}
+[data-theme="slate"] .subject-task-toolbar {
+  background: linear-gradient(100deg, rgba(94, 224, 194, 0.08), #18191d) !important;
+  border-color: #2b2c34 !important;
+}
+[data-theme="slate"] .section-question {
+  border-bottom-color: #26272e !important;
+}
+[data-theme="slate"] .section-question-prompt {
+  color: #e5e7eb !important;
+}
+[data-theme="slate"] .section-answer-input {
+  background: #121316 !important;
+  border-color: #2d2e36 !important;
+  color: #f3f4f6 !important;
+}
+
+/* Reader Settings Popover */
+[data-theme="slate"] .reader-popover {
+  background: #17181c !important;
+  border-color: #2e2f38 !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.65) !important;
+}
+[data-theme="slate"] .reader-section-title {
+  color: #9ca3af !important;
+}
+[data-theme="slate"] .reader-opt-btn {
+  background: #131417 !important;
+  border-color: #27282f !important;
+  color: #a1a1aa !important;
+}
+[data-theme="slate"] .reader-opt-btn:hover {
+  background: #1d1e24 !important;
+  border-color: #5ee0c2 !important;
+  color: #ffffff !important;
+}
+[data-theme="slate"] .reader-opt-btn.active {
+  background: rgba(94, 224, 194, 0.16) !important;
+  border-color: #5ee0c2 !important;
+  color: #ffffff !important;
+}
+
+/* Figures & Sources */
+[data-theme="slate"] .edu-figure,
+[data-theme="slate"] .recsys-figure {
+  background: #16171b !important;
+  border-color: #2a2b33 !important;
+}
+[data-theme="slate"] .edu-figure .image-stage,
+[data-theme="slate"] .recsys-figure .image-stage,
+[data-theme="slate"] .recsys-figure.dark-stage .image-stage {
+  background: #0f1013 !important;
+}
+[data-theme="slate"] .edu-figure figcaption {
+  color: #d1d5db !important;
+}
+[data-theme="slate"] .edu-figure figcaption strong {
+  color: #f3f4f6 !important;
+}
+[data-theme="slate"] #subject-recsys .rs-sources {
+  background: #16171b !important;
+  border-color: #2a2b33 !important;
+}
+[data-theme="slate"] #subject-recsys .rs-sources summary {
+  color: #ececf1 !important;
+}
+[data-theme="slate"] #subject-recsys .rs-sources p,
+[data-theme="slate"] #subject-recsys .rs-sources li {
+  color: #d1d5db !important;
+}
+[data-theme="slate"] .section-doc-btn {
+  background: #1a1b20 !important;
+  border-color: #2c2e36 !important;
+  color: #d1d5db !important;
+}
+[data-theme="slate"] .section-doc-btn:hover {
+  border-color: #5ee0c2 !important;
+  color: #ffffff !important;
+}
+
+/* Chapter Navigation Footer */
+[data-theme="slate"] .rs-chapter-nav {
+  background: #151619 !important;
+  border-color: #292a32 !important;
+}
+[data-theme="slate"] .rs-nav-btn {
+  background: #1c1d22 !important;
+  border-color: #2e3038 !important;
+  color: #e5e7eb !important;
+}
+[data-theme="slate"] .rs-nav-btn:hover {
+  border-color: #5ee0c2 !important;
+  color: #ffffff !important;
+  background: #25262e !important;
+}
+[data-theme="slate"] .rs-nav-indicator {
+  color: #9ca3af !important;
+}
+
+
 /* ==========================================================================
    FAST-TRACK CHEAT SHEET DEDICATED STYLES
    Professional typography, formula cards, decision tables & deep link buttons
