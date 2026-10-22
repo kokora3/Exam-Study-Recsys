@@ -221,7 +221,7 @@ body.sidebar-open:after{content:"";display:none;position:fixed;inset:110px 0 0;b
 </div>
 <div aria-hidden="true" aria-labelledby="searchTitle" aria-modal="true" class="search" id="searchOverlay" role="dialog"><div class="search-box"><div class="search-title"><b id="searchTitle">ค้นหาทุกวิชา</b><button aria-label="ปิดหน้าค้นหา" id="searchClose">×</button></div><input aria-controls="searchResults" autocomplete="off" id="searchInput" placeholder="ค้นหาได้ทั้งไทยและ English เช่น หน่วยความจำ, Virtual Memory, NP-complete…"/><div aria-live="polite" class="search-results" id="searchResults" role="listbox"></div></div></div>
 <aside aria-hidden="true" aria-labelledby="termTitle" class="term-modal" id="termModal" role="dialog"><article class="term-terminal"><header class="term-head"><div class="term-title-wrap"><span class="term-path">คำอธิบายแนวคิด</span><strong class="term-title" id="termTitle">Technical term</strong></div><button aria-label="ปิดคำอธิบายศัพท์" class="term-close" id="termClose" type="button">×</button></header><div class="term-body"><div class="term-article" id="termArticle"></div><p class="term-related" id="termRelated"></p><p class="term-hint">กด Esc, ปุ่ม × หรือคลิกพื้นที่นอกการ์ดเพื่อปิด</p></div></article></aside>
-
+<div aria-hidden="true" aria-labelledby="pdfTitle" aria-modal="true" class="pdf-modal" id="pdfModal" role="dialog"><article class="pdf-dialog"><header class="pdf-head"><div class="pdf-title-wrap"><span class="pdf-eyebrow">Section document</span><strong class="pdf-title" id="pdfTitle">เอกสารประกอบ</strong></div><div class="pdf-actions"><a class="pdf-external" id="pdfExternal" rel="noreferrer" target="_blank">เปิดแยก ↗</a><button aria-label="ปิดเอกสาร" class="pdf-close" id="pdfClose" type="button">×</button></div></header><div class="pdf-frame-wrap"><iframe class="pdf-frame" id="pdfFrame" loading="lazy" title="เอกสาร PDF ประกอบหัวข้อ"></iframe><p class="pdf-fallback">Browser นี้ไม่รองรับ PDF viewer กรุณากด “เปิดแยก”</p></div></article></div>
 
 <script src="public/js/recsys-foundations.js"></script>
 <script src="public/js/recsys-introduction.js"></script>
@@ -277,6 +277,8 @@ window.setAccent = setAccent;
 
 function switchRecsysChapter(chapterId) {
   window.RECSYS_COURSE?.setActiveChapter?.(chapterId);
+  const root = document.getElementById('subject-recsys');
+  if (root) root.classList.add('active');
   buildTabs();
   renderHero();
   buildSidebar();
@@ -321,7 +323,8 @@ function renderHero() {
 window.renderHero = renderHero;
 
 function closeSidebar(){
-  document.getElementById('sidebar').classList.remove('open');
+  const sb = document.getElementById('sidebar');
+  if (sb) sb.classList.remove('open');
   document.body.classList.remove('sidebar-open');
   if(window.syncSidebarToggle) window.syncSidebarToggle();
 }
@@ -347,6 +350,7 @@ let observer;
 function observeSections(){
   if(observer) observer.disconnect();
   const links = [...sideNav.querySelectorAll('.side-link')];
+  if (typeof IntersectionObserver === 'undefined') return;
   observer = new IntersectionObserver(entries => {
     const visible = entries.filter(e => e.isIntersecting).sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
     if(!visible) return;
@@ -379,28 +383,29 @@ const pdfClose = document.getElementById('pdfClose');
 let pdfReturnFocus = null;
 
 function closePdfModal(){
+  if (!pdfModal) return;
   pdfModal.classList.remove('open');
   pdfModal.setAttribute('aria-hidden', 'true');
   document.body.classList.remove('pdf-open');
-  pdfFrame.src = 'about:blank';
+  if (pdfFrame) pdfFrame.src = 'about:blank';
   pdfReturnFocus?.focus?.();
 }
 function openPdfDocument(sectionId){
   const doc = SECTION_DOCUMENTS[sectionId];
-  if(!doc) return;
+  if(!doc || !pdfModal) return;
   closeTerm();
   pdfReturnFocus = document.activeElement;
-  document.getElementById('pdfTitle').textContent = doc.title;
-  pdfFrame.src = doc.path + (doc.startPage ? '#page=' + doc.startPage + '&view=FitH' : '#view=FitH');
-  pdfExternal.href = doc.path + (doc.startPage ? '#page=' + doc.startPage : '');
+  if (pdfTitle) pdfTitle.textContent = doc.title;
+  if (pdfFrame) pdfFrame.src = doc.path + (doc.startPage ? '#page=' + doc.startPage + '&view=FitH' : '#view=FitH');
+  if (pdfExternal) pdfExternal.href = doc.path + (doc.startPage ? '#page=' + doc.startPage : '');
   pdfModal.classList.add('open');
   pdfModal.setAttribute('aria-hidden', 'false');
   document.body.classList.add('pdf-open');
-  setTimeout(() => pdfClose.focus(), 30);
+  if (pdfClose) setTimeout(() => pdfClose.focus(), 30);
 }
 window.openPdfDocument = openPdfDocument;
-pdfClose.onclick = closePdfModal;
-pdfModal.onclick = (e) => { if(e.target === pdfModal) closePdfModal(); };
+if (pdfClose) pdfClose.onclick = closePdfModal;
+if (pdfModal) pdfModal.onclick = (e) => { if(e.target === pdfModal) closePdfModal(); };
 
 const GLOSSARY={
  'Software Engineering':['Software Engineering','ศาสตร์ที่ใช้กระบวนการ วิธีการ เครื่องมือ และการบริหารความเสี่ยงอย่างเป็นระบบเพื่อสร้างและดูแลซอฟต์แวร์','เป้าหมายไม่ได้หยุดที่ code รันได้ แต่ต้องตอบโจทย์ผู้มีส่วนได้ส่วนเสียและรักษาคุณภาพได้ตลอดอายุระบบ','ทีมกำหนด requirement ออกแบบ ทดสอบ ส่งมอบ และติดตามผลด้วยหลักฐานที่ตรวจสอบย้อนกลับได้','ไม่ใช่คำพ้องของ programming เพราะครอบคลุมคน กระบวนการ คุณภาพ และวิวัฒนาการของระบบ','Lifecycle · Quality · Requirement'],
@@ -587,6 +592,7 @@ const termClose = document.getElementById('termClose');
 let termReturnFocus = null;
 
 function closeTerm(){
+  if (!termModal) return;
   termModal.classList.remove('open');
   termModal.setAttribute('aria-hidden', 'true');
   document.body.classList.remove('term-open');
@@ -602,24 +608,26 @@ function renderRelated(termKey, text){
 }
 function openTerm(termKey){
   let item = GLOSSARY[termKey];
-  if(!item) return;
+  if(!item || !termModal) return;
   termReturnFocus = document.activeElement;
-  termTitle.textContent = item[0];
-  termArticle.innerHTML = `
-    <p class="term-lead">${item[1]}</p>
-    <div class="term-section"><h4>หลักการและแก่นความคิด</h4><p>${item[2]}</p></div>
-    <div class="term-section"><h4>ตัวอย่างในชีวิตจริง</h4><p>${item[3]}</p></div>
-    <div class="term-section warn"><h4>ข้อควรระวัง / ข้อจำกัด</h4><p>${item[4]}</p></div>
-  `;
-  termRelated.innerHTML = item[5] ? `<b>คำที่เกี่ยวข้อง:</b> ${renderRelated(termKey, item[5])}` : '';
+  if (termTitle) termTitle.textContent = item[0];
+  if (termArticle) {
+    termArticle.innerHTML = `
+      <p class="term-lead">${item[1]}</p>
+      <div class="term-section"><h4>หลักการและแก่นความคิด</h4><p>${item[2]}</p></div>
+      <div class="term-section"><h4>ตัวอย่างในชีวิตจริง</h4><p>${item[3]}</p></div>
+      <div class="term-section warn"><h4>ข้อควรระวัง / ข้อจำกัด</h4><p>${item[4]}</p></div>
+    `;
+  }
+  if (termRelated) termRelated.innerHTML = item[5] ? `<b>คำที่เกี่ยวข้อง:</b> ${renderRelated(termKey, item[5])}` : '';
   termModal.classList.add('open');
   termModal.setAttribute('aria-hidden', 'false');
   document.body.classList.add('term-open');
-  setTimeout(() => termClose.focus(), 30);
+  if (termClose) setTimeout(() => termClose.focus(), 30);
 }
 window.openTerm = openTerm;
-termClose.onclick = closeTerm;
-termModal.onclick = (e) => { if(e.target === termModal) closeTerm(); };
+if (termClose) termClose.onclick = closeTerm;
+if (termModal) termModal.onclick = (e) => { if(e.target === termModal) closeTerm(); };
 
 function termMatch(text, term){
   const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -684,6 +692,7 @@ const SEARCH_ALIASES = {
 
 let searchReturnFocus = null;
 function openSearch(){
+  if (!overlay || !input) return;
   searchReturnFocus = document.activeElement;
   overlay.classList.add('open');
   overlay.setAttribute('aria-hidden', 'false');
@@ -691,6 +700,7 @@ function openSearch(){
   renderSearch('');
 }
 function closeSearch(){
+  if (!overlay || !input) return;
   overlay.classList.remove('open');
   overlay.setAttribute('aria-hidden', 'true');
   input.value = '';
@@ -701,6 +711,7 @@ function searchTerms(query){
   return [normalized, ...(SEARCH_ALIASES[normalized] || [])].filter(Boolean);
 }
 function renderSearch(query){
+  if (!results) return;
   const terms = searchTerms(query);
   const items = [];
   document.querySelectorAll('.subject-content section[data-nav]').forEach(sec => {
@@ -737,10 +748,10 @@ function renderSearch(query){
   });
 }
 
-document.getElementById('searchBtn').onclick = openSearch;
-document.getElementById('searchClose').onclick = closeSearch;
-input.oninput = (e) => renderSearch(e.target.value);
-overlay.onclick = (e) => { if(e.target === overlay) closeSearch(); };
+if (document.getElementById('searchBtn')) document.getElementById('searchBtn').onclick = openSearch;
+if (document.getElementById('searchClose')) document.getElementById('searchClose').onclick = closeSearch;
+if (input) input.oninput = (e) => renderSearch(e.target.value);
+if (overlay) overlay.onclick = (e) => { if(e.target === overlay) closeSearch(); };
 
 document.addEventListener('keydown', event => {
   if((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k'){
@@ -762,6 +773,7 @@ const desktopSidebarQuery = window.matchMedia('(min-width:761px)');
 const SIDEBAR_STATE_KEY = 'recsysSidebarCollapsedV1';
 
 function syncSidebarToggle(){
+  if (!menuButton || !sidebar) return;
   const isDesktop = desktopSidebarQuery.matches;
   const isOpen = isDesktop ? !document.body.classList.contains('sidebar-collapsed') : sidebar.classList.contains('open');
   menuButton.setAttribute('aria-expanded', String(isOpen));
@@ -777,21 +789,23 @@ if(desktopSidebarQuery.matches && safeGet(SIDEBAR_STATE_KEY) === '1'){
 }
 syncSidebarToggle();
 
-menuButton.onclick = () => {
-  if(desktopSidebarQuery.matches){
-    const willCollapse = !document.body.classList.contains('sidebar-collapsed');
-    document.body.classList.toggle('sidebar-collapsed', willCollapse);
-    safeSet(SIDEBAR_STATE_KEY, willCollapse ? '1' : '0');
-  } else {
-    const willOpen = !sidebar.classList.contains('open');
-    sidebar.classList.toggle('open', willOpen);
-    document.body.classList.toggle('sidebar-open', willOpen);
-  }
-  syncSidebarToggle();
-};
+if (menuButton) {
+  menuButton.onclick = () => {
+    if(desktopSidebarQuery.matches){
+      const willCollapse = !document.body.classList.contains('sidebar-collapsed');
+      document.body.classList.toggle('sidebar-collapsed', willCollapse);
+      safeSet(SIDEBAR_STATE_KEY, willCollapse ? '1' : '0');
+    } else {
+      const willOpen = !sidebar.classList.contains('open');
+      sidebar.classList.toggle('open', willOpen);
+      document.body.classList.toggle('sidebar-open', willOpen);
+    }
+    syncSidebarToggle();
+  };
+}
 
 desktopSidebarQuery.addEventListener('change', () => {
-  sidebar.classList.remove('open');
+  if (sidebar) sidebar.classList.remove('open');
   document.body.classList.remove('sidebar-open');
   if(desktopSidebarQuery.matches){
     document.body.classList.toggle('sidebar-collapsed', safeGet(SIDEBAR_STATE_KEY) === '1');
@@ -803,7 +817,10 @@ desktopSidebarQuery.addEventListener('change', () => {
 function init(){
   Object.assign(SECTION_DOCUMENTS, window.RECSYS_COURSE.documents);
   installGlossaryTerms();
-  switchSubject('recsys');
+  const root = document.getElementById('subject-recsys');
+  if (root) root.classList.add('active');
+  const activeId = window.RECSYS_COURSE?.getActiveChapterId?.() || 'recsys-foundations';
+  switchRecsysChapter(activeId);
 }
 
 init();
